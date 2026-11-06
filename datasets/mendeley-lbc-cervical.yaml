@@ -1,0 +1,10 @@
+id: mendeley-lbc-cervical
+name: Mendeley LBC Cervical Cancer dataset
+url: https://data.mendeley.com/
+modality: cytology images (liquid-based)
+organ_or_domain: cervix
+size: verify
+access: open
+licence: verify
+notes: Exact record URL and licence to verify.
+last_checked: '2026-11-06'

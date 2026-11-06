@@ -1,0 +1,46 @@
+id: medmcqa-path
+legacy_id: cl-2026w45-medmcqa-path
+title: 'Pathology and lab-medicine slice of MedMCQA (AIIMS/NEET-PG style): prompt sensitivity, answer-order bias
+  and permutation voting across open-weight and frontier models, with a pathologist-built error taxonomy'
+area: clinical-data-llm
+tags:
+- llm-benchmark
+- prompt-sensitivity
+- pathology-education
+status: new
+status_history:
+- status: new
+  date: '2026-11-04'
+  note: Migrated from the claude.ai register (2026-W45 (initial))
+source:
+  type: preprint
+  title: 'When Chain-of-Thought Backfires: Evaluating Prompt Sensitivity in Medical Language Models'
+  authors: verify
+  venue: arXiv
+  date: '2026-03-26'
+  url: https://arxiv.org/abs/2603.25960
+  arxiv_id: '2603.25960'
+  code_url: https://github.com/UNHSAILLab/MedMCQA-Robustness-Study
+  code_licence: MIT
+datasets:
+- id: medmcqa
+  role: benchmark
+study_type: LLM benchmarking / robustness evaluation
+reporting_guideline: TRIPOD-LLM; MI-CLEAR-LLM
+novelty_delta: Source tested only MedGemma 4B/27B with aggregate accuracy. Adds per-subject pathology/microbiology/biochemistry
+  results, newer open models plus 1–2 frontier APIs, a pathologist error taxonomy, an audit of wrong answer keys
+  in pathology items, and cost per correct answer.
+compute:
+  tier: runpod
+  estimate: RunPod (~20–40 GPU-h) + API (~USD 30–80)
+est_weeks: 5
+scores:
+  feasibility: 5
+  novelty: 3
+  fit: null
+risks: []
+access_actions: []
+candidate_journals: []
+added_at: '2026-11-04T08:30:00Z'
+added_by: scout
+run_id: 2026-W45 (initial)

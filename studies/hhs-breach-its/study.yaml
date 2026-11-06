@@ -1,0 +1,47 @@
+id: hhs-breach-its
+legacy_id: cy-2026w45-hhs-breach-its
+title: 'US healthcare breaches 2010–2026 from the HHS OCR portal: interrupted time-series and changepoint analysis
+  of hacking/ransomware, with lessons for India''s DPDP breach-notification rules'
+area: healthcare-cybersecurity
+tags:
+- breaches
+- ransomware
+- time-series
+- dpdp
+status: new
+status_history:
+- status: new
+  date: '2026-11-04'
+  note: Migrated from the claude.ai register (2026-W45 (initial))
+source:
+  type: journal
+  title: 'JAMA Network Open study on hacking/ransomware healthcare breaches 2010–2024 (title and DOI: verify)'
+  authors: verify
+  venue: JAMA Network Open
+  date: 2025 (verify)
+  url: https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2833984
+  code_note: None; reimplementable in pandas/R (segmented regression, ruptures)
+datasets:
+- id: hhs-ocr-breach-portal
+  role: development
+- id: vcdb
+  role: external-validation
+study_type: Retrospective secondary-data analysis
+reporting_guideline: RECORD / STROBE (adapted)
+novelty_delta: Prior study ended in 2024 and was descriptive. Adds 2025–2026 data, formal changepoint/ITS models,
+  entity-type and business-associate breakdown, LLM-assisted ransomware tagging validated on a hand-labelled sample,
+  and the first DPDP-compliance translation for Indian hospitals.
+compute:
+  tier: laptop
+  estimate: Laptop
+est_weeks: 4
+scores:
+  feasibility: 5
+  novelty: 3
+  fit: null
+risks: []
+access_actions: []
+candidate_journals: []
+added_at: '2026-11-04T08:30:00Z'
+added_by: scout
+run_id: 2026-W45 (initial)

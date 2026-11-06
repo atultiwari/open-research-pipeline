@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/util';
+---
+<Base title="Search" description="Full-text search across studies, datasets and journals.">
+  <h1>Search</h1>
+  <p class="lede">Searches the full text of every study (including replication guides and gap analyses), dataset and journal.</p>
+  <link href={url('pagefind/pagefind-ui.css')} rel="stylesheet" />
+  <div id="search"></div>
+  <noscript><p>Search needs JavaScript. Use the filters on the <a href={url()}>register</a> instead.</p></noscript>
+  <p id="search-missing" class="muted" hidden>The search index is built only in production (<code>npm run build</code>). It is not available in <code>npm run dev</code>.</p>
+  <script is:inline define:vars={{ base: url('pagefind/') }}>
+    const s = document.createElement('script');
+    s.src = `${base}pagefind-ui.js`;
+    s.onload = () => {
+      // eslint-disable-next-line no-undef
+      new PagefindUI({ element: '#search', showSubResults: true, showImages: false });
+    };
+    s.onerror = () => { document.getElementById('search-missing').hidden = false; };
+    document.head.appendChild(s);
+  </script>
+  <style is:global>
+    #search { --pagefind-ui-primary: var(--accent); --pagefind-ui-text: var(--text); --pagefind-ui-background: var(--surface);
+      --pagefind-ui-border: var(--border); --pagefind-ui-tag: var(--surface-2); --pagefind-ui-font: inherit; }
+  </style>
+</Base>

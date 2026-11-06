@@ -1,0 +1,14 @@
+id: camelyon16
+name: CAMELYON16
+url: https://camelyon16.grand-challenge.org/
+modality: WSI
+organ_or_domain: breast lymph nodes
+size: ~700 GB
+access: open
+licence: CC0
+licence_notes: Mirrored on AWS Open Data, no account.
+institution_country: Netherlands
+labels: Metastasis annotations
+alt_urls:
+- https://registry.opendata.aws/camelyon/
+last_checked: '2026-11-06'

@@ -1,0 +1,48 @@
+id: plism-scanner
+legacy_id: cp-2026w45-plism-scanner
+title: Do pathology foundation models see the scanner or the tissue? Open-data test of embedding stability across
+  scanners and smartphones (PLISM)
+area: computational-pathology
+tags:
+- robustness
+- scanner-shift
+- smartphone
+- foundation-models
+status: new
+status_history:
+- status: new
+  date: '2026-11-04'
+  note: Migrated from the claude.ai register (2026-W45 (initial))
+source:
+  type: preprint
+  title: Scanner-Induced Domain Shifts Undermine the Robustness of Pathology Foundation Models
+  authors: verify
+  venue: arXiv
+  date: '2026-01-07'
+  url: https://arxiv.org/abs/2601.04163v1
+  arxiv_id: 2601.04163v1
+  code_note: 'None from source; reimplementable. Feature extraction: https://github.com/mahmoodlab/TRIDENT'
+  code_licence: 'Feature extraction: TRIDENT, Other (NOASSERTION on GitHub)'
+datasets:
+- id: plism
+  role: benchmark
+study_type: Robustness benchmark
+reporting_guideline: CLAIM 2024
+novelty_delta: Source's 14-model result used in-house data with no code. Re-running its embedding-stability metrics
+  on public, tile-registered PLISM makes it reproducible, adds newer models (H-optimus-0/1, Virchow2, UNI2-h, OpenMidnight,
+  CONCHv1.5) and a smartphone axis relevant to low-resource Indian settings.
+compute:
+  tier: runpod
+  estimate: RunPod (~10–20 GPU-h); analysis on laptop
+est_weeks: 5
+scores:
+  feasibility: 5
+  novelty: 4
+  fit: null
+risks: []
+access_actions:
+- Gated access to several foundation models (CC-BY-NC-ND; institutional email)
+candidate_journals: []
+added_at: '2026-11-04T08:30:00Z'
+added_by: scout
+run_id: 2026-W45 (initial)

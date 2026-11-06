@@ -1,0 +1,51 @@
+id: wbc-crossdataset
+legacy_id: cp-2026w45-wbc-crossdataset
+title: 'Hematology vs histopathology vs general foundation models for white-cell classification: cross-dataset validation
+  (WBCBench 2026 → PBC Barcelona → Raabin-WBC) and robustness to image degradation'
+area: computational-pathology
+tags:
+- haematology
+- white-cells
+- foundation-models
+status: new
+status_history:
+- status: new
+  date: '2026-11-04'
+  note: Migrated from the claude.ai register (2026-W45 (initial))
+source:
+  type: preprint
+  title: 'WBCBench 2026: A Challenge for Robust White Blood Cell Classification Under Class Imbalance'
+  authors: verify
+  venue: arXiv
+  date: '2026-04-12'
+  url: https://arxiv.org/html/2604.10797v1
+  arxiv_id: 2604.10797v1
+  code_url: https://github.com/marrlab/DinoBloom
+  code_licence: Apache-2.0
+datasets:
+- id: wbcbench-2026
+  role: development
+- id: pbc-barcelona
+  role: external-validation
+- id: raabin-wbc
+  role: external-validation
+study_type: Benchmark + external validation + robustness
+reporting_guideline: CLAIM 2024
+novelty_delta: Challenge entries reported only in-distribution macro-F1. Trains frozen-encoder probes on single-institution
+  WBCBench, tests zero-shot on Spanish and Iranian sets with pathologist-harmonised classes, compares DinoBloom
+  with UNI2-h, H-optimus-0, Virchow2 and DINOv2, and reports degradation curves and calibration.
+compute:
+  tier: colab
+  estimate: Colab (~1–3 GPU-h per model)
+est_weeks: 4
+scores:
+  feasibility: 5
+  novelty: 3
+  fit: null
+risks: []
+access_actions:
+- Hugging Face gated access (auto-approval) for WBCBench 2026
+candidate_journals: []
+added_at: '2026-11-04T08:30:00Z'
+added_by: scout
+run_id: 2026-W45 (initial)

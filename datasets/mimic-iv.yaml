@@ -1,0 +1,15 @@
+id: mimic-iv
+name: MIMIC-IV
+url: https://physionet.org/content/mimiciv/3.1/
+modality: EHR
+organ_or_domain: critical care and hospital admissions
+size: verify
+access: credentialed
+licence: PhysioNet Credentialed Health Data License 1.5.0 (verify)
+licence_notes: 'Credentialing + CITI training (~1–2 weeks). DUA forbids redistribution and sending data to external LLM APIs:
+  use local models only.'
+institution_country: USA (Beth Israel Deaconess / MIT)
+alt_urls:
+- https://physionet.org/content/mimiciv/2.2/
+notes: ClinicalBench split indices match v2.2; the cirrhosis-sepsis study uses v3.1.
+last_checked: '2026-11-06'

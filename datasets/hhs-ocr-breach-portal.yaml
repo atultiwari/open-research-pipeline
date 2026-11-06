@@ -1,0 +1,11 @@
+id: hhs-ocr-breach-portal
+name: HHS OCR Breach Portal
+url: https://ocrportal.hhs.gov/ocr/breach/breach_report.jsf
+modality: tabular (breach reports)
+organ_or_domain: US healthcare data breaches (500+ individuals)
+size: verify
+access: open
+licence: US government public data
+institution_country: USA (HHS)
+notes: 'Rows under investigation change: keep date-stamped snapshots (outside the repo).'
+last_checked: '2026-11-06'

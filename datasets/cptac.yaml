@@ -1,0 +1,11 @@
+id: cptac
+name: Clinical Proteomic Tumor Analysis Consortium (CPTAC)
+url: https://proteomics.cancer.gov/programs/cptac
+modality: WSI; proteomics; clinical
+organ_or_domain: multiple cancers
+size: verify
+access: open
+licence: verify
+institution_country: USA (NCI)
+notes: Pathology slides via TCIA; use as external validation for TCGA-trained models.
+last_checked: '2026-11-06'

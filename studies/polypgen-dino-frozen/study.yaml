@@ -1,0 +1,51 @@
+id: polypgen-dino-frozen
+legacy_id: gh-2026w45-polypgen-dino-frozen
+title: 'Cross-centre generalisation of polyp segmentation: correctly frozen re-evaluation of DINOv2/v3 key features
+  on PolypGen with zero-shot external testing on Kvasir-SEG and CVC-ClinicDB'
+area: gastro-hepatology
+tags:
+- polyp-segmentation
+- domain-generalisation
+- endoscopy
+status: new
+status_history:
+- status: new
+  date: '2026-11-04'
+  note: Migrated from the claude.ai register (2026-W45 (initial))
+source:
+  type: preprint
+  title: Unlocking Generalization in Polyp Segmentation with DINO Self-Attention "keys"
+  authors: verify
+  venue: arXiv (cs.CV)
+  date: '2026-01-21'
+  url: https://arxiv.org/abs/2512.13376v2
+  arxiv_id: 2512.13376v2
+  code_url: https://github.com/Trustworthy-AI-UU-NKI/RepMatters
+  code_licence: 'None stated on GitHub (no licence file): reimplement, do not copy'
+datasets:
+- id: polypgen
+  role: development
+- id: kvasir-seg
+  role: external-validation
+- id: cvc-clinicdb
+  role: external-validation
+study_type: Segmentation domain-generalisation benchmark
+reporting_guideline: CLAIM 2024
+novelty_delta: Authors' own v2 note says the encoder was not properly frozen, so the claims are not fully valid.
+  A transparent, correctly frozen reproduction with zero-shot external sets, newer encoders and failure analysis
+  by polyp size and morphology fills a real gap.
+compute:
+  tier: runpod
+  estimate: Colab or RunPod (~10 GPU-h)
+est_weeks: 5
+scores:
+  feasibility: 4
+  novelty: 3
+  fit: null
+risks: []
+access_actions:
+- Synapse account for PolypGen (free)
+candidate_journals: []
+added_at: '2026-11-04T08:30:00Z'
+added_by: scout
+run_id: 2026-W45 (initial)

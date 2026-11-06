@@ -1,0 +1,11 @@
+id: medmarks
+name: Medmarks benchmark suite
+url: https://github.com/MedARC-AI/Medmarks
+modality: text (benchmark harness)
+organ_or_domain: medical LLM evaluation
+size: Multiple subsets
+access: open
+licence: Harness MIT (verify); subset licences vary
+licence_notes: Skip subsets with unclear licences (Medbullets, MTSamples, MedConceptsQA).
+notes: 'Subsets used: MedMCQA, MedCalc-Bench, MedHallu, MEDEC, Med-HALT.'
+last_checked: '2026-11-06'

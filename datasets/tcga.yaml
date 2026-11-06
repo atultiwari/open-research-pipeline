@@ -1,0 +1,11 @@
+id: tcga
+name: The Cancer Genome Atlas (TCGA) via GDC
+url: https://portal.gdc.cancer.gov/
+modality: WSI; genomics; clinical
+organ_or_domain: pan-cancer
+size: ~11,000 patients; diagnostic and tissue slides
+access: open
+licence: GDC open-access tier (verify data use terms)
+institution_country: USA (NCI)
+notes: 'Projects used here: BRCA, LUAD/LUSC, GBM/LGG, RCC, LIHC.'
+last_checked: '2026-11-06'

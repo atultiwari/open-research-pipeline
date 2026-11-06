@@ -1,0 +1,11 @@
+id: panda
+name: PANDA challenge (prostate biopsies)
+url: https://www.kaggle.com/c/prostate-cancer-grade-assessment
+modality: WSI
+organ_or_domain: prostate
+size: verify
+access: free-registration
+licence: verify
+licence_notes: Kaggle account; accept competition rules.
+labels: ISUP grade / Gleason
+last_checked: '2026-11-06'

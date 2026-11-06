@@ -1,0 +1,53 @@
+# Node / Astro
+node_modules/
+site/dist/
+site/.astro/
+dist/
+.astro/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Never commit data
+data/
+raw/
+*.csv
+*.tsv
+*.parquet
+*.feather
+*.xlsx
+*.xls
+*.svs
+*.ndpi
+*.mrxs
+*.scn
+*.tif
+*.tiff
+*.h5
+*.hdf5
+*.npy
+*.npz
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.pcap
+*.pcapng
+*.zip
+*.tar
+*.tar.gz
+*.gz
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+.env
+.env.*
+
+# Local build brief (kept out of the public repo)
+HANDOFF.md

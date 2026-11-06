@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+import { REPO_URL } from '../lib/util';
+---
+<Base title="How it works" description="The pipeline from link to preprint, with three approval gates.">
+  <h1>How it works</h1>
+  <p class="lede">
+    Atul has no dataset of his own, so every study here must run on open data. Claude finds, checks and writes; Atul
+    supervises and approves at three gates.
+  </p>
+
+  <h2>The pipeline</h2>
+  <ol class="steps">
+    <li><strong>A link comes in</strong>: a paper, preprint, code repository or dataset, shared by Atul or found by the weekly scout.</li>
+    <li><strong>Claude ingests it</strong>: fetches metadata from public APIs, finds the linked code and datasets, checks for duplicates, and checks that the work can be done on open data.</li>
+    <li><strong>Claude writes the entry</strong>: a summary, a replication guide and a gap analysis, with a recommended extension and scores. Status <span class="pill new">new</span>.</li>
+    <li class="gate"><strong>Gate 1: Atul approves the study</strong> (or parks or rejects it). Status <span class="pill approved">approved</span>.</li>
+    <li><strong>Claude drafts the protocol</strong>: aims, data access, methods, statistics, reporting checklist, timeline and journals. Status <span class="pill protocol">protocol</span>.</li>
+    <li class="gate"><strong>Gate 2: Atul signs off the protocol.</strong> Analysis starts. Status <span class="pill analysis">analysis</span>, then <span class="pill drafting">drafting</span>.</li>
+    <li class="gate"><strong>Gate 3: Atul approves the manuscript.</strong> It goes to a preprint server, then a zero-APC journal. Status <span class="pill preprint">preprint</span> → <span class="pill submitted">submitted</span> → <span class="pill published">published</span>.</li>
+  </ol>
+
+  <h2>Adding a link</h2>
+  <div class="grid">
+    <section class="card">
+      <h3 style="margin-top:0">Claude Code</h3>
+      <p>In this repository's folder, run <code>/add-study &lt;url&gt;</code>.</p>
+    </section>
+    <section class="card">
+      <h3 style="margin-top:0">Claude app</h3>
+      <p>In a session with this repository attached, paste the link and say "add this study".</p>
+    </section>
+    <section class="card">
+      <h3 style="margin-top:0">GitHub issue (phone)</h3>
+      <p>Open an issue with the <a href={`${REPO_URL}/issues/new/choose`}>"Add a link"</a> form. The next scout run or <code>/process-inbox</code> picks it up.</p>
+    </section>
+  </div>
+
+  <h2>Changing a status</h2>
+  <p>
+    In Claude Code: <code>/approve &lt;slug&gt;</code>, <code>/park &lt;slug&gt;</code> or <code>/reject &lt;slug&gt; &lt;reason&gt;</code>.
+    On a phone: open the study page, tap <strong>Edit on GitHub</strong>, change <code>status:</code>, add a line to
+    <code>status_history</code>, and commit. The site rebuilds in about two minutes.
+  </p>
+
+  <h2>Rules every entry follows</h2>
+  <ul>
+    <li><strong>Open data only</strong>: open, free registration, or credentialed (such as PhysioNet). Never paid data or UK Biobank.</li>
+    <li><strong>No data in the repository</strong>: only metadata, links, code and aggregate results.</li>
+    <li><strong>Verify, never invent</strong>: every link is fetched; anything unconfirmed is marked <span class="badge">verify</span>.</li>
+    <li><strong>Licences recorded exactly</strong>, with non-commercial, no-derivatives and gated terms flagged.</li>
+    <li><strong>Defensive security only</strong> for cybersecurity studies.</li>
+  </ul>
+</Base>

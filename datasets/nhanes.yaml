@@ -1,0 +1,16 @@
+id: nhanes
+name: NHANES (National Health and Nutrition Examination Survey)
+url: https://wwwn.cdc.gov/nchs/nhanes/
+modality: tabular (survey, labs, exam)
+organ_or_domain: population health; haematology; liver (elastography cycles)
+size: ~5,000 participants per year; 2-year cycles
+access: open
+licence: US government public data (verify exact terms)
+institution_country: USA (CDC/NCHS)
+labels: Labs, questionnaires, exam; liver transient elastography + CAP in 2017–Mar 2020 (P_LUX) and Aug 2021–Aug 2023 (LUX_L)
+notes: 'Use survey weights. Files used here: CBC_J, FERTIN_J, FETIB_J, HSCRP_J (2017–18); P_LUX; LUX_L, BIOPRO_L, CBC_L, BMX_L,
+  DEMO_L, HEPC_L (2021–23).'
+alt_urls:
+- https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/FERTIN_J.htm
+- https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/LUX_L.htm
+last_checked: '2026-11-06'

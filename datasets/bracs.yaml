@@ -1,0 +1,10 @@
+id: bracs
+name: BRACS (BReAst Carcinoma Subtyping)
+url: https://www.bracs.icar.cnr.it/
+modality: WSI and ROIs
+organ_or_domain: breast
+size: verify
+access: free-registration
+licence: verify
+institution_country: Italy
+last_checked: '2026-11-06'

@@ -1,0 +1,280 @@
+# Zero-APC journal shortlist. Converted from _seed/journals.md (researched 2026-11-04).
+# "verify" = the publisher page did not load during research, or the value was not shown.
+researched: "2026-11-04"
+notes:
+  - Publish free by choosing the subscription (non-open-access) route at acceptance in a hybrid journal.
+  - India gets no automatic APC waiver from Research4Life, Springer Nature, Wiley, Taylor & Francis or Wolters Kluwer, so fully open-access journals are excluded.
+journals:
+  # --- Computational pathology and imaging AI ---
+  - id: jiim
+    name: Journal of Imaging Informatics in Medicine
+    publisher: Springer
+    areas: [computational-pathology]
+    free_route: Subscription; no APC
+    first_decision: 4 days (median)
+    acceptance_to_online: Not published
+    fits: WSI and imaging AI tools
+    url: https://link.springer.com/journal/10278
+    last_checked: "2026-11-04"
+  - id: cmig
+    name: Computerized Medical Imaging and Graphics
+    publisher: Elsevier
+    areas: [computational-pathology]
+    free_route: Subscription (verify)
+    first_decision: 3 days
+    acceptance_to_online: 10 days
+    fits: Imaging and WSI deep learning
+    url: https://www.sciencedirect.com/journal/computerized-medical-imaging-and-graphics/about/insights
+    verify_flags: [free_route]
+    last_checked: "2026-11-04"
+  - id: mbec
+    name: Medical & Biological Engineering & Computing
+    publisher: Springer
+    areas: [computational-pathology]
+    free_route: Subscription
+    first_decision: 6 days (median)
+    acceptance_to_online: Not published
+    fits: AI methods, image analysis
+    url: https://link.springer.com/journal/11517
+    last_checked: "2026-11-04"
+  - id: modern-pathology
+    name: Modern Pathology
+    publisher: Elsevier (USCAP)
+    areas: [computational-pathology]
+    free_route: Subscription; no author fee
+    first_decision: 4 days
+    acceptance_to_online: Not published
+    fits: High-bar computational pathology
+    url: https://www.sciencedirect.com/journal/modern-pathology/about/insights
+    last_checked: "2026-11-04"
+  - id: laboratory-investigation
+    name: Laboratory Investigation
+    publisher: Elsevier (USCAP)
+    areas: [computational-pathology]
+    free_route: Subscription; no author fee
+    first_decision: 6 days
+    acceptance_to_online: Not published
+    fits: Computational pathology research
+    url: https://www.sciencedirect.com/journal/laboratory-investigation/about/insights
+    last_checked: "2026-11-04"
+  - id: cibm
+    name: Computers in Biology and Medicine
+    publisher: Elsevier
+    areas: [computational-pathology]
+    free_route: Subscription (verify)
+    first_decision: verify
+    acceptance_to_online: verify
+    fits: AI pathology, segmentation (needs clear data splits)
+    url: https://www.sciencedirect.com/journal/computers-in-biology-and-medicine/about/insights
+    verify_flags: [free_route, first_decision, acceptance_to_online]
+    last_checked: "2026-11-04"
+  - id: bspc
+    name: Biomedical Signal Processing and Control
+    publisher: Elsevier
+    areas: [computational-pathology]
+    free_route: Subscription (verify)
+    first_decision: 10 days
+    acceptance_to_online: 12 days
+    fits: Methods; about 203 days from submission to acceptance
+    url: https://www.sciencedirect.com/journal/biomedical-signal-processing-and-control/about/insights
+    verify_flags: [free_route]
+    last_checked: "2026-11-04"
+  - id: ijpm
+    name: Indian Journal of Pathology & Microbiology
+    publisher: verify
+    areas: [computational-pathology]
+    free_route: Fee status unclear (verify)
+    first_decision: verify
+    acceptance_to_online: verify
+    fits: Indexed; review reportedly slow
+    url: verify
+    verify_flags: [publisher, free_route, url]
+    last_checked: "2026-11-04"
+  # --- Gastroenterology and hepatology ---
+  - id: ijg
+    name: Indian Journal of Gastroenterology
+    publisher: Springer (ISG)
+    areas: [gastro-hepatology]
+    free_route: Subscription; no APC
+    first_decision: 11 days (median)
+    acceptance_to_online: Not published
+    fits: Original articles, research letters, systematic reviews (no case reports)
+    url: https://link.springer.com/journal/12664
+    last_checked: "2026-11-04"
+  - id: hepatology-international
+    name: Hepatology International
+    publisher: Springer (APASL)
+    areas: [gastro-hepatology]
+    free_route: Subscription
+    first_decision: 7 days (median)
+    acceptance_to_online: Not published
+    fits: Cirrhosis and liver AI; IF 7.8; selective
+    url: https://link.springer.com/journal/12072
+    last_checked: "2026-11-04"
+  - id: jceh
+    name: Journal of Clinical and Experimental Hepatology
+    publisher: Elsevier (INASL)
+    areas: [gastro-hepatology]
+    free_route: Subscription; no author fee
+    first_decision: Not shown (25 days after review)
+    acceptance_to_online: 7 days
+    fits: Liver studies with Indian relevance; society-owned, check preprint policy
+    url: https://www.sciencedirect.com/journal/journal-of-clinical-and-experimental-hepatology/about/insights
+    last_checked: "2026-11-04"
+  - id: dds
+    name: Digestive Diseases and Sciences
+    publisher: Springer
+    areas: [gastro-hepatology]
+    free_route: Subscription; free colour
+    first_decision: 28 days
+    acceptance_to_online: 21 days
+    fits: Pancreatitis, ERCP, GI AI
+    url: https://link.springer.com/journal/10620
+    last_checked: "2026-11-04"
+  - id: ejgh
+    name: European Journal of Gastroenterology & Hepatology
+    publisher: Wolters Kluwer
+    areas: [gastro-hepatology]
+    free_route: Subscription (verify)
+    first_decision: verify
+    acceptance_to_online: verify
+    fits: Original articles
+    url: verify
+    verify_flags: [free_route, first_decision, acceptance_to_online, url]
+    last_checked: "2026-11-04"
+  # --- Clinical data, LLMs and informatics ---
+  - id: ijmi
+    name: International Journal of Medical Informatics
+    publisher: Elsevier
+    areas: [clinical-data-llm]
+    free_route: Subscription (verify)
+    first_decision: About 1 day
+    acceptance_to_online: About 3 days
+    fits: LLM evaluation, EHR, decision support
+    url: https://www.sciencedirect.com/journal/international-journal-of-medical-informatics/about/insights
+    verify_flags: [free_route]
+    last_checked: "2026-11-04"
+  - id: jms
+    name: Journal of Medical Systems
+    publisher: Springer
+    areas: [clinical-data-llm, healthcare-cybersecurity]
+    free_route: Subscription
+    first_decision: 8 days (median)
+    acceptance_to_online: Not published
+    fits: Clinical AI applications; security of clinical systems; IF 8.8
+    url: https://link.springer.com/journal/10916
+    last_checked: "2026-11-04"
+  - id: jbi
+    name: Journal of Biomedical Informatics
+    publisher: Elsevier
+    areas: [clinical-data-llm]
+    free_route: Subscription (verify)
+    first_decision: 2 days
+    acceptance_to_online: 8 days
+    fits: Methods-heavy NLP and LLM work
+    url: https://www.sciencedirect.com/journal/journal-of-biomedical-informatics/about/insights
+    verify_flags: [free_route]
+    last_checked: "2026-11-04"
+  - id: aim
+    name: Artificial Intelligence in Medicine
+    publisher: Elsevier
+    areas: [clinical-data-llm]
+    free_route: Subscription (verify)
+    first_decision: verify
+    acceptance_to_online: verify
+    fits: AI methods
+    url: https://www.sciencedirect.com/journal/artificial-intelligence-in-medicine/about/insights
+    verify_flags: [free_route, first_decision, acceptance_to_online]
+    last_checked: "2026-11-04"
+  - id: cmpb
+    name: Computer Methods and Programs in Biomedicine
+    publisher: Elsevier
+    areas: [clinical-data-llm]
+    free_route: Subscription (verify)
+    first_decision: verify
+    acceptance_to_online: verify
+    fits: Tools, software, ML
+    url: https://www.sciencedirect.com/journal/computer-methods-and-programs-in-biomedicine/about/insights
+    verify_flags: [free_route, first_decision, acceptance_to_online]
+    last_checked: "2026-11-04"
+  - id: jamia
+    name: Journal of the American Medical Informatics Association (JAMIA)
+    publisher: Oxford University Press
+    areas: [clinical-data-llm]
+    free_route: Subscription (verify)
+    first_decision: Not published
+    acceptance_to_online: Not published
+    fits: Informatics and LLMs; selective
+    url: https://academic.oup.com/jamia/pages/jamia_publishing
+    verify_flags: [free_route]
+    last_checked: "2026-11-04"
+  - id: ieee-jbhi
+    name: IEEE Journal of Biomedical and Health Informatics
+    publisher: IEEE (EMBS)
+    areas: [clinical-data-llm]
+    free_route: Free only for regular papers of 8 pages or fewer; longer papers pay US$250–350 per extra page
+    fits: Keep manuscripts to 8 pages or fewer
+    url: https://embs.org/jbhi/prepare-and-submit-your-manuscript
+    last_checked: "2026-11-04"
+  # --- Healthcare cybersecurity ---
+  - id: hpt
+    name: Health Policy and Technology
+    publisher: Elsevier
+    areas: [healthcare-cybersecurity]
+    free_route: Subscription (verify)
+    first_decision: 4 days
+    acceptance_to_online: 4 days
+    fits: Breach analysis, DPDP, health-IT governance
+    url: https://www.sciencedirect.com/journal/health-policy-and-technology/about/insights
+    verify_flags: [free_route]
+    last_checked: "2026-11-04"
+  - id: computers-security
+    name: Computers & Security
+    publisher: Elsevier
+    areas: [healthcare-cybersecurity]
+    free_route: Subscription
+    first_decision: 2 days
+    acceptance_to_online: 9 days
+    fits: Health-data security, threat analysis
+    url: https://www.sciencedirect.com/journal/computers-and-security/about/insights
+    last_checked: "2026-11-04"
+  - id: jisa
+    name: Journal of Information Security and Applications
+    publisher: Elsevier
+    areas: [healthcare-cybersecurity]
+    free_route: Subscription
+    first_decision: 3 days
+    acceptance_to_online: 15 days
+    fits: Applied security, IoMT intrusion detection
+    url: https://www.sciencedirect.com/journal/journal-of-information-security-and-applications/about/insights
+    last_checked: "2026-11-04"
+  - id: health-technology
+    name: Health and Technology
+    publisher: Springer
+    areas: [healthcare-cybersecurity]
+    free_route: Subscription
+    first_decision: 27 days (median)
+    acceptance_to_online: Not published
+    fits: Health-IT security, privacy
+    url: https://link.springer.com/journal/12553
+    last_checked: "2026-11-04"
+excluded:
+  - name: Journal of Pathology Informatics
+    reason: APC US$1,670 since October 2024
+    source: https://www.pathologyinformatics.org/updates-on-new-jpi-publisher-and-jpi-publication-fees
+  - name: Scientific Reports; IEEE Access
+    reason: Fully open access with APC
+  - name: International Journal of Information Security
+    reason: Now fully open access, APC US$3,690
+  - name: PLOS Digital Health
+    reason: APC US$3,165 unless Fee Assistance is granted
+  - name: Intelligence-Based Medicine; Informatics in Medicine Unlocked
+    reason: APC US$2,500 and US$2,710
+  - name: Gastro Hep Advances; JGH Open; Hepatology Communications
+    reason: Fully open access with APC
+  - name: BMC titles (BMC Medical Informatics and Decision Making, BMC Gastroenterology, BMC Medical Imaging, Diagnostic Pathology)
+    reason: APC; India pays 25% under BMC's pilot, still not zero
+  - name: JMIR family
+    reason: Waivers only in exceptional cases
+  - name: Indian Journal of Medical Research (ICMR)
+    reason: No fee, but rejects work already posted as a preprint (conflicts with preprint-first)

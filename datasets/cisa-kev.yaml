@@ -1,0 +1,10 @@
+id: cisa-kev
+name: CISA Known Exploited Vulnerabilities catalogue
+url: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
+modality: tabular
+organ_or_domain: exploited vulnerabilities
+size: verify
+access: open
+licence: US government public data
+institution_country: USA (CISA)
+last_checked: '2026-11-06'

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dataset.schema.json",
+  "title": "Open dataset",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "url", "modality", "organ_or_domain", "access", "licence"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"},
+    "name": {"type": "string"},
+    "url": {"type": "string", "pattern": "^https?://\\S+$"},
+    "alt_urls": {"type": "array", "items": {"type": "string", "pattern": "^https?://\\S+$"}},
+    "doi": {"type": "string", "pattern": "^(10\\.\\d{4,9}/\\S+|verify)$"},
+    "modality": {"type": "string"},
+    "organ_or_domain": {"type": "string"},
+    "size": {"type": "string"},
+    "access": {"enum": ["open", "free-registration", "credentialed"]},
+    "licence": {"type": "string"},
+    "licence_notes": {"type": "string"},
+    "institution_country": {"type": "string"},
+    "labels": {"type": "string"},
+    "citation": {"type": "string"},
+    "notes": {"type": "string"},
+    "last_checked": {"type": "string"}
+  }
+}

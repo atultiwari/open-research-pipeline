@@ -1,0 +1,123 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import StatusPill from '../components/StatusPill.astro';
+import { AREA_LABEL, STATUS_ORDER, TIER_LABEL, ACCESS_LABEL, headline, studyAccess, url } from '../lib/util';
+
+const studies = (await getCollection('studies')).map((e) => e.data);
+const datasets = new Map((await getCollection('datasets')).map((e) => [e.id, e.data]));
+const docs = await getCollection('studyDocs');
+const stub = new Set(docs.filter((d) => d.data.enriched === false).map((d) => d.id.split('/')[0]));
+
+const rows = studies
+  .map((s) => ({ ...s, score: headline(s), access: studyAccess(s, datasets), added: String(s.added_at).slice(0, 10) }))
+  .sort((a, b) => b.score - a.score || a.est_weeks - b.est_weeks);
+
+const counts = STATUS_ORDER.map((st) => ({ st, n: studies.filter((s) => s.status === st).length })).filter((c) => c.n > 0);
+---
+<Base title="Open Research Pipeline">
+  <h1>Study register</h1>
+  <p class="lede">
+    Published papers, preprints, code and datasets that can be replicated and extended using open data, scored for
+    feasibility and novelty. Each study has a replication guide and a gap analysis.
+  </p>
+
+  <ul class="counts" aria-label="Studies by status">
+    <li><strong>{studies.length}</strong>total</li>
+    {counts.map((c) => <li><strong>{c.n}</strong><StatusPill status={c.st} /></li>)}
+  </ul>
+
+  <form class="filters" id="filters" aria-label="Filter studies" onsubmit="return false">
+    <label>Search titles<input type="search" name="q" placeholder="e.g. cirrhosis" /></label>
+    <label>Area
+      <select name="area"><option value="">All areas</option>{Object.entries(AREA_LABEL).map(([k, v]) => <option value={k}>{v}</option>)}</select>
+    </label>
+    <label>Status
+      <select name="status"><option value="">All statuses</option>{STATUS_ORDER.map((s) => <option value={s}>{s}</option>)}</select>
+    </label>
+    <label>Compute
+      <select name="tier"><option value="">Any compute</option>{Object.entries(TIER_LABEL).map(([k, v]) => <option value={k}>{v}</option>)}</select>
+    </label>
+    <label>Data access
+      <select name="access"><option value="">Any access</option>{Object.entries(ACCESS_LABEL).map(([k, v]) => <option value={k}>{v}</option>)}</select>
+    </label>
+    <label>Sort by
+      <select name="sort">
+        <option value="score">Score (feasibility × novelty)</option>
+        <option value="newest">Newest</option>
+        <option value="fastest">Fastest to preprint</option>
+      </select>
+    </label>
+  </form>
+
+  <p class="muted small" id="shown" aria-live="polite">{rows.length} studies shown</p>
+
+  <div class="table-wrap">
+    <table class="register">
+      <thead>
+        <tr><th scope="col">Study</th><th scope="col">Area</th><th scope="col">Status</th><th scope="col" class="num">Score</th><th scope="col">Compute</th><th scope="col" class="num">Weeks</th></tr>
+      </thead>
+      <tbody id="rows">
+        {rows.map((r) => (
+          <tr data-area={r.area} data-status={r.status} data-tier={r.compute.tier} data-access={r.access}
+              data-score={r.score} data-weeks={r.est_weeks} data-added={r.added} data-title={r.title.toLowerCase()}>
+            <td class="title-cell">
+              <a href={url(`studies/${r.id}`)}>{r.title}</a>
+              {stub.has(r.id) && <> <span class="badge">needs enrichment</span></>}
+            </td>
+            <td data-label="Area" class="small">{AREA_LABEL[r.area]}</td>
+            <td><StatusPill status={r.status} /></td>
+            <td data-label="Score" class="num" title={`Feasibility ${r.scores.feasibility} × novelty ${r.scores.novelty}`}>{r.score}</td>
+            <td data-label="Compute" class="small">{TIER_LABEL[r.compute.tier]} · {ACCESS_LABEL[r.access]}</td>
+            <td data-label="Weeks" class="num">{r.est_weeks}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <p class="empty" id="empty" hidden>No studies match these filters.</p>
+  </div>
+
+  <script>
+    const form = document.getElementById('filters') as HTMLFormElement;
+    const body = document.getElementById('rows') as HTMLTableSectionElement;
+    const shown = document.getElementById('shown') as HTMLElement;
+    const empty = document.getElementById('empty') as HTMLElement;
+    const rows = Array.from(body.querySelectorAll('tr'));
+    const KEYS = ['q', 'area', 'status', 'tier', 'access', 'sort'] as const;
+
+    const sorters: Record<string, (a: HTMLElement, b: HTMLElement) => number> = {
+      score: (a, b) => Number(b.dataset.score) - Number(a.dataset.score) || Number(a.dataset.weeks) - Number(b.dataset.weeks),
+      newest: (a, b) => (b.dataset.added ?? '').localeCompare(a.dataset.added ?? ''),
+      fastest: (a, b) => Number(a.dataset.weeks) - Number(b.dataset.weeks) || Number(b.dataset.score) - Number(a.dataset.score),
+    };
+
+    function apply() {
+      const f = new FormData(form);
+      const get = (k: string) => String(f.get(k) ?? '');
+      const q = get('q').trim().toLowerCase();
+      let visible = 0;
+      for (const r of rows) {
+        const d = r.dataset;
+        const ok = (!q || (d.title ?? '').includes(q)) && ['area', 'status', 'tier', 'access'].every((k) => !get(k) || d[k] === get(k));
+        r.hidden = !ok;
+        if (ok) visible++;
+      }
+      [...rows].sort(sorters[get('sort')] ?? sorters.score).forEach((r) => body.appendChild(r));
+      shown.textContent = `${visible} of ${rows.length} studies shown`;
+      empty.hidden = visible > 0;
+      const params = new URLSearchParams();
+      KEYS.forEach((k) => { const v = get(k); if (v && !(k === 'sort' && v === 'score')) params.set(k, v); });
+      history.replaceState(null, '', params.size ? `?${params}` : location.pathname);
+    }
+
+    const initial = new URLSearchParams(location.search);
+    KEYS.forEach((k) => {
+      const el = form.elements.namedItem(k) as HTMLInputElement | HTMLSelectElement | null;
+      const v = initial.get(k);
+      if (el && v) el.value = v;
+    });
+    form.addEventListener('input', apply);
+    form.addEventListener('change', apply);
+    apply();
+  </script>
+</Base>

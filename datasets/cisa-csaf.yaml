@@ -1,0 +1,11 @@
+id: cisa-csaf
+name: CISA CSAF advisories (incl. ICS Medical Advisories)
+url: https://github.com/cisagov/CSAF
+modality: structured advisories (CSAF JSON)
+organ_or_domain: medical-device vulnerabilities
+size: ICSMA subset ~400 advisories (verify)
+access: open
+licence: US government public data (verify)
+institution_country: USA (CISA)
+notes: Check coverage of pre-CSAF advisories.
+last_checked: '2026-11-06'

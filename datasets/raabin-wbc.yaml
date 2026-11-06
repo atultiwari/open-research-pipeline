@@ -1,0 +1,11 @@
+id: raabin-wbc
+name: Raabin-WBC
+url: https://raabindata.com/
+modality: blood smear cell images
+organ_or_domain: haematology
+size: verify
+access: open
+licence: verify
+institution_country: Iran
+notes: 'Free data section on the home page (#freedata). Part of DinoBloom pretraining: declare leakage.'
+last_checked: '2026-11-06'

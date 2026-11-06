@@ -1,0 +1,11 @@
+id: ciciomt2024
+name: CICIoMT2024
+url: https://www.unb.ca/cic/datasets/iomt-dataset-2024.html
+modality: network traffic (flows, pcaps)
+organ_or_domain: Internet of Medical Things intrusion detection
+size: verify
+access: open
+licence: verify
+licence_notes: Free download form.
+institution_country: Canada (UNB CIC)
+last_checked: '2026-11-06'

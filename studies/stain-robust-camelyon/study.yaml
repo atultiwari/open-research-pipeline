@@ -1,0 +1,50 @@
+id: stain-robust-camelyon
+legacy_id: cp-2026w45-stain-robust-camelyon
+title: 'Stain-robustness of foundation-model MIL classifiers beyond MSI: the CTPLab protocol applied to lymph-node
+  metastasis (CAMELYON16 → CAMELYON17)'
+area: computational-pathology
+tags:
+- robustness
+- stain-variation
+- lymph-node
+- wsi
+status: new
+status_history:
+- status: new
+  date: '2026-11-04'
+  note: Migrated from the claude.ai register (2026-W45 (initial))
+source:
+  type: preprint
+  title: A protocol for evaluating robustness to H&E staining variation in computational pathology models (CVPR
+    2026)
+  authors: verify
+  venue: arXiv
+  date: '2026-03-13'
+  url: https://arxiv.org/html/2603.12886v1
+  arxiv_id: 2603.12886v1
+  code_url: https://github.com/CTPLab/staining-robustness-evaluation
+  code_licence: Apache-2.0
+datasets:
+- id: camelyon16
+  role: development
+- id: camelyon17
+  role: external-validation
+study_type: Robustness / external validation
+reporting_guideline: CLAIM 2024 / TRIPOD+AI
+novelty_delta: Protocol shown only on colorectal MSI with three models. Tests a second task (nodal metastasis),
+  external multi-centre validation on CAMELYON17, and open-licence models, to check whether 'robustness does not
+  track AUC' holds across tasks.
+compute:
+  tier: runpod
+  estimate: RunPod (~60–120 GPU-h; reduce with fewer stain conditions/models)
+est_weeks: 9
+scores:
+  feasibility: 3
+  novelty: 4
+  fit: null
+risks: []
+access_actions: []
+candidate_journals: []
+added_at: '2026-11-04T08:30:00Z'
+added_by: scout
+run_id: 2026-W45 (initial)

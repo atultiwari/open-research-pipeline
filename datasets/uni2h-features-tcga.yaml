@@ -1,0 +1,11 @@
+id: uni2h-features-tcga
+name: Precomputed UNI2-h features for TCGA/CPTAC (Hugging Face)
+url: https://huggingface.co/datasets/sofieneb/uni2h_features
+modality: WSI patch embeddings
+organ_or_domain: pan-cancer
+size: verify
+access: free-registration
+licence: CC-BY-NC-ND-4.0
+licence_notes: 'Non-commercial, no-derivatives. Hugging Face gated (auto-approval) per HF API 2026-11-06. Third-party extraction:
+  spot-check against self-extracted features.'
+last_checked: '2026-11-06'

@@ -1,0 +1,12 @@
+id: medmcqa
+name: MedMCQA
+url: https://huggingface.co/datasets/openlifescienceai/medmcqa
+modality: text (MCQ)
+organ_or_domain: medical entrance exams (AIIMS/NEET-PG)
+size: Validation split 4,183 questions
+access: open
+licence: Apache-2.0
+institution_country: India
+labels: Answer key, subject field (Pathology, Microbiology, Biochemistry, …)
+notes: Answer keys are noisy.
+last_checked: '2026-11-06'

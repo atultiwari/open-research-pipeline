@@ -1,0 +1,46 @@
+id: medhallu-small
+legacy_id: cl-2026w45-medhallu-small
+title: Can small open-weight models detect medical hallucinations? MedHallu on Gemma 3, MedGemma, Qwen3, Llama,
+  with and without retrieved knowledge, plus a pathologist-annotated lab-medicine subset
+area: clinical-data-llm
+tags:
+- llm-safety
+- hallucination
+- small-models
+status: new
+status_history:
+- status: new
+  date: '2026-11-04'
+  note: Migrated from the claude.ai register (2026-W45 (initial))
+source:
+  type: preprint
+  title: 'MedHallu: A Comprehensive Benchmark for Detecting Medical Hallucinations in Large Language Models'
+  authors: verify
+  venue: arXiv (EMNLP 2025)
+  date: '2025-02-20'
+  url: https://arxiv.org/abs/2502.14302
+  arxiv_id: '2502.14302'
+  code_url: https://github.com/MedHallu/MedHallu
+  code_licence: MIT
+datasets:
+- id: medhallu
+  role: benchmark
+study_type: LLM safety / hallucination detection
+reporting_guideline: TRIPOD-LLM; MI-CLEAR-LLM
+novelty_delta: Original used GPT-4o, Llama-3.1, UltraMedical; best hard-item F1 was 0.625. Adds newer small open
+  models, a small-model safety-checker design, a pathology/lab-topic subset with expert error taxonomy, and cost/latency
+  trade-offs.
+compute:
+  tier: api
+  estimate: Colab + API (~USD 20–40)
+est_weeks: 4
+scores:
+  feasibility: 5
+  novelty: 3
+  fit: null
+risks: []
+access_actions: []
+candidate_journals: []
+added_at: '2026-11-04T08:30:00Z'
+added_by: scout
+run_id: 2026-W45 (initial)

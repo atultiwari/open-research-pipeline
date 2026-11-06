@@ -1,0 +1,47 @@
+id: mpib-small-llm
+legacy_id: cy-2026w45-mpib-small-llm
+title: Prompt-injection robustness of small, on-prem-deployable medical LLMs (<10B, quantised) on MPIB, with lightweight
+  defences and their false-refusal cost
+area: healthcare-cybersecurity
+tags:
+- prompt-injection
+- llm-safety
+- quantisation
+status: new
+status_history:
+- status: new
+  date: '2026-11-04'
+  note: Migrated from the claude.ai register (2026-W45 (initial))
+source:
+  type: preprint
+  title: 'MPIB: A Benchmark for Medical Prompt Injection Attacks and Clinical Safety in LLMs'
+  authors: verify
+  venue: arXiv (cs.CL/cs.CR)
+  date: '2026-02-06'
+  url: https://arxiv.org/abs/2602.06268
+  arxiv_id: '2602.06268'
+  code_url: https://github.com/jhlee0619/mpib-eval
+  code_licence: None stated on GitHub (no licence file)
+datasets:
+- id: mpib
+  role: benchmark
+study_type: Benchmark / red-team evaluation
+reporting_guideline: TRIPOD-LLM (adapted)
+novelty_delta: Original tested 12 models (4B–72B) without newer small models or quantised variants. Adds Gemma-3/Qwen3/Phi-4-mini/Llama-3.2
+  in GGUF/AWQ, effect of quantisation on clinical-harm rate, one cheap defence stack, and optional Indian-guideline
+  RAG poisoning set.
+compute:
+  tier: runpod
+  estimate: RunPod (~20–40 GPU-h)
+est_weeks: 6
+scores:
+  feasibility: 4
+  novelty: 4
+  fit: null
+risks: []
+access_actions:
+- Hugging Face gated access (auto-approval) for MPIB
+candidate_journals: []
+added_at: '2026-11-04T08:30:00Z'
+added_by: scout
+run_id: 2026-W45 (initial)

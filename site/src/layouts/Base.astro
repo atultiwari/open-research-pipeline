@@ -1,0 +1,67 @@
+---
+import '../styles/global.css';
+import { url, REPO_URL } from '../lib/util';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = 'Study opportunities that can be replicated and extended on open data.' } = Astro.props;
+const path = Astro.url.pathname;
+const nav = [
+  { href: url(), label: 'Register' },
+  { href: url('datasets'), label: 'Datasets' },
+  { href: url('journals'), label: 'Journals' },
+  { href: url('how-it-works'), label: 'How it works' },
+  { href: url('search'), label: 'Search' },
+];
+const isCurrent = (href: string) => (href === url() ? path === href : path.startsWith(href));
+const pageTitle = title === 'Open Research Pipeline' ? title : `${title} · Open Research Pipeline`;
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href={url('favicon.svg')} />
+    <script is:inline>
+      try {
+        const t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch (_) {}
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href={url()}><img src={url('favicon.svg')} alt="" width="26" height="26" />Open Research Pipeline</a>
+        <nav class="site-nav" aria-label="Main">
+          {nav.map((n) => <a href={n.href} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a>)}
+          <button class="theme-btn" type="button" id="theme-btn" aria-label="Switch colour theme">Theme</button>
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="wrap">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        Maintained by Dr. Atul Tiwari, with Claude. Open data only.
+        <a href={REPO_URL}>Source on GitHub</a>. Code MIT; content CC BY 4.0.
+      </div>
+    </footer>
+    <script is:inline>
+      document.getElementById('theme-btn')?.addEventListener('click', () => {
+        const root = document.documentElement;
+        const dark = root.dataset.theme
+          ? root.dataset.theme === 'dark'
+          : matchMedia('(prefers-color-scheme: dark)').matches;
+        root.dataset.theme = dark ? 'light' : 'dark';
+        try { localStorage.setItem('theme', root.dataset.theme); } catch (_) {}
+      });
+    </script>
+  </body>
+</html>

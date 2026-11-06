@@ -1,0 +1,46 @@
+id: clinicalbench-labs
+legacy_id: cl-2026w45-clinicalbench-labs
+title: Do routine laboratory values change LLM vs ML performance? Extend ClinicalBench (MIMIC-IV mortality, readmission,
+  length of stay) with admission CBC/biochemistry panels
+area: clinical-data-llm
+tags:
+- ehr
+- llm-vs-ml
+- laboratory-values
+status: new
+status_history:
+- status: new
+  date: '2026-11-04'
+  note: Migrated from the claude.ai register (2026-W45 (initial))
+source:
+  type: preprint
+  title: 'ClinicalBench: Can LLMs Beat Traditional ML Models in Clinical Prediction?'
+  authors: verify
+  venue: arXiv (v2; KDD'26 per repo)
+  date: '2026-06-08'
+  url: https://arxiv.org/abs/2411.06469
+  arxiv_id: '2411.06469'
+  code_url: https://github.com/canyuchen/ClinicalBench
+  code_licence: MIT
+datasets:
+- id: mimic-iv
+  role: development
+study_type: EHR prediction / LLM vs ML (retrospective cohort)
+reporting_guideline: TRIPOD+AI; TRIPOD-LLM
+novelty_delta: ClinicalBench inputs had no lab values. Adding structured routine labs tests whether LLMs use numeric
+  lab data as well as gradient boosting, with a lab-only ablation, calibration and an optional small LoRA fine-tune.
+compute:
+  tier: runpod
+  estimate: RunPod (~40–80 GPU-h); XGBoost on laptop
+est_weeks: 8
+scores:
+  feasibility: 3
+  novelty: 4
+  fit: null
+risks: []
+access_actions:
+- PhysioNet credentialing + CITI training (~1–2 weeks; start early)
+candidate_journals: []
+added_at: '2026-11-04T08:30:00Z'
+added_by: scout
+run_id: 2026-W45 (initial)

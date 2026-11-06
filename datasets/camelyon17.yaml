@@ -1,0 +1,13 @@
+id: camelyon17
+name: CAMELYON17
+url: https://camelyon17.grand-challenge.org/
+modality: WSI
+organ_or_domain: breast lymph nodes (5 centres)
+size: verify
+access: open
+licence: CC0 (verify)
+institution_country: Netherlands
+alt_urls:
+- https://registry.opendata.aws/camelyon/
+notes: 'Multi-centre: use for external validation of CAMELYON16 models.'
+last_checked: '2026-11-06'

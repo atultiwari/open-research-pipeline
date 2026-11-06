@@ -1,0 +1,11 @@
+id: eicu-crd
+name: eICU Collaborative Research Database
+url: https://physionet.org/content/eicu-crd/2.0/
+modality: EHR
+organ_or_domain: critical care (multi-centre)
+size: verify
+access: credentialed
+licence: PhysioNet Credentialed Health Data License (verify version)
+licence_notes: Same PhysioNet credential as MIMIC-IV.
+institution_country: USA (multi-centre)
+last_checked: '2026-11-06'

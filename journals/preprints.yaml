@@ -1,0 +1,29 @@
+# Preprint servers. Converted from _seed/journals.md (researched 2026-11-04).
+notes:
+  - Elsevier allows preprints anywhere except some society-owned or double-anonymised titles (https://www.elsevier.com/about/policies-and-standards/sharing).
+  - Springer journals generally allow preprints (verify per journal).
+servers:
+  - id: medrxiv
+    name: medRxiv
+    url: https://www.medrxiv.org/about/FAQ
+    best_for: Clinical, gastro-hepatology, NHANES/MIMIC, LLM-in-medicine
+    time_to_post: 2–4 days
+    watch_for: Needs an ethics/IRB statement (public de-identified data — state exempt); no case reports or narrative reviews
+  - id: arxiv
+    name: arXiv
+    url: https://info.arxiv.org/help/endorsement.html
+    best_for: Imaging AI (cs.CV, eess.IV), LLMs (cs.CL), security (cs.CR)
+    time_to_post: 1–4 days
+    watch_for: First-time submitters need an endorsement
+  - id: biorxiv
+    name: bioRxiv
+    url: https://www.biorxiv.org/about/FAQ
+    best_for: Non-clinical computational pathology methods
+    time_to_post: About 3 days
+    watch_for: Clinical work is redirected to medRxiv
+  - id: research-square
+    name: Research Square In Review
+    url: https://www.researchsquare.com/
+    best_for: Springer/BMC submissions (opt-in)
+    time_to_post: Up to about 3 weeks
+    watch_for: Posted only after the journal's checks

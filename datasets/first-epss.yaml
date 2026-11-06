@@ -1,0 +1,9 @@
+id: first-epss
+name: FIRST EPSS scores
+url: https://www.first.org/epss/
+modality: tabular (exploit probability)
+organ_or_domain: software vulnerabilities
+size: verify
+access: open
+licence: verify
+last_checked: '2026-11-06'

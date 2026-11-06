@@ -1,0 +1,48 @@
+id: cbc-iron-deficiency
+legacy_id: cl-2026w45-cbc-iron-deficiency
+title: 'Predicting iron deficiency (low ferritin) from routine CBC: develop on NHANES, externally validate on an
+  open Yemeni hospital dataset; logistic regression, XGBoost and TabPFN vs zero/few-shot LLMs'
+area: clinical-data-llm
+tags:
+- haematology
+- anaemia
+- tabular-ml
+- llm
+status: new
+status_history:
+- status: new
+  date: '2026-11-04'
+  note: Migrated from the claude.ai register (2026-W45 (initial))
+source:
+  type: preprint
+  title: 'Predicting Iron Deficiencies Using Routine Complete Blood Cell Count Parameters: A Machine Learning Approach
+    and Evaluation'
+  authors: verify
+  venue: Preprints.org
+  date: '2026-04-02'
+  url: https://www.preprints.org/manuscript/202604.0073
+  code_note: None; reimplementable (sklearn/xgboost)
+datasets:
+- id: nhanes
+  role: development
+- id: mendeley-yemen-cbc
+  role: external-validation
+study_type: Diagnostic prediction model + external validation; LLM vs ML
+reporting_guideline: TRIPOD+AI (+TRIPOD-LLM); STARD-AI elements
+novelty_delta: Source used a private single-centre dataset with no code. Adds a fully open pipeline, external validation
+  in an LMIC hospital population relevant to India's anaemia burden, LLM and TabPFN head-to-head, pathologist check
+  against Mentzer/MCH logic, and decision-curve analysis.
+compute:
+  tier: api
+  estimate: Laptop; API (~USD 10–30) for the LLM arm
+est_weeks: 4
+scores:
+  feasibility: 5
+  novelty: 3
+  fit: null
+risks: []
+access_actions: []
+candidate_journals: []
+added_at: '2026-11-04T08:30:00Z'
+added_by: scout
+run_id: 2026-W45 (initial)

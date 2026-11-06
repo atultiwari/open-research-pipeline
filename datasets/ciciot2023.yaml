@@ -1,0 +1,10 @@
+id: ciciot2023
+name: CICIoT2023
+url: https://www.unb.ca/cic/datasets/iotdataset-2023.html
+modality: network traffic
+organ_or_domain: IoT intrusion detection
+size: verify
+access: open
+licence: verify
+institution_country: Canada (UNB CIC)
+last_checked: '2026-11-06'

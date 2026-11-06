@@ -1,0 +1,11 @@
+id: hepatobench
+name: HepatoBench
+url: https://huggingface.co/datasets/xtxx/HepatoBench
+modality: histology patches
+organ_or_domain: liver
+size: 87,301 patches, 7 classes
+access: open
+licence: CC BY 4.0 on card; CC BY-NC 4.0 in paper — treat as CC BY-NC 4.0
+licence_notes: Licence mismatch between dataset card (cc-by-4.0, HF API 2026-11-06) and paper. Paper says not for diagnosis-focused
+  algorithms.
+last_checked: '2026-11-06'

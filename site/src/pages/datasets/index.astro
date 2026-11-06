@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Verify from '../../components/Verify.astro';
+import { ACCESS_LABEL, url } from '../../lib/util';
+
+const datasets = (await getCollection('datasets')).map((e) => e.data).sort((a, b) => a.name.localeCompare(b.name));
+const studies = (await getCollection('studies')).map((e) => e.data);
+const usedBy = (id: string) => studies.filter((s) => s.datasets.some((d) => d.id === id)).length;
+---
+<Base title="Datasets" description="Registry of open datasets used for replication and external validation.">
+  <h1>Open-dataset registry</h1>
+  <p class="lede">
+    Every dataset here is open, free with registration, or credentialed (such as PhysioNet). No paid data and no UK
+    Biobank. "Used by" counts the studies in the register that use each dataset.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th scope="col">Dataset</th><th scope="col">Modality</th><th scope="col">Domain</th><th scope="col">Access</th><th scope="col">Licence</th><th scope="col" class="num">Used by</th></tr></thead>
+      <tbody>
+        {datasets.map((d) => (
+          <tr>
+            <td><a href={url(`datasets/${d.id}`)}>{d.name}</a></td>
+            <td class="small">{d.modality}</td>
+            <td class="small">{d.organ_or_domain}</td>
+            <td class="small">{ACCESS_LABEL[d.access]}</td>
+            <td class="small"><Verify value={d.licence} /></td>
+            <td class="num">{usedBy(d.id)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</Base>

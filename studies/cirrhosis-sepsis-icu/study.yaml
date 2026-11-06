@@ -1,0 +1,49 @@
+id: cirrhosis-sepsis-icu
+legacy_id: gh-2026w45-cirrhosis-sepsis-icu
+title: 'Cirrhosis with sepsis, ICU mortality: independent reimplementation of a 13-variable nomogram on MIMIC-IV,
+  head-to-head with MELD 3.0 and CLIF-C scores in eICU, and a reduced bedside score for Indian ICUs'
+area: gastro-hepatology
+tags:
+- cirrhosis
+- sepsis
+- icu
+- prognosis
+status: new
+status_history:
+- status: new
+  date: '2026-11-04'
+  note: Migrated from the claude.ai register (2026-W45 (initial))
+source:
+  type: journal
+  title: 'Development and validation of a prediction model for in-hospital mortality in ICU patients with cirrhosis
+    and sepsis: a multicentre retrospective cohort study'
+  authors: verify
+  venue: Frontiers in Medicine
+  date: '2026-01-20'
+  url: https://www.frontiersin.org/journals/medicine/articles/10.3389/fmed.2026.1759988/full
+  doi: 10.3389/fmed.2026.1759988
+  code_note: None; reimplementable (13 predictors listed)
+datasets:
+- id: mimic-iv
+  role: development
+- id: eicu-crd
+  role: external-validation
+study_type: Prognostic model external validation + comparison with liver scores
+reporting_guideline: TRIPOD+AI; RECORD
+novelty_delta: Independent replication plus the head-to-head with MELD 3.0 and CLIF scores the original lacked;
+  a reduced-variable score usable where lactate/urine output are missing; open SQL/R code as a contribution.
+compute:
+  tier: laptop
+  estimate: Laptop
+est_weeks: 5
+scores:
+  feasibility: 4
+  novelty: 3
+  fit: null
+risks: []
+access_actions:
+- PhysioNet credentialing + CITI training (~1–2 weeks; start early)
+candidate_journals: []
+added_at: '2026-11-04T08:30:00Z'
+added_by: scout
+run_id: 2026-W45 (initial)

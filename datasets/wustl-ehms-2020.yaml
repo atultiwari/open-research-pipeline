@@ -1,0 +1,11 @@
+id: wustl-ehms-2020
+name: WUSTL-EHMS-2020
+url: https://research.engineering.wustl.edu/~jain/ehms/index.html
+modality: network traffic + biometrics
+organ_or_domain: healthcare monitoring intrusion detection
+size: verify
+access: open
+licence: verify
+institution_country: USA (WUSTL)
+notes: Feature set differs from CICIoMT2024.
+last_checked: '2026-11-06'

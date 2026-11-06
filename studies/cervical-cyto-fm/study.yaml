@@ -1,0 +1,51 @@
+id: cervical-cyto-fm
+legacy_id: cp-2026w45-cervical-cyto-fm
+title: 'Cervical cytology foundation models: updated benchmark of 2025–26 models with cross-dataset (conventional
+  Pap → LBC) external validation and few-shot LoRA'
+area: computational-pathology
+tags:
+- cytology
+- cervix
+- foundation-models
+status: new
+status_history:
+- status: new
+  date: '2026-11-04'
+  note: Migrated from the claude.ai register (2026-W45 (initial))
+source:
+  type: preprint
+  title: Exploring Foundation Models Fine-Tuning for Cytology Classification (ISBI 2025)
+  authors: verify
+  venue: arXiv
+  date: '2024-11-22'
+  url: https://arxiv.org/pdf/2411.14975
+  arxiv_id: '2411.14975'
+  code_url: https://github.com/mdausort/Cytology-fine-tuning
+  code_licence: MIT
+datasets:
+- id: sipakmed
+  role: development
+- id: mendeley-lbc-cervical
+  role: external-validation
+- id: body-cavity-fluid-cytology
+  role: benchmark
+study_type: Benchmark + external validation
+reporting_guideline: CLAIM 2024
+novelty_delta: Source tested five earlier models within each dataset only. Adds UNI2-h, Virchow2, H-optimus, CONCHv1.5,
+  DinoBloom, MUSK and the first cross-dataset normal-vs-abnormal transfer from conventional Pap to liquid-based
+  cytology.
+compute:
+  tier: colab
+  estimate: Colab (~5–15 GPU-h for LoRA)
+est_weeks: 4
+scores:
+  feasibility: 5
+  novelty: 3
+  fit: null
+risks: []
+access_actions:
+- Gated access to some foundation models (UNI2-h, Virchow2; institutional email may be needed)
+candidate_journals: []
+added_at: '2026-11-04T08:30:00Z'
+added_by: scout
+run_id: 2026-W45 (initial)

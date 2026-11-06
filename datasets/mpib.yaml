@@ -1,0 +1,10 @@
+id: mpib
+name: MPIB (Medical Prompt Injection Benchmark) v1.2
+url: https://huggingface.co/datasets/jhlee0619/mpib
+modality: text (prompts)
+organ_or_domain: medical LLM prompt-injection safety
+size: 9,697 instances
+access: free-registration
+licence: CC-BY-NC-4.0
+licence_notes: Hugging Face gated, auto-approval. Non-commercial. Never commit payloads; report aggregates only.
+last_checked: '2026-11-06'

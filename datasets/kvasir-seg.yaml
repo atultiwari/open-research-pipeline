@@ -1,0 +1,11 @@
+id: kvasir-seg
+name: Kvasir-SEG
+url: https://datasets.simula.no/kvasir-seg/
+modality: colonoscopy images + masks
+organ_or_domain: colon polyps
+size: verify
+access: open
+licence: verify
+institution_country: Norway (Simula)
+last_checked: '2026-11-06'
+notes: Canonical Simula page timed out on 2026-11-06; recheck before use.

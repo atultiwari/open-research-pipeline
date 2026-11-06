@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "preprints.schema.json",
+  "title": "Preprint servers",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["servers"],
+  "properties": {
+    "notes": {"type": "array", "items": {"type": "string"}},
+    "servers": {
+      "type": "array",
+      "items": {"type": "object", "additionalProperties": false, "required": ["id", "name", "url", "best_for"],
+                "properties": {"id": {"type": "string"}, "name": {"type": "string"},
+                               "url": {"type": "string", "pattern": "^https?://\\S+$"},
+                               "best_for": {"type": "string"}, "time_to_post": {"type": "string"},
+                               "watch_for": {"type": "string"}}}
+    }
+  }
+}

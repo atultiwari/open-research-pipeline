@@ -1,0 +1,12 @@
+id: medhallu
+name: MedHallu
+url: https://huggingface.co/datasets/UTAustin-AIHealth/MedHallu
+modality: text (QA pairs)
+organ_or_domain: medical LLM hallucination detection
+size: ~10k PubMedQA-derived pairs; pqa_labeled subset 1k
+access: open
+licence: Not stated on Hugging Face card (verify)
+licence_notes: 'HF API (2026-11-06): no licence field, not gated. Code repo is MIT.'
+institution_country: USA (UT Austin)
+notes: Hallucinated answers were LLM-generated.
+last_checked: '2026-11-06'

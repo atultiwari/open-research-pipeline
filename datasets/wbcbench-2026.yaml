@@ -1,0 +1,11 @@
+id: wbcbench-2026
+name: WBCBench 2026
+url: https://huggingface.co/datasets/Xin-Tian/wbcbench2026
+modality: blood smear cell images
+organ_or_domain: haematology (white cells)
+size: ~100k images, 13 classes
+access: free-registration
+licence: other (custom; non-commercial, no redistribution — verify wording)
+licence_notes: Hugging Face gated, auto-approval (HF API 2026-11-06).
+notes: 267 test labels changed after the challenge.
+last_checked: '2026-11-06'

@@ -1,0 +1,50 @@
+id: fairness-tcga-cptac
+legacy_id: cp-2026w45-fairness-tcga-cptac
+title: Do newer foundation models reduce demographic performance gaps? Race-, age- and site-stratified audit of
+  UNI2-h MIL on TCGA with CPTAC external validation
+area: computational-pathology
+tags:
+- fairness
+- foundation-models
+- wsi
+status: new
+status_history:
+- status: new
+  date: '2026-11-04'
+  note: Migrated from the claude.ai register (2026-W45 (initial))
+source:
+  type: journal
+  title: Demographic bias in misdiagnosis by computational pathology models (Nature Medicine 2024)
+  authors: verify
+  venue: Nature Medicine
+  date: 2024-04
+  url: https://pubmed.ncbi.nlm.nih.gov/38641744/
+  code_url: https://github.com/mahmoodlab/CPATH_demographics
+  code_licence: Other (NOASSERTION on GitHub; seed notes say academic use only)
+datasets:
+- id: uni2h-features-tcga
+  role: development
+- id: tcga
+  role: development
+- id: cptac
+  role: external-validation
+study_type: Fairness / subgroup analysis + external validation
+reporting_guideline: TRIPOD+AI / CLAIM 2024
+novelty_delta: Original used older encoders and private MGB data for breast and lung tasks. Rebuilds the tasks fully
+  on open TCGA (train) and CPTAC (external) with UNI2-h, reports disparity by race, age and submitting site, and
+  tests whether site-stratified splits shrink apparent bias.
+compute:
+  tier: colab
+  estimate: Laptop/Colab (~5–10 GPU-h on precomputed features)
+est_weeks: 5
+scores:
+  feasibility: 4
+  novelty: 4
+  fit: null
+risks: []
+access_actions:
+- Hugging Face gated access (auto-approval) for precomputed UNI2-h features
+candidate_journals: []
+added_at: '2026-11-04T08:30:00Z'
+added_by: scout
+run_id: 2026-W45 (initial)

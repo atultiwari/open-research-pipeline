@@ -1,0 +1,11 @@
+id: hyperkvasir
+name: HyperKvasir
+url: https://osf.io/mh9sj/
+modality: endoscopy images and videos
+organ_or_domain: GI tract
+size: verify
+access: open
+licence: verify (OSF lists SimulaMet as copyright holder)
+institution_country: Norway (Simula)
+last_checked: '2026-11-06'
+notes: OSF project verified 2026-11-06. The Simula page https://datasets.simula.no/hyper-kvasir/ timed out that day.

@@ -1,0 +1,12 @@
+---
+// Renders a value; adds a "verify" badge when the value contains the word "verify".
+import { isVerify, isUrl } from '../lib/util';
+interface Props { value?: unknown; link?: boolean }
+const { value, link = false } = Astro.props;
+const text = value === undefined || value === null || value === '' ? '—' : String(value);
+const flagged = isVerify(text);
+const onlyVerify = /^verify$/i.test(text.trim());
+---
+{onlyVerify ? <span class="badge" title="Not yet confirmed">verify</span> : (
+  <>{link && isUrl(text) ? <a href={text}>{text}</a> : text}{flagged && <> <span class="badge" title="Contains an unconfirmed item">verify</span></>}</>
+)}

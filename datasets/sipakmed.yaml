@@ -1,0 +1,12 @@
+id: sipakmed
+name: SIPaKMeD
+url: https://www.cs.uoi.gr/~marina/sipakmed.html
+modality: cytology images (Pap smear cells)
+organ_or_domain: cervix
+size: 4,049 cells
+access: open
+licence: Research use with citation (verify)
+institution_country: Greece
+labels: 5 cell classes (not Bethesda categories)
+notes: Use the original source, not Kaggle mirrors.
+last_checked: '2026-11-06'

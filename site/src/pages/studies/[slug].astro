@@ -1,0 +1,151 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import StatusPill from '../../components/StatusPill.astro';
+import Verify from '../../components/Verify.astro';
+import { AREA_LABEL, TIER_LABEL, ACCESS_LABEL, headline, studyAccess, editUrl, viewUrl, url, isUrl } from '../../lib/util';
+
+export async function getStaticPaths() {
+  const studies = await getCollection('studies');
+  return studies.map((s) => ({ params: { slug: s.id }, props: { study: s.data } }));
+}
+
+const { study: s } = Astro.props;
+const datasetMap = new Map((await getCollection('datasets')).map((e) => [e.id, e.data]));
+const journalMap = new Map((await getCollection('journals')).map((e) => [e.id, e.data]));
+const doc = async (name: string) => {
+  const entry = await getEntry('studyDocs', `${s.id}/${name}`);
+  return entry ? { entry, Content: (await render(entry)).Content } : null;
+};
+const [replication, extension, protocol, notes] = await Promise.all(
+  ['replication', 'extension', 'protocol', 'notes'].map(doc),
+);
+const access = studyAccess(s, datasetMap);
+const needsEnrichment = [replication, extension].some((d) => d?.entry.data.enriched === false);
+const src = s.source;
+const sections = [
+  { id: 'summary', label: 'Summary' },
+  { id: 'replicate', label: 'Replicate' },
+  { id: 'extend', label: 'Extend' },
+  ...(protocol ? [{ id: 'protocol', label: 'Protocol' }] : []),
+  ...(notes ? [{ id: 'notes', label: "Atul's notes" }] : []),
+  { id: 'history', label: 'History' },
+];
+---
+<Base title={s.title} description={s.novelty_delta}>
+  <article data-pagefind-body>
+    <p class="small muted" style="margin:0"><a href={url()}>Register</a> / {AREA_LABEL[s.area]}</p>
+    <h1>{s.title}</h1>
+    <p>
+      <StatusPill status={s.status} />
+      {needsEnrichment && <> <span class="badge">needs enrichment</span></>}
+      {s.tags.map((t) => <span class="tag">{t}</span>)}
+    </p>
+
+    <div class="grid">
+      <section class="card" aria-label="Scores">
+        <dl class="kv">
+          <dt>Score</dt><dd><strong>{headline(s)}</strong> / 25 (feasibility × novelty)</dd>
+          <dt>Feasibility</dt><dd>{s.scores.feasibility} / 5</dd>
+          <dt>Novelty</dt><dd>{s.scores.novelty} / 5</dd>
+          <dt>Fit</dt><dd>{s.scores.fit ?? <span class="muted">not yet rated</span>}{s.scores.fit && ' / 5'}</dd>
+        </dl>
+      </section>
+      <section class="card" aria-label="Effort">
+        <dl class="kv">
+          <dt>Compute</dt><dd>{TIER_LABEL[s.compute.tier]}<br /><span class="small muted">{s.compute.estimate}</span></dd>
+          <dt>Weeks</dt><dd>~{s.est_weeks} to a preprint</dd>
+          <dt>Data access</dt><dd>{ACCESS_LABEL[access]}</dd>
+        </dl>
+      </section>
+      <section class="card" aria-label="Access actions">
+        <h2 style="margin:0 0 0.4rem;font-size:1rem">Access actions</h2>
+        {s.access_actions.length ? <ul style="margin:0;padding-left:1.1rem">{s.access_actions.map((a) => <li>{a}</li>)}</ul>
+          : <p class="muted" style="margin:0">None: all data downloadable without an account.</p>}
+      </section>
+    </div>
+
+    <nav class="section-nav" aria-label="Sections">{sections.map((x) => <a href={`#${x.id}`}>{x.label}</a>)}</nav>
+
+    <div class="doc">
+      <section id="summary">
+        <h2>Summary</h2>
+        <p><strong>Why it is new:</strong> {s.novelty_delta}</p>
+        <dl class="kv">
+          <dt>Study type</dt><dd>{s.study_type}</dd>
+          <dt>Reporting guideline</dt><dd>{s.reporting_guideline}</dd>
+          {s.risks.length > 0 && <><dt>Risks</dt><dd><ul style="margin:0;padding-left:1.1rem">{s.risks.map((r) => <li>{r}</li>)}</ul></dd></>}
+        </dl>
+
+        <h3>Source</h3>
+        <dl class="kv">
+          <dt>Title</dt><dd>{isUrl(src.url) ? <a href={src.url}>{src.title}</a> : src.title}</dd>
+          <dt>Type</dt><dd>{src.type}</dd>
+          <dt>Authors</dt><dd><Verify value={src.authors} /></dd>
+          <dt>Venue</dt><dd><Verify value={src.venue} /></dd>
+          <dt>Date</dt><dd><Verify value={src.date} /></dd>
+          {src.doi && <><dt>DOI</dt><dd>{src.doi === 'verify' ? <Verify value="verify" /> : <a href={`https://doi.org/${src.doi}`}>{src.doi}</a>}</dd></>}
+          {src.arxiv_id && <><dt>arXiv</dt><dd>{src.arxiv_id}</dd></>}
+          <dt>Code</dt><dd>{src.code_url ? <Verify value={src.code_url} link /> : <Verify value={src.code_note} />}</dd>
+          {src.code_licence && <><dt>Code licence</dt><dd><Verify value={src.code_licence} /></dd></>}
+        </dl>
+
+        <h3>Datasets</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">Dataset</th><th scope="col">Role</th><th scope="col">Access</th><th scope="col">Licence</th></tr></thead>
+            <tbody>
+              {s.datasets.map((d) => {
+                const ds = datasetMap.get(d.id);
+                return (
+                  <tr>
+                    <td><a href={url(`datasets/${d.id}`)}>{ds?.name ?? d.id}</a></td>
+                    <td>{d.role}</td>
+                    <td>{ds ? ACCESS_LABEL[ds.access] : '—'}</td>
+                    <td><Verify value={ds?.licence} /></td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        {s.candidate_journals.length > 0 && (
+          <>
+            <h3>Candidate journals (zero APC)</h3>
+            <ul>{s.candidate_journals.map((j) => <li><a href={url(`journals#${j}`)}>{journalMap.get(j)?.name ?? j}</a></li>)}</ul>
+          </>
+        )}
+      </section>
+
+      <section id="replicate">
+        <h2>Replicate</h2>
+        {replication ? <replication.Content /> : <p class="muted">No replication guide yet.</p>}
+      </section>
+
+      <section id="extend">
+        <h2>Extend</h2>
+        {extension ? <extension.Content /> : <p class="muted">No extension analysis yet.</p>}
+      </section>
+
+      {protocol && <section id="protocol"><h2>Protocol</h2><protocol.Content /></section>}
+      {notes && <section id="notes"><h2>Atul's notes</h2><notes.Content /></section>}
+
+      <section id="history">
+        <h2>Status history</h2>
+        <ol class="timeline">
+          {[...s.status_history].reverse().map((h) => (
+            <li><StatusPill status={h.status} /> <span class="small muted">{h.date}</span>{h.note && <div class="small">{h.note}</div>}</li>
+          ))}
+        </ol>
+        <p class="small muted">Added {String(s.added_at).slice(0, 10)} by {s.added_by}{s.run_id && ` (${s.run_id})`}.</p>
+      </section>
+    </div>
+
+    <div class="actions">
+      <a class="btn" href={editUrl(`studies/${s.id}/study.yaml`)}>Edit on GitHub</a>
+      <a class="btn secondary" href={viewUrl(`studies/${s.id}`)}>View files</a>
+    </div>
+    <p class="small muted">To change status: edit <code>status:</code> and add a line to <code>status_history</code>, then commit.</p>
+  </article>
+</Base>

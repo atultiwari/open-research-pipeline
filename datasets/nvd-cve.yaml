@@ -1,0 +1,10 @@
+id: nvd-cve
+name: NVD CVE API
+url: https://nvd.nist.gov/developers/vulnerabilities
+modality: structured vulnerability records
+organ_or_domain: software vulnerabilities (CVSS, CWE)
+size: verify
+access: open
+licence: US government public data
+institution_country: USA (NIST)
+last_checked: '2026-11-06'

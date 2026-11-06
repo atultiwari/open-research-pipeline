@@ -1,0 +1,9 @@
+id: vcdb
+name: VERIS Community Database (VCDB)
+url: https://github.com/vz-risk/VCDB
+modality: structured incident records (JSON)
+organ_or_domain: security incidents (all sectors)
+size: verify
+access: open
+licence: verify
+last_checked: '2026-11-06'

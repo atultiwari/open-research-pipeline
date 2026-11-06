@@ -1,0 +1,50 @@
+id: quantised-labmed
+legacy_id: cl-2026w45-quantised-labmed
+title: 'Laptop-deployable medical LLMs: accuracy and hallucination cost of 4/8-bit quantisation on a lab-medicine
+  slice of Medmarks (MedMCQA-pathology, MedCalc-Bench, MedHallu, MEDEC)'
+area: clinical-data-llm
+tags:
+- llm-benchmark
+- quantisation
+- low-resource
+status: new
+status_history:
+- status: new
+  date: '2026-11-04'
+  note: Migrated from the claude.ai register (2026-W45 (initial))
+source:
+  type: preprint
+  title: 'Medmarks: A Comprehensive Open-Source LLM Benchmark Suite for Medical Tasks'
+  authors: verify
+  venue: arXiv (ICML 2026)
+  date: '2026-05-02'
+  url: https://arxiv.org/abs/2605.01417
+  arxiv_id: '2605.01417'
+  code_url: https://github.com/MedARC-AI/Medmarks
+  code_licence: MIT
+datasets:
+- id: medmarks
+  role: benchmark
+- id: medmcqa
+  role: benchmark
+- id: medhallu
+  role: benchmark
+study_type: LLM benchmarking / deployment evaluation
+reporting_guideline: TRIPOD-LLM; MI-CLEAR-LLM
+novelty_delta: Medmarks evaluated 61 models at full precision only. Adds quantisation levels on consumer GPU and
+  CPU laptop for Indian low-resource deployment, with tokens/sec, RAM, cost per 1,000 questions and calibration,
+  restricted to lab-medicine tasks (anion gap, eGFR, corrected calcium via MedCalc-Bench).
+compute:
+  tier: runpod
+  estimate: Laptop/Colab + RunPod (~10–20 GPU-h) + API (~USD 20–50)
+est_weeks: 4
+scores:
+  feasibility: 5
+  novelty: 3
+  fit: null
+risks: []
+access_actions: []
+candidate_journals: []
+added_at: '2026-11-04T08:30:00Z'
+added_by: scout
+run_id: 2026-W45 (initial)

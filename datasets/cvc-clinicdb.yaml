@@ -1,0 +1,10 @@
+id: cvc-clinicdb
+name: CVC-ClinicDB
+url: https://polyp.grand-challenge.org/CVCClinicDB/
+modality: colonoscopy frames + masks
+organ_or_domain: colon polyps
+size: verify
+access: open
+licence: verify
+institution_country: Spain
+last_checked: '2026-11-06'

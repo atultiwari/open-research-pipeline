@@ -1,0 +1,50 @@
+id: hepatobench-tcga-lihc
+legacy_id: gh-2026w45-hepatobench-tcga-lihc
+title: 'Liver histology tissue classification: benchmark open pathology foundation models on HepatoBench, then test
+  slide-level tissue composition (fibrosis, necrosis, steatosis) against TCGA-LIHC survival'
+area: gastro-hepatology
+tags:
+- liver
+- tissue-classification
+- foundation-models
+- survival
+status: new
+status_history:
+- status: new
+  date: '2026-11-04'
+  note: Migrated from the claude.ai register (2026-W45 (initial))
+source:
+  type: preprint
+  title: A Digital Pathology Resource for Liver Cancer Quantification with Datasets, Benchmarks, and Tools (HepatoBench
+    / HepatoQuant)
+  authors: verify
+  venue: arXiv (cs.CV)
+  date: '2026-04-22'
+  url: https://arxiv.org/abs/2604.22858
+  arxiv_id: '2604.22858'
+  code_url: https://github.com/lingxitong/PFM_Segmentation
+  code_licence: None stated on GitHub (no licence file)
+datasets:
+- id: hepatobench
+  role: benchmark
+- id: tcga
+  role: external-validation
+study_type: Benchmark + prognostic feature study
+reporting_guideline: CLAIM 2024; REMARK / TRIPOD+AI for survival
+novelty_delta: Paper benchmarked only UNI-v1, Virchow-2 and GigaPath. Adds lighter open encoders (H0-mini, Phikon-v2,
+  UNI2, CONCH v1.5), label-efficiency curves, pathologist per-class error review, and a TCGA-LIHC survival test
+  of tissue fractions.
+compute:
+  tier: runpod
+  estimate: Colab + RunPod (~15–30 GPU-h for ~370 WSIs)
+est_weeks: 6
+scores:
+  feasibility: 4
+  novelty: 4
+  fit: null
+risks: []
+access_actions: []
+candidate_journals: []
+added_at: '2026-11-04T08:30:00Z'
+added_by: scout
+run_id: 2026-W45 (initial)

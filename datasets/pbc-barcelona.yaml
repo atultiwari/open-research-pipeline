@@ -1,0 +1,11 @@
+id: pbc-barcelona
+name: PBC dataset (peripheral blood cells, Barcelona)
+url: https://data.mendeley.com/datasets/snkd93bnjr/1
+modality: blood smear cell images
+organ_or_domain: haematology
+size: 17,092 images
+access: open
+licence: CC BY 4.0
+institution_country: Spain
+notes: 'Part of DinoBloom pretraining: declare leakage.'
+last_checked: '2026-11-06'

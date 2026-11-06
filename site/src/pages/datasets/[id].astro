@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Verify from '../../components/Verify.astro';
+import StatusPill from '../../components/StatusPill.astro';
+import { ACCESS_LABEL, url, editUrl } from '../../lib/util';
+
+export async function getStaticPaths() {
+  const datasets = await getCollection('datasets');
+  return datasets.map((d) => ({ params: { id: d.id }, props: { d: d.data } }));
+}
+const { d } = Astro.props;
+const studies = (await getCollection('studies'))
+  .map((e) => e.data)
+  .flatMap((s) => s.datasets.filter((x) => x.id === d.id).map((x) => ({ s, role: x.role })));
+const fields: Array<[string, unknown, boolean?]> = [
+  ['Link', d.url, true], ['DOI', d.doi], ['Modality', d.modality], ['Organ or domain', d.organ_or_domain],
+  ['Size', d.size], ['Access', ACCESS_LABEL[d.access]], ['Licence', d.licence], ['Licence notes', d.licence_notes],
+  ['Institution / country', d.institution_country], ['Labels', d.labels], ['Citation', d.citation],
+  ['Notes', d.notes], ['Last checked', d.last_checked],
+];
+---
+<Base title={d.name} description={`${d.name}: ${d.modality}, ${d.organ_or_domain}. Access: ${d.access}.`}>
+  <article data-pagefind-body>
+    <p class="small muted" style="margin:0"><a href={url('datasets')}>Datasets</a></p>
+    <h1>{d.name}</h1>
+    <div class="card">
+      <dl class="kv">
+        {fields.filter(([, v]) => v !== undefined && v !== '').map(([k, v, link]) => <><dt>{k}</dt><dd><Verify value={v} link={link} /></dd></>)}
+        {d.alt_urls && <><dt>Other links</dt><dd>{d.alt_urls.map((u) => <div><a href={u}>{u}</a></div>)}</dd></>}
+      </dl>
+    </div>
+
+    <h2>Studies using this dataset</h2>
+    {studies.length ? (
+      <ul>{studies.map(({ s, role }) => <li><a href={url(`studies/${s.id}`)}>{s.title}</a> <span class="small muted">({role})</span> <StatusPill status={s.status} /></li>)}</ul>
+    ) : <p class="muted">None yet. Available as an external-validation cohort for new studies.</p>}
+
+    <div class="actions"><a class="btn secondary" href={editUrl(`datasets/${d.id}.yaml`)}>Edit on GitHub</a></div>
+  </article>
+</Base>

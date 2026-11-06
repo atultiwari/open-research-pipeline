@@ -1,0 +1,49 @@
+id: ap-icu-mortality
+legacy_id: gh-2026w45-ap-icu-mortality
+title: 'Acute pancreatitis ICU mortality: reimplement a MIMIC-IV → eICU XGBoost model with a harmonised endpoint,
+  benchmarked against BISAP, SOFA and a parsimonious logistic score'
+area: gastro-hepatology
+tags:
+- pancreatitis
+- icu
+- prognosis
+- xgboost
+status: new
+status_history:
+- status: new
+  date: '2026-11-04'
+  note: Migrated from the claude.ai register (2026-W45 (initial))
+source:
+  type: preprint
+  title: Development and external validation of a metabolic-clinical XGBoost model for mortality prediction in acute
+    pancreatitis
+  authors: verify
+  venue: Research Square
+  date: '2026-08-28'
+  url: https://www.researchsquare.com/article/rs-10464724
+  code_note: None; reimplementable (LASSO → 14-feature XGBoost, isotonic calibration, SHAP)
+datasets:
+- id: mimic-iv
+  role: development
+- id: eicu-crd
+  role: external-validation
+study_type: Prognostic model replication + external validation
+reporting_guideline: TRIPOD+AI
+novelty_delta: Preprint develops on 28-day mortality but validates on in-hospital mortality. A harmonised-endpoint
+  validation with ML vs BISAP/SOFA, decision curves and open code is a credible rapid paper, and builds a pancreatitis
+  pipeline reusable for the planned post-ERCP pancreatitis study.
+compute:
+  tier: laptop
+  estimate: Laptop
+est_weeks: 5
+scores:
+  feasibility: 4
+  novelty: 3
+  fit: null
+risks: []
+access_actions:
+- PhysioNet credentialing + CITI training (~1–2 weeks; start early)
+candidate_journals: []
+added_at: '2026-11-04T08:30:00Z'
+added_by: scout
+run_id: 2026-W45 (initial)

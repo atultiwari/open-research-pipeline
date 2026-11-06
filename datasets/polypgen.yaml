@@ -1,0 +1,10 @@
+id: polypgen
+name: PolypGen
+url: https://www.synapse.org/#!Synapse:syn45200214
+modality: colonoscopy frames + masks
+organ_or_domain: colon polyps (6 centres)
+size: 1,537 frames with masks
+access: free-registration
+licence: CC BY 4.0
+licence_notes: Synapse account required.
+last_checked: '2026-11-06'

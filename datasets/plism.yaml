@@ -1,0 +1,12 @@
+id: plism
+name: PLISM (multi-scanner, smartphone and multi-stain tiles)
+url: https://huggingface.co/datasets/owkin/plism-dataset
+modality: WSI tiles (registered)
+organ_or_domain: multiple tissues
+size: ~225 GB full set
+access: open
+licence: CC BY 4.0
+licence_notes: Not gated per HF API 2026-11-06; Hugging Face login helps for bulk download.
+citation: Ochi et al., Scientific Data 2024 (verify)
+institution_country: Japan (verify)
+last_checked: '2026-11-06'

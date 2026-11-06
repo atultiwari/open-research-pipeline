@@ -1,0 +1,49 @@
+id: pathfm-adversarial
+legacy_id: cy-2026w45-pathfm-adversarial
+title: Adversarial vulnerability and cheap defences for patch-level pathology foundation models in MIL pipelines
+  (Camelyon16/TCGA), with cross-FM transferability
+area: healthcare-cybersecurity
+tags:
+- adversarial-robustness
+- foundation-models
+- wsi
+status: new
+status_history:
+- status: new
+  date: '2026-11-04'
+  note: Migrated from the claude.ai register (2026-W45 (initial))
+source:
+  type: preprint
+  title: 'The Butterfly Effect in Pathology: Exploring Security in Pathology Foundation Models'
+  authors: verify
+  venue: arXiv (cs.CV/cs.CR)
+  date: '2025-05-30'
+  url: https://arxiv.org/abs/2505.24141
+  arxiv_id: '2505.24141'
+  code_url: https://github.com/Jiashuai-Liu-hmos/Attack-WSI-pathology-foundation-models
+  code_licence: None stated on GitHub (no licence file)
+datasets:
+- id: camelyon16
+  role: development
+- id: tcga
+  role: development
+study_type: Adversarial robustness benchmark
+reporting_guideline: CLAIM items optional
+novelty_delta: 'Original attacked slide-level FMs (CHIEF, PRISM, TITAN): ~0.1% perturbed patches dropped TITAN Camelyon16
+  accuracy from 98% to 42%. Extends to patch-level FMs (Phikon-v2, H-optimus, UNI2) under ABMIL/CLAM, transferability
+  between FMs, JPEG/stain-normalisation defences, and a pathologist''s threat-plausibility view.'
+compute:
+  tier: runpod
+  estimate: RunPod (~30–60 GPU-h)
+est_weeks: 8
+scores:
+  feasibility: 3
+  novelty: 4
+  fit: null
+risks: []
+access_actions:
+- Hugging Face gated access for some foundation-model weights (free registration)
+candidate_journals: []
+added_at: '2026-11-04T08:30:00Z'
+added_by: scout
+run_id: 2026-W45 (initial)

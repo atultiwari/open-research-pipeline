@@ -1,0 +1,78 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Verify from '../components/Verify.astro';
+import { AREA_LABEL, editUrl } from '../lib/util';
+
+const journals = (await getCollection('journals')).map((e) => e.data);
+const excluded = (await getCollection('excludedJournals')).map((e) => e.data);
+const preprints = (await getCollection('preprints')).map((e) => e.data);
+const NMC_URL = 'https://recruitment.ggsmch.org/wp-content/uploads/2025/10/Notified-Medical-Institutions-Qualifications-of-Faculty-Regulations-2025.pdf';
+---
+<Base title="Journals" description="Zero-APC journal shortlist, excluded journals, preprint servers and NMC promotion rules.">
+  <div data-pagefind-body>
+    <h1>Journals and preprints</h1>
+    <p class="lede">
+      Journals where accepted papers can be published without an article processing charge (APC), by choosing the
+      subscription route in a hybrid journal. Researched 2026-11-04 from publisher pages; "verify" marks values that
+      could not be confirmed.
+    </p>
+
+    <h2>Rules that shape the shortlist</h2>
+    <ul>
+      <li>India gets no automatic APC waiver from Research4Life, Springer Nature, Wiley, Taylor &amp; Francis or Wolters Kluwer, so fully open-access journals are excluded.</li>
+      <li>
+        <strong>NMC promotion rules.</strong> The NMC Medical Institutions (Qualifications of Faculty) Regulations 2025
+        count only original papers, meta-analyses, systematic reviews and case series in journals indexed in MEDLINE,
+        PMC, SCI/SCIE, Embase, Scopus or DOAJ. Promotion from Associate Professor to Professor needs at least two such
+        papers published after becoming Associate Professor, as one of the first three authors.
+        <a href={NMC_URL}>Regulations (PDF)</a>.
+      </li>
+      <li>UGC discontinued the UGC-CARE list in February 2025.</li>
+    </ul>
+
+    {Object.entries(AREA_LABEL).map(([area, label]) => (
+      <>
+        <h2>{label}</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">Journal</th><th scope="col">Free route</th><th scope="col">First decision</th><th scope="col">Acceptance → online</th><th scope="col">Fits</th></tr></thead>
+            <tbody>
+              {journals.filter((j) => j.areas.includes(area as never)).map((j) => (
+                <tr id={j.id}>
+                  <td>{j.url === 'verify' ? j.name : <a href={j.url}>{j.name}</a>}{j.url === 'verify' && <> <span class="badge">verify</span></>}<div class="small muted">{j.publisher}</div></td>
+                  <td class="small"><Verify value={j.free_route} /></td>
+                  <td class="small"><Verify value={j.first_decision} /></td>
+                  <td class="small"><Verify value={j.acceptance_to_online} /></td>
+                  <td class="small">{j.fits}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </>
+    ))}
+
+    <h2>Excluded and why</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Journal</th><th scope="col">Why excluded</th></tr></thead>
+        <tbody>{excluded.map((x) => <tr><td>{x.name}</td><td class="small">{x.reason}{x.source && <> (<a href={x.source}>source</a>)</>}</td></tr>)}</tbody>
+      </table>
+    </div>
+
+    <h2>Preprint servers</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Server</th><th scope="col">Best for</th><th scope="col">Time to post</th><th scope="col">Watch for</th></tr></thead>
+        <tbody>{preprints.map((p) => <tr><td><a href={p.url}>{p.name}</a></td><td class="small">{p.best_for}</td><td class="small">{p.time_to_post}</td><td class="small">{p.watch_for}</td></tr>)}</tbody>
+      </table>
+    </div>
+    <p class="small">
+      Elsevier allows preprints anywhere except some society-owned or double-anonymised titles
+      (<a href="https://www.elsevier.com/about/policies-and-standards/sharing">policy</a>). Springer journals generally
+      allow preprints; check each journal.
+    </p>
+    <div class="actions"><a class="btn secondary" href={editUrl('journals/journals.yaml')}>Edit the shortlist on GitHub</a></div>
+  </div>
+</Base>
