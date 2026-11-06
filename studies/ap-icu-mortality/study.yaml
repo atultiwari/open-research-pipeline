@@ -1,13 +1,18 @@
 id: ap-icu-mortality
 legacy_id: gh-2026w45-ap-icu-mortality
-title: 'Acute pancreatitis ICU mortality: reimplement a MIMIC-IV → eICU XGBoost model with a harmonised endpoint,
-  benchmarked against BISAP, SOFA and a parsimonious logistic score'
+title: 'Same endpoint, locked models: endpoint-harmonised, bidirectional MIMIC-IV ↔ eICU validation of ICU acute-pancreatitis
+  mortality models (AP-METRIC XGBoost, the ABL equation, a 5-variable logistic score) against BISAP, SOFA and APACHE
+  IVa, with an enzyme-confirmed phenotype check'
 area: gastro-hepatology
 tags:
 - pancreatitis
 - icu
 - prognosis
 - xgboost
+- external-validation
+- bisap
+- mimic-iv
+- eicu
 status: new
 status_history:
 - status: new
@@ -15,35 +20,74 @@ status_history:
   note: Migrated from the claude.ai register (2026-W45 (initial))
 source:
   type: preprint
-  title: Development and external validation of a metabolic-clinical XGBoost model for mortality prediction in acute
-    pancreatitis
-  authors: verify
-  venue: Research Square
+  title: 'Development and external validation of a metabolic-clinical XGBoost model for mortality prediction in
+    acute pancreatitis: a dual-cohort study with DM-stratified confounding control (A TRIPOD+AI-compliant prediction
+    model study)'
+  authors: Hao Y et al. (7 authors; Shanghai Pudong New Area People's Hospital / Seventh People's Hospital of Shanghai
+    University of TCM)
+  venue: Research Square preprint v1 (CC BY 4.0); In Review at BMC Medical Informatics and Decision Making; no journal
+    version found as of 2026-11-06
   date: '2026-08-28'
-  url: https://www.researchsquare.com/article/rs-10464724
-  code_note: None; reimplementable (LASSO → 14-feature XGBoost, isotonic calibration, SHAP)
+  url: https://www.researchsquare.com/article/rs-10464724/v1
+  code_note: 'Zenodo concept DOI (latest version record 21465873, 21 Jul 2026): full Python analysis script, run
+    logs, aggregate CSVs and figures; no patient data and no cohort-extraction SQL. eICU vasopressor flag was all-zero
+    before the 20 Jul 2026 version.'
+  doi: 10.21203/rs.3.rs-10464724/v1
+  code_url: https://doi.org/10.5281/zenodo.20768793
+  code_licence: MIT
 datasets:
 - id: mimic-iv
   role: development
 - id: eicu-crd
   role: external-validation
-study_type: Prognostic model replication + external validation
-reporting_guideline: TRIPOD+AI
-novelty_delta: Preprint develops on 28-day mortality but validates on in-hospital mortality. A harmonised-endpoint
-  validation with ML vs BISAP/SOFA, decision curves and open code is a credible rapid paper, and builds a pancreatitis
-  pipeline reusable for the planned post-ERCP pancreatitis study.
+- id: mimic-iv-note
+  role: benchmark
+study_type: Prognostic model replication + endpoint-harmonised, bidirectional external validation of published models
+  and severity scores, with a leakage-free reimplementation and a case-definition sensitivity analysis
+reporting_guideline: TRIPOD+AI; RECORD
+novelty_delta: The source trains on 28-day mortality but validates on in-hospital mortality, selects features outside
+  cross-validation and re-fits preprocessing on eICU; its own output shows plain logistic regression ahead of XGBoost.
+  No published ICU acute-pancreatitis model has been validated independently, on a harmonised endpoint, or in both
+  directions (the eICU-derived ABL equation has never been tested in MIMIC-IV). This study does that against BISAP,
+  SOFA and APACHE IVa with proper calibration statistics, and checks whether an enzyme-confirmed (revised Atlanta)
+  cohort changes the answer.
 compute:
   tier: laptop
-  estimate: Laptop
-est_weeks: 5
+  estimate: Laptop CPU, 16 GB RAM, ~100 GB disk for local PostgreSQL/DuckDB builds of MIMIC-IV and eICU (verify);
+    shared with cirrhosis-sepsis-icu. SQL builds take hours, modelling minutes. No GPU; no API (DUA forbids external
+    LLM APIs).
+est_weeks: 6
 scores:
   feasibility: 4
   novelty: 3
-  fit: null
-risks: []
+  fit: 3
+risks:
+- Crowded field (170+ MIMIC/eICU pancreatitis mortality papers); OpenAlex search was rate-limited on 2026-11-06
+  - rerun novelty checks before the protocol
+- 'Cohort-extraction SQL is not released; exact replication depends on rebuilding the authors'' cohort from the
+  Methods (several steps ambiguous: imaging confirmation, ''missing outcome'' exclusions, eICU AP source)'
+- 'Few eICU deaths (35 in the source cohort): wide CIs, hospital-level analysis descriptive only'
+- 'BISAP items need proxies: impaired mental status via GCS < 15 (sedation), pleural effusion via ICD codes or local
+  regex on MIMIC-IV-Note radiology reports (none in eICU); BISAP is defined at hospital, not ICU, admission'
+- 'eICU has no billing diagnoses: Charlson and AP phenotyping depend on ICU-documented diagnoses and pasthistory;
+  whether lipase/amylase are charted in eICU lab is unverified'
+- Source preprint may change during peer review (journal moved from JMIR to BMC MIDM per Zenodo/Research Square);
+  recheck numbers before submission
+- 'PhysioNet DUA: no row-level data or notes to Claude or any external LLM API; analysis runs locally with aggregates
+  only shared back'
+- No open post-ERCP pancreatitis dataset exists; the register's planned ERCP follow-on cannot be done on open data
 access_actions:
-- PhysioNet credentialing + CITI training (~1–2 weeks; start early)
-candidate_journals: []
+- PhysioNet credentialing + CITI 'Data or Specimens Only Research' training + sign the Credentialed Health Data
+  Use Agreement 1.5.0 on the MIMIC-IV v3.1 and eICU-CRD v2.0 pages (~1–2 weeks; same credential as cirrhosis-sepsis-icu)
+- 'Optional: sign the DUA for MIMIC-IV-Note v2.2 (pleural effusion from radiology reports, local text search only)'
+- Download the latest Zenodo version of the authors' MIT-licensed script (record 21465873); read Supplementary Table
+  S6 (AP-METRIC points) and S7 (missingness) from the Research Square appendix
+- Confirm units of the ABL equation (Li 2020, BMJ Open; lactate mmol/L, BUN mg/dL assumed)
+candidate_journals:
+- dds
+- ijg
+- ijmi
 added_at: '2026-11-04T08:30:00Z'
 added_by: scout
 run_id: 2026-W45 (initial)
+last_reviewed: '2026-11-06'

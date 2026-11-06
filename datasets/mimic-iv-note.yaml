@@ -1,0 +1,23 @@
+id: mimic-iv-note
+name: 'MIMIC-IV-Note: Deidentified free-text clinical notes'
+url: https://physionet.org/content/mimic-iv-note/2.2/
+doi: 10.13026/1n74-ne17
+modality: clinical text (discharge summaries, radiology reports)
+organ_or_domain: hospital and emergency department notes linked to MIMIC-IV
+size: 331,794 discharge summaries (145,915 patients) and 2,321,355 radiology reports (237,427 patients). Download size
+  not shown publicly (verify).
+access: credentialed
+licence: PhysioNet Credentialed Health Data License 1.5.0
+licence_notes: Same PhysioNet credential and CITI "Data or Specimens Only Research" training as MIMIC-IV, plus signing the
+  PhysioNet Credentialed Health Data Use Agreement 1.5.0 on this dataset page. Free text is the highest-risk content for
+  the PhysioNet notice on GPT-style services (https://physionet.org/news/post/gpt-responsible-use) - never send notes to
+  external LLM APIs; text mining must use local regex or locally run models only. No redistribution of notes or note-derived
+  row-level labels.
+institution_country: USA (Beth Israel Deaconess Medical Center / MIT Laboratory for Computational Physiology)
+citation: Johnson A, Pollard T, Horng S, Celi LA, Mark R. MIMIC-IV-Note - Deidentified free-text clinical notes (version 2.2).
+  PhysioNet; 2023. doi:10.13026/1n74-ne17
+alt_urls:
+- https://mimic.mit.edu
+notes: v2.2 published 6 Jan 2023 (latest-version DOI 10.13026/7qgp-kc16). Notes link to MIMIC-IV by subject_id/hadm_id.
+  Useful for imaging findings not coded elsewhere (e.g. pleural effusion for BISAP in ap-icu-mortality).
+last_checked: '2026-11-06'

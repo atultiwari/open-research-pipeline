@@ -4,23 +4,25 @@ url: https://physionet.org/content/mimiciv/3.1/
 doi: 10.13026/kpb9-mt58
 modality: EHR
 organ_or_domain: critical care and hospital admissions
-size: 'v3.0/3.1 row counts: 364,627 patients, 546,028 admissions, 94,458 ICU stays (over 65,000 ICU patients and over
-  200,000 emergency department patients); admissions 2008–2022. Download size not shown publicly (verify).'
+size: 'v3.0/3.1 row counts: 364,627 patients, 546,028 admissions, 94,458 ICU stays (over 65,000 ICU patients and over 200,000
+  emergency department patients); admissions 2008–2022. Download size not shown publicly (verify).'
 access: credentialed
 licence: PhysioNet Credentialed Health Data License 1.5.0
-licence_notes: 'Access needs PhysioNet credentialing, CITI "Data or Specimens Only Research" training and signing the
-  PhysioNet Credentialed Health Data Use Agreement 1.5.0 (allow ~1–2 weeks). The DUA forbids sharing access or redistributing
-  data; PhysioNet states this rules out sending data to third-party LLM APIs or chat services (https://physionet.org/news/post/gpt-responsible-use).
-  Project rule: local models and local analysis only, aggregates only leave the machine. The DUA also forbids attempts to identify
-  individuals or institutions, and asks that code behind disseminated results be shared openly.'
+licence_notes: 'Access needs PhysioNet credentialing, CITI "Data or Specimens Only Research" training and signing the PhysioNet
+  Credentialed Health Data Use Agreement 1.5.0 (allow ~1–2 weeks). The DUA forbids sharing access or redistributing data;
+  PhysioNet states this rules out sending data to third-party LLM APIs or chat services (https://physionet.org/news/post/gpt-responsible-use).
+  Project rule: local models and local analysis only, aggregates only leave the machine. The DUA also forbids attempts to
+  identify individuals or institutions, and asks that code behind disseminated results be shared openly.'
 institution_country: USA (Beth Israel Deaconess Medical Center / MIT Laboratory for Computational Physiology)
 citation: Johnson AEW et al. MIMIC-IV, a freely accessible electronic health record dataset. Sci Data 2023;10:1. doi:10.1038/s41597-022-01899-x
 alt_urls:
 - https://physionet.org/content/mimiciv/2.2/
 - https://github.com/MIT-LCP/mimic-code
-notes: 'v3.1 (released 11 Oct 2024) is the current version as of 2026-11-06. v3.0 added 2020–2022 stays and out-of-hospital
+notes: v3.1 (released 11 Oct 2024) is the current version as of 2026-11-06. v3.0 added 2020–2022 stays and out-of-hospital
   mortality up to 1 year after hospital or ED discharge; v3.1 fixed lab itemids that had changed between v2.2 and v3.0. Dates
   are shifted; calendar period is available only as patients.anchor_year_group (2008–2010 … 2020–2022). Official SQL concepts
   (Sepsis-3, SOFA, MELD, KDIGO) are in MIT-LCP/mimic-code (MIT licence). ClinicalBench split indices match v2.2; the cirrhosis-sepsis
-  study uses v3.1.'
+  study uses v3.1. mimic-code also provides score/sirs.sql, firstday/first_day_gcs.sql and measurement/enzyme.sql (amylase;
+  lipase is not in that concept, look it up in d_labitems). Free-text notes (discharge summaries, radiology reports) are a
+  separate credentialed dataset, MIMIC-IV-Note (datasets/mimic-iv-note.yaml).
 last_checked: '2026-11-06'
