@@ -3,7 +3,7 @@
 
 Usage: python3 scripts/check_links.py [path ...]
 Some publishers block automated clients (403/429); those are reported as 'blocked', not failures,
-and should be checked by hand once. Timeouts are reported but do not fail the run.
+and should be checked by hand once. Timeouts and untrusted certificates (CERT) are reported but do not fail the run.
 Exit code 1 only for 404/410 or connection failures.
 """
 from __future__ import annotations
@@ -41,7 +41,9 @@ def fetch(url: str) -> tuple[str, str]:
         return url, str(err.code)
     except urllib.error.URLError as err:
         reason = type(getattr(err, "reason", err)).__name__
-        return url, "timeout" if "Timeout" in reason else f"error: {reason}"
+        if "Timeout" in reason:
+            return url, "timeout"
+        return url, "cert" if "SSLCertVerification" in reason else f"error: {reason}"
     except TimeoutError:
         return url, "timeout"
     except Exception as err:  # noqa: BLE001 - report any network failure
@@ -58,6 +60,8 @@ def main() -> int:
         code = int(status) if status.isdigit() else None
         if status == "timeout":
             label = "TIMEOUT"
+        elif status == "cert":
+            label = "CERT   "  # server certificate chain not trusted by Python; check once with curl/browser
         elif code in DEAD or code is None:
             label, bad = "DEAD   ", bad + 1
         elif code in BLOCKED:
