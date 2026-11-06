@@ -2,6 +2,9 @@
 """One-off migration: _seed/studies.json -> studies/<slug>/{study.yaml, replication.md, extension.md}.
 
 Usage: python3 scripts/import_seed.py [--force]
+
+Historical: the migration ran on 2026-11-04/06 and _seed/ was then deleted. To re-run it, restore
+the seed first:  git checkout c154992 -- _seed
 Values come only from the seed file, plus code licences read from the GitHub API on 2026-11-06.
 Anything not in the seed is written as 'verify' or left for /enrich.
 """
@@ -240,6 +243,9 @@ def write_study(rec: dict, force: bool) -> str:
 
 def main() -> int:
     force = "--force" in sys.argv
+    if not SEED.exists():
+        print("ERROR: _seed/studies.json is gone (migration done). Restore it with: git checkout c154992 -- _seed")
+        return 1
     records = json.loads(SEED.read_text(encoding="utf-8"))
     missing = [slug_of(r["id"]) for r in records if slug_of(r["id"]) not in EXTRA]
     if missing:
