@@ -6,11 +6,14 @@ tags:
 - annotation-bias
 - cross-dataset
 - lmic
-status: new
+status: approved
 status_history:
 - status: new
   date: '2026-11-06'
   note: Added by atul
+- status: approved
+  date: '2026-11-06'
+  note: Gate 1 approved by Atul
 datasets:
 - id: txl-pbc
   role: development
@@ -68,3 +71,4 @@ scores:
   fit: 4
   feasibility: 4
   novelty: 3
+last_reviewed: '2026-11-06'
