@@ -1,0 +1,23 @@
+id: far-polyp-seg
+name: FAR-POLYP-SEG
+url: https://doi.org/10.5281/zenodo.20284781
+doi: 10.5281/zenodo.20284781
+alt_urls:
+- https://github.com/FAR-POLYP-SEG/
+modality: colonoscopy still frames + binary masks, with patient-level metadata
+organ_or_domain: colon polyps and normal mucosa (single centre, prospective)
+size: 8,181 frames from 455 patients (432 polyp-positive with masks, 7,749 normal-mucosa frames); Dataset.zip 344 MB;
+  JPEG at 572 x 470, 672 x 480 or 720 x 480
+access: open
+licence: CC BY 4.0 (Zenodo record and paper)
+licence_notes: Zenodo API 2026-11-06 reports cc-by-4.0, open access. Paper says all direct identifiers, timestamps and
+  on-screen overlays were removed before release; metadata use an anonymised patient id.
+institution_country: Farhikhtegan Hospital, Islamic Azad University, Tehran, Iran
+labels: Binary masks (one mask per frame, all polyps merged); per-patient age, sex, indication, Boston Bowel Preparation
+  Scale (BBPS), procedure duration. No histology, polyp size or morphology.
+citation: 'Lalinia M et al. FAR-POLYP-SEG: A Prospective Single-Center Colonoscopy Dataset for Colorectal Polyp Segmentation
+  with Patient-Level Metadata and Baseline Cross-Validation. J Imaging Inform Med (2026). doi:10.1007/s10278-026-02268-5'
+last_checked: '2026-11-06'
+notes: Acquired February-December 2025 on Olympus CV-190 equipment. Masks drawn by one of three GPs working in gastroenterology
+  and reviewed by two gastroenterologists (single annotator per frame). Use patient-grouped splits. The normal frames allow
+  false-positive testing on polyp-free mucosa.

@@ -1,12 +1,17 @@
 id: polypgen-dino-frozen
 legacy_id: gh-2026w45-polypgen-dino-frozen
-title: 'Cross-centre generalisation of polyp segmentation: correctly frozen re-evaluation of DINOv2/v3 key features
-  on PolypGen with zero-shot external testing on Kvasir-SEG and CVC-ClinicDB'
+title: Do frozen DINO encoders trained on PolypGen work in new countries and on polyp-free frames? Zero-shot external
+  testing of frozen vs fine-tuned DINOv2/v3 polyp segmentation on Kvasir-SEG, CVC-ClinicDB, PolypDB (Sweden, Vietnam)
+  and FAR-POLYP-SEG (Iran)
 area: gastro-hepatology
 tags:
 - polyp-segmentation
 - domain-generalisation
 - endoscopy
+- foundation-models
+- external-validation
+- false-positives
+- lmic
 status: new
 status_history:
 - status: new
@@ -14,14 +19,20 @@ status_history:
   note: Migrated from the claude.ai register (2026-W45 (initial))
 source:
   type: preprint
-  title: Unlocking Generalization in Polyp Segmentation with DINO Self-Attention "keys"
-  authors: verify
-  venue: arXiv (cs.CV)
-  date: '2026-01-21'
-  url: https://arxiv.org/abs/2512.13376v2
-  arxiv_id: 2512.13376v2
+  title: 'Unlocking Generalization in Polyp Segmentation with DINO Self-Attention "keys" (v1; v2 is a withdrawal
+    notice; corrected version retitled "Representation Matters: Rethinking Domain Generalization in Polyp Segmentation")'
+  authors: Monteiro C et al.
+  venue: arXiv (cs.CV), v1 2025-12-15; v2 withdrawn 2026-01-21 (encoder not properly frozen). Repo README says accepted
+    at MICCAI 2026 MLMI; no LNCS record found on 2026-11-06 (verify)
+  date: '2025-12-15'
+  url: https://arxiv.org/abs/2512.13376v1
+  arxiv_id: 2512.13376v1
   code_url: https://github.com/Trustworthy-AI-UU-NKI/RepMatters
-  code_licence: 'None stated on GitHub (no licence file): reimplement, do not copy'
+  code_licence: 'None (no licence file on GitHub): reimplement, do not copy. Extractor adapted from ShirAmir/dino-vit-features
+    (MIT)'
+  doi: 10.48550/arXiv.2512.13376
+  code_note: Freezing bug fixed in commits of 2026-08-10; fold JSONs deleted from the tree (still in commit f1e4e5e);
+    keyvitseg/main.py fails to parse as of 2026-11-06 (stray top-level else)
 datasets:
 - id: polypgen
   role: development
@@ -29,23 +40,46 @@ datasets:
   role: external-validation
 - id: cvc-clinicdb
   role: external-validation
-study_type: Segmentation domain-generalisation benchmark
+- id: polypdb
+  role: external-validation
+- id: far-polyp-seg
+  role: external-validation
+study_type: Segmentation external-validation and specificity benchmark (frozen vs fine-tuned foundation encoders)
 reporting_guideline: CLAIM 2024
-novelty_delta: Authors' own v2 note says the encoder was not properly frozen, so the claims are not fully valid.
-  A transparent, correctly frozen reproduction with zero-shot external sets, newer encoders and failure analysis
-  by polyp size and morphology fills a real gap.
+novelty_delta: The authors have since fixed the freezing bug themselves (frozen DINO loses 7-10 Dice points; only
+  fine-tuned DINOv3 beats UM-Net), but every result is still PolypGen-only and polyp-positive-only. This study adds
+  the first zero-shot tests of PolypGen-trained frozen and fine-tuned DINOv2/v3 segmenters on LMIC centres (PolypDB-Vietnam,
+  FAR-POLYP-SEG Iran), false-positive rates on 7,749 normal-mucosa frames, calibration, and subgroups by size, modality
+  and bowel preparation.
 compute:
   tier: runpod
-  estimate: Colab or RunPod (~10 GPU-h)
-est_weeks: 5
+  estimate: '~30-40 GPU-h on RunPod A40/L4 (~US$15-25): reduced replication plus external runs; frozen arm cheap
+    with cached features; analysis on laptop'
+est_weeks: 6
 scores:
   feasibility: 4
   novelty: 3
-  fit: null
-risks: []
+  fit: 3
+risks:
+- 'Crowded field: PolypDINO, Polyp-DiFoM, SegDINO and others already test DINO-based polyp segmenters on Kvasir/CVC;
+  novelty rests on the Iran/Vietnam sets and normal-frame false positives'
+- The authors' corrected MLMI 2026 paper may appear with extra analyses; recheck before the protocol
+- 'Licence mix: Kvasir-SEG and CVC-ClinicDB are research/education only (NC-like); PolypGen forbids redistribution
+  despite CC BY 4.0 in its paper; PolypDB has no formal licence'
+- CVC-ClinicDB official download link is empty; only unofficial mirrors were found
+- Dataset overlap (Kvasir-SEG within HyperKvasir; PolypDB Norway from HyperKvasir) needs a hash check
+- No histology in any dataset, so the pathologist contribution is limited to visual error review
+- Original code does not run as published; reimplementation needed
 access_actions:
-- Synapse account for PolypGen (free)
-candidate_journals: []
+- Free Synapse account for PolypGen; cite all three required papers
+- Hugging Face gated access (manual approval) for DINOv3 weights; DINOv2 is open (Apache-2.0)
+- Download FAR-POLYP-SEG (Zenodo, 344 MB) and PolypDB (OSF, 1.39 GB); no registration
+- Kvasir-SEG from the Simula page (was down on 2026-11-06; retry) and a documented CVC-ClinicDB mirror with checksum
+candidate_journals:
+- jiim
+- cmig
+- dds
 added_at: '2026-11-04T08:30:00Z'
 added_by: scout
 run_id: 2026-W45 (initial)
+last_reviewed: '2026-11-06'

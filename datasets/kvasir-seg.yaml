@@ -1,11 +1,19 @@
 id: kvasir-seg
 name: Kvasir-SEG
-url: https://datasets.simula.no/kvasir-seg/
-modality: colonoscopy images + masks
-organ_or_domain: colon polyps
-size: verify
+url: https://github.com/DebeshJha/Kvasir-SEG
+modality: colonoscopy images + binary masks + bounding boxes (JSON)
+organ_or_domain: colon polyps (single centre)
+size: 1,000 polyp images with masks; resolution 332 x 487 to 1920 x 1072; zip about 46.2 MB
 access: open
-licence: verify
-institution_country: Norway (Simula)
+licence: 'Custom terms: research and educational use only; commercial use forbidden without prior written permission;
+  cite Jha et al. (MMM 2020)'
+licence_notes: Not a Creative Commons licence (NC-like terms). The GitHub repo has no licence file; terms are stated in
+  its README and on the Simula page. Kvasir-SEG images are the polyp class of Kvasir v2, and the same 1,000 segmented polyp
+  images are also shipped inside HyperKvasir, so the two are not independent test sets.
+institution_country: Bærum Hospital, Vestre Viken Health Trust, Norway (SimulaMet)
+labels: Binary polyp masks; bounding boxes in JSON
+citation: 'Jha D et al. Kvasir-SEG: A Segmented Polyp Dataset. MultiMedia Modeling (MMM 2020), LNCS 11962, 451-462. doi:10.1007/978-3-030-37734-2_37'
 last_checked: '2026-11-06'
-notes: Canonical Simula page timed out on 2026-11-06; recheck before use.
+notes: The canonical download page (datasets.simula.no/kvasir-seg) refused connections or timed out on 2026-11-06 (two
+  attempts plus WebFetch); the author's GitHub README links to it and confirms size and terms. Images captured with Olympus
+  scopes; some show the ScopeGuide position thumbnail (a known shortcut cue). Hugging Face copies exist but are unofficial.

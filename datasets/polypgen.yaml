@@ -1,10 +1,28 @@
 id: polypgen
 name: PolypGen
 url: https://www.synapse.org/#!Synapse:syn45200214
-modality: colonoscopy frames + masks
-organ_or_domain: colon polyps (6 centres)
-size: 1,537 frames with masks
+alt_urls:
+- https://www.synapse.org/Synapse:syn26376615
+doi: 10.7303/syn26376615
+modality: colonoscopy frames + binary masks + bounding boxes (single frames and video sequences)
+organ_or_domain: colon polyps (6 centres in France, Italy x2, Norway, UK, Egypt)
+size: '8,037 frames: 3,762 polyp-positive (1,537 single frames with masks, of which 88 from C6; 2,225 sequence frames)
+  and 4,275 negative sequence frames; JPEG, up to 1920 x 1080'
 access: free-registration
-licence: CC BY 4.0
-licence_notes: Synapse account required.
+licence: CC BY 4.0 (Sci Data paper, Data Records and Usage Notes)
+licence_notes: 'MISMATCH: the Sci Data paper says CC BY 4.0 and allows research and commercial use, but the Synapse
+  project wiki (modified 2026-05-16) forbids redistribution and creating new datasets from it, says it is for research
+  only, requires a Google form for any company or for-profit use, and requires citing three papers (Sci Data 2023, Sci
+  Rep 2024, Med Image Anal 2021). Never upload copies (Kaggle, Hugging Face, Dataset Ninja). Download needs a free Synapse
+  account; no extra access requirement is set on the entity (Synapse REST API, 2026-11-06).'
+institution_country: Ambroise Pare Hospital (France), Istituto Oncologico Veneto and CRO Aviano (Italy), Oslo University
+  Hospital (Norway), John Radcliffe Hospital (UK), University of Alexandria (Egypt); curated by Oxford/Leeds and SimulaMet
+labels: Binary masks and VOC bounding boxes for all single frames; per-centre folders; polyp size categories (small/medium/large
+  by box size) and flat vs protruded shares reported in the paper
+citation: Ali S et al. A multi-centre polyp detection and segmentation dataset for generalisability assessment. Sci Data
+  10, 75 (2023). doi:10.1038/s41597-023-01981-y
 last_checked: '2026-11-06'
+notes: 'All six centres used Olympus endoscopes (Exera 195, H190, VG-165/CV180/H185, Evis Exera III CF190, GIF-H260Z/CV260,
+  Exera 160AL/180AL). Centre-to-code mapping (C1 France ... C6 Egypt) follows the order of Table 2 in the paper: verify
+  before naming centres in a manuscript. Single-frame counts per centre used by Monteiro et al. (arXiv 2512.13376v1):
+  C1 256, C2 301, C3 457, C4 227, C5 208, C6 88. Full anonymisation, no age or sex. Paper: https://pmc.ncbi.nlm.nih.gov/articles/PMC9902556/'

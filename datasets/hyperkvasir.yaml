@@ -1,11 +1,19 @@
 id: hyperkvasir
 name: HyperKvasir
 url: https://osf.io/mh9sj/
-modality: endoscopy images and videos
-organ_or_domain: GI tract
-size: verify
+modality: endoscopy images and videos (upper and lower GI)
+organ_or_domain: GI tract (anatomical landmarks, normal and pathological findings, including polyps)
+size: 110,079 images (10,662 labelled in 23 classes, 99,417 unlabelled) + 374 videos (~1 million frames); about 66.4 GB
 access: open
-licence: verify (OSF lists SimulaMet as copyright holder)
-institution_country: Norway (Simula)
+licence: CC BY 4.0 (OSF project licence; copyright holder SimulaMet, 2019)
+licence_notes: Licence read from the OSF API on 2026-11-06. Its 1,000 polyp images with masks are the Kvasir-SEG images,
+  so do not treat HyperKvasir and Kvasir-SEG as separate test sets. PolypDB's Norwegian images were drawn from HyperKvasir's
+  unlabelled frames.
+institution_country: Bærum Hospital, Vestre Viken Hospital Trust, Norway (SimulaMet)
+labels: Image-level class labels for 10,662 images; masks and boxes for 1,000 polyp images; video-level findings
+citation: Borgli H et al. HyperKvasir, a comprehensive multi-class image and video dataset for gastrointestinal endoscopy.
+  Sci Data 7, 283 (2020). doi:10.1038/s41597-020-00622-y
 last_checked: '2026-11-06'
-notes: OSF project verified 2026-11-06. The Simula page https://datasets.simula.no/hyper-kvasir/ timed out that day.
+notes: Olympus and Pentax equipment. Fully anonymised (metadata removed, files renamed) with Norwegian data-protection
+  approval. The Simula download page (datasets.simula.no/hyper-kvasir) refused connections on 2026-11-06; the OSF project
+  is reachable. Paper at https://pmc.ncbi.nlm.nih.gov/articles/PMC7455694/

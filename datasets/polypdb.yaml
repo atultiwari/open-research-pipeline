@@ -1,0 +1,23 @@
+id: polypdb
+name: PolypDB
+url: https://osf.io/pr7ms/
+alt_urls:
+- https://github.com/DebeshJha/PolypDB
+modality: colonoscopy images + binary masks + bounding boxes, five imaging modalities (WLI, NBI, BLI, LCI, FICE)
+organ_or_domain: colon polyps (3 centres in Norway, Sweden, Vietnam)
+size: 3,934 images (abstract); one zip of 1.39 GB on OSF. Centre 3 (Vietnam) has 1,200 images (1,000 WLI, 70 BLI, 70 FICE,
+  60 LCI)
+access: open
+licence: 'None stated: OSF shows no licence; the README says "open for research and educational purposes" (verify)'
+licence_notes: No formal licence on OSF (API, 2026-11-06) or GitHub; treat as research and education only and cite the
+  paper. Norway images come partly from HyperKvasir's unlabelled frames (overlap risk with Kvasir-SEG/HyperKvasir; use
+  only the Sweden and Vietnam folders as truly external). Per-centre counts in the arXiv paper do not fully add up (3,934
+  vs 3,904).
+institution_country: Bærum Hospital (Norway), Karolinska University Hospital (Sweden), Hanoi Medical University and Institute
+  of Gastroenterology and Hepatology (Vietnam)
+labels: Binary masks and boxes; modality-wise and centre-wise folders with splits on GitHub
+citation: 'Jha D et al. PolypDB: A Curated Multi-Center Dataset for Development of AI Algorithms in Colonoscopy. arXiv
+  2409.00045 (2024, v2 2025).'
+last_checked: '2026-11-06'
+notes: Vietnam centre used a Fujinon (Fujifilm) system; Norway and Sweden used Olympus Evis Exera III CF190. Minimum resolution
+  1280 x 720, JPEG. Annotations verified by 10 gastroenterologists.

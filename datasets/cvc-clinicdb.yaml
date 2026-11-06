@@ -1,10 +1,20 @@
 id: cvc-clinicdb
 name: CVC-ClinicDB
 url: https://polyp.grand-challenge.org/CVCClinicDB/
-modality: colonoscopy frames + masks
-organ_or_domain: colon polyps
-size: verify
+modality: colonoscopy video frames + binary masks (TIFF)
+organ_or_domain: colon polyps (single centre)
+size: 612 frames at 384 x 288 from colonoscopy sequences (29 vs 31 sequences reported in different sources; verify)
 access: open
-licence: verify
-institution_country: Spain
+licence: 'Custom terms: "completely restricted for research and educational purposes"; commercial use forbidden; cite
+  Bernal et al. 2015'
+licence_notes: Not a Creative Commons licence (NC-like terms). Originals belong to Hospital Clinic Barcelona, masks to
+  the Computer Vision Center. On 2026-11-06 the official page's "download link" section contained no link, so in practice
+  people use mirrors (Kaggle, several Hugging Face copies, the PraNet test bundle). Whether these mirrors are authorised
+  is not stated (verify); record which copy you used and its checksum.
+institution_country: Hospital Clinic and Computer Vision Center, Barcelona, Spain
+labels: Binary polyp masks
+citation: 'Bernal J et al. WM-DOVA maps for accurate polyp highlighting in colonoscopy: Validation vs. saliency maps from
+  physicians. Comput Med Imaging Graph 43, 99-111 (2015). doi:10.1016/j.compmedimag.2015.02.007'
 last_checked: '2026-11-06'
+notes: Official training set of the MICCAI 2015 polyp detection sub-challenge. Consecutive frames from the same sequence
+  are near-duplicates; use it only as a whole external test set, never split it at random.
