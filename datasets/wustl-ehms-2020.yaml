@@ -1,11 +1,24 @@
 id: wustl-ehms-2020
 name: WUSTL-EHMS-2020
 url: https://research.engineering.wustl.edu/~jain/ehms/index.html
-modality: network traffic + biometrics
-organ_or_domain: healthcare monitoring intrusion detection
-size: verify
+alt_urls:
+- https://research.engineering.wustl.edu/~jain/ehms/ftp/wustl-ehms-2020_with_attacks_categories.csv
+modality: network flow metrics (Argus) + patient biometric readings, tabular CSV
+organ_or_domain: healthcare monitoring intrusion detection (Enhanced Healthcare Monitoring System testbed)
+size: 16,318 rows (14,272 normal, 2,046 attack), 45 columns; one CSV of 3,946,888 bytes (page states 4.4 MB)
 access: open
-licence: verify
-institution_country: USA (WUSTL)
-notes: Feature set differs from CICIoMT2024.
+licence: verify (no licence or terms stated on the dataset page, checked 2026-11-06)
+licence_notes: 'Direct download, no registration. No licence text, so treat as "research use with citation" and do
+  not redistribute the CSV. The companion paper is in IEEE Access (open access; article licence verify).'
+institution_country: USA (Washington University in St. Louis)
+labels: 'Label (0 normal, 1 attack) and Attack Category (normal, Spoofing, Data Alteration). Columns: 35 flow metrics
+  including SrcAddr, DstAddr, Sport, Dport, SrcMac, DstMac, Dur, TotPkts, TotBytes, Rate, Load, jitter and packet-size
+  fields; 8 biometrics (Temp, SpO2, Pulse_Rate, SYS, DIA, Heart_rate, Resp_Rate, ST)'
+citation: Hady AA, Ghubaish A, Salman T, Unal D, Jain R. Intrusion detection system for healthcare systems using medical
+  and network data - a comparison study. IEEE Access 2020;8:106576-106584. doi:10.1109/ACCESS.2020.3000421
+notes: 'Labels were assigned from the attacker laptop''s source MAC address, so SrcMac, SrcAddr and related identifier
+  columns leak the label and must be dropped. The feature set (Argus flow metrics) differs from CICIoMT2024 (CIC
+  window features), and no pcaps are released, so cross-dataset work needs a small hand-harmonised feature subset.
+  Attacks are man-in-the-middle only (spoofing and data alteration). Biometric values come from a testbed with no
+  names or record numbers; the header and first rows show only lab IP and MAC addresses (checked 2026-11-06).'
 last_checked: '2026-11-06'

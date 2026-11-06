@@ -1,11 +1,33 @@
 id: ciciomt2024
 name: CICIoMT2024
 url: https://www.unb.ca/cic/datasets/iomt-dataset-2024.html
-modality: network traffic (flows, pcaps)
+alt_urls:
+- http://cicresearch.ca/IOTDataset/CICIoMT2024/
+- https://www.unb.ca/cic/datasets/index.html
+modality: network traffic (pcaps and extracted per-window feature CSVs)
 organ_or_domain: Internet of Medical Things intrusion detection
-size: verify
-access: open
-licence: verify
-licence_notes: Free download form.
-institution_country: Canada (UNB CIC)
+size: 'Total GB not stated on the page (verify after download). Row counts reported by users differ: Wi-Fi/MQTT
+  train 7,160,831 and test 1,614,182 rows (Alruwaili et al., Sensors 2026) versus 6,987,390 and 2,175,604 (Jaiswal
+  et al. 2026, Table II); Bluetooth train 121,590 and test 31,704 rows (Jaiswal et al. code outputs)'
+access: free-registration
+licence: 'No formal licence. The UNB CIC datasets page (FAQ) says users may redistribute, republish and mirror CIC
+  datasets in any form, provided they cite the dataset and its paper'
+licence_notes: 'The general terms sit in the FAQ of https://www.unb.ca/cic/datasets/index.html; the CICIoMT2024 page
+  itself shows no licence text, and the download form adds none (checked 2026-11-06). Download needs a free form
+  (first and last name, email, organisation, job title, country) at cicresearch.ca; only the person who registered
+  should then browse the files. No NC or ND terms found. The Hugging Face copy somnath0100/CICIoMT2024Small holds
+  CICFlowMeter-style "pcap_Flow" CSVs, not the official feature files: do not treat it as the official release.'
+institution_country: Canada (University of New Brunswick, Canadian Institute for Cybersecurity)
+labels: 'Benign plus 18 attack labels in five families (DDoS, DoS, Recon, Spoofing, MQTT) for Wi-Fi/MQTT, and benign
+  versus DoS for Bluetooth Low Energy; one CSV per attack capture, already split into train and test folders'
+citation: Dadkhah S, Neto ECP, Ferreira R, Molokwu RC, Sadeghi S, Ghorbani AA. CICIoMT2024 - a benchmark dataset for
+  multi-protocol security assessment in IoMT. Internet of Things 2024;28:101351. doi:10.1016/j.iot.2024.101351
+  (preprint doi:10.2139/ssrn.4725150)
+notes: '40 devices (25 real, 15 simulated); Wi-Fi, MQTT and BLE; profiling captures (power, idle, active, interaction)
+  as well as attack captures. Feature CSVs exist only for Wi-Fi/MQTT and profiling; the page''s statistics table
+  lists about 44-45 window-level features (Header_Length, Protocol Type, Duration, Rate, flag counts, protocol
+  indicators, Tot sum, Min, Max, AVG, Std, IAT, Magnitue, Radius, Covariance, Variance, Weight...). Bluetooth CSVs
+  have a different 27-feature set (HCI_* counts). Features are averaged over packet windows, so many rows are exact
+  repeats: in the Bluetooth training files 34% of DoS rows are duplicates. No device or session identifier column
+  in the CSVs. The feature extractor is shared with CICIoT2023 (about 44 shared feature names; verify on the headers).'
 last_checked: '2026-11-06'

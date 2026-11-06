@@ -1,10 +1,26 @@
 id: ciciot2023
 name: CICIoT2023
 url: https://www.unb.ca/cic/datasets/iotdataset-2023.html
-modality: network traffic
-organ_or_domain: IoT intrusion detection
-size: verify
-access: open
-licence: verify
-institution_country: Canada (UNB CIC)
+alt_urls:
+- http://cicresearch.ca/IOTDataset/CIC_IOT_Dataset2023/
+- https://www.unb.ca/cic/datasets/index.html
+- https://huggingface.co/datasets/lacg030175/CIC-IoT-2023-neto-full
+modality: network traffic (pcaps and extracted per-window feature CSVs)
+organ_or_domain: IoT intrusion detection (general IoT, not medical)
+size: 'Total GB not stated on the page (verify). About 46.7 million CSV rows with 46 features, per the README of a
+  third-party benchmark that uses the lacg030175/CIC-IoT-2023-neto-full mirror (1.6 GB parquet; verify)'
+access: free-registration
+licence: 'No formal licence. The UNB CIC datasets page (FAQ) says users may redistribute, republish and mirror CIC
+  datasets in any form, provided they cite the dataset and its paper'
+licence_notes: 'The dataset page shows no licence text (checked 2026-11-06); general terms are in the FAQ of
+  https://www.unb.ca/cic/datasets/index.html. The official download goes through the same free CIC form as CICIoMT2024
+  (name, email, organisation, job title, country). Hugging Face mirrors exist; check row counts against the paper
+  before using one, as several are subsets (DDoS-only, filtered or subsampled).'
+institution_country: Canada (University of New Brunswick, Canadian Institute for Cybersecurity)
+labels: Benign plus 33 attack labels in 7 families (DDoS, DoS, Recon, Web-based, Brute Force, Spoofing, Mirai)
+citation: Neto ECP, Dadkhah S, Ferreira R, Zohourian A, Lu R, Ghorbani AA. CICIoT2023 - a real-time dataset and benchmark
+  for large-scale attacks in IoT environment. Sensors 2023;23(13):5941. doi:10.3390/s23135941
+notes: '105-device topology. Same lab and same window-feature extractor as CICIoMT2024, so the two share most feature
+  names (about 44; verify on the headers), which makes CICIoT2023 the cleanest cross-dataset partner for CICIoMT2024.
+  Class mix is dominated by DDoS (about 73% of rows).'
 last_checked: '2026-11-06'

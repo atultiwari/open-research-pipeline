@@ -1,12 +1,15 @@
 id: iomt-xdataset
 legacy_id: cy-2026w45-iomt-xdataset
-title: Leakage-aware cross-dataset evaluation of lightweight, explainable IoMT intrusion detectors (CICIoMT2024
-  → WUSTL-EHMS-2020 / CICIoT2023), with int8 edge models and SHAP stability
+title: How much of CICIoMT2024 intrusion-detection accuracy is an evaluation artefact? A shortcut-by-shortcut leakage
+  audit of lightweight, explainable IoMT detectors, with transfer to CICIoT2023 and WUSTL-EHMS-2020
 area: healthcare-cybersecurity
 tags:
 - iomt
 - intrusion-detection
 - leakage
+- benchmark
+- tsetlin-machine
+- cross-dataset
 - edge-ml
 status: new
 status_history:
@@ -14,14 +17,20 @@ status_history:
   date: '2026-11-04'
   note: Migrated from the claude.ai register (2026-W45 (initial))
 source:
-  type: preprint
-  title: 'A Tsetlin Machine-driven Intrusion Detection System for Next-Generation IoMT Security (companion: arXiv:2604.06254)'
-  authors: verify
-  venue: arXiv (cs.CR)
-  date: '2026-04-03'
-  url: https://arxiv.org/abs/2604.03205
+  type: conference
+  title: A Tsetlin Machine-Driven Intrusion Detection System for Next-Generation IoMT Security (preprint arXiv:2604.03205;
+    companion arXiv:2604.06254, SE ViT-BiLSTM, ISCTurkiye 2025)
+  authors: Jaiswal R, Andersen P-A, Cenkeramaddi LR et al.
+  venue: 2026 Silicon Valley Cybersecurity Conference (SVCC), pp. 1-8 (preprint arXiv cs.CR, 2026-04-03)
+  date: 2026-06
+  url: https://doi.org/10.1109/SVCC69905.2026.11642276
   arxiv_id: '2604.03205'
-  code_note: No official code; reimplementable (sklearn/XGBoost/PyTorch)
+  code_note: 'Repo holds only the Bluetooth (scenario 1) notebooks for the Tsetlin Machine and ML baselines; scenarios
+    2-3 must be rebuilt from Tables III, V and VII. GPL-3.0: keep reused code under GPL or reimplement. Companion
+    paper has no code.'
+  doi: 10.1109/SVCC69905.2026.11642276
+  code_url: https://github.com/rkj08105/TM-driven-IDS
+  code_licence: GPL-3.0
 datasets:
 - id: ciciomt2024
   role: development
@@ -29,23 +38,46 @@ datasets:
   role: external-validation
 - id: ciciot2023
   role: external-validation
-study_type: Benchmark / ML evaluation
-reporting_guideline: None standard; TRIPOD+AI items optional
-novelty_delta: Most CICIoMT2024 papers report 96–99.5% accuracy on random splits of one dataset. Adds dedup and
-  attack-held-out splits to expose inflation, cross-dataset transfer, measured int8 edge latency, SHAP stability,
-  and DPDP framing for Indian hospital networks.
+study_type: Benchmark / leakage audit + external validation (ML evaluation)
+reporting_guideline: 'TRIPOD+AI (adapted: data sources, splits, leakage, validation items); no IDS-specific guideline
+  exists'
+novelty_delta: Cross-dataset transfer (Jodayree 2026; DEA-IDS 2026), leave-one-attack-out, int8 and SHAP-stability
+  work on CICIoMT2024 or its relatives already exist, so the register's bundle is no longer new. This study measures,
+  protocol by protocol, how much pooled random splits, oversampling before the split, cross-split duplicates and
+  seen-attack-only testing inflate CICIoMT2024 scores, re-scores the source's Tsetlin Machine and standard baselines
+  under one clean protocol, and publishes a feature-harmonisation table for honest transfer to CICIoT2023 and WUSTL-EHMS-2020.
 compute:
   tier: laptop
-  estimate: Laptop
-est_weeks: 7
+  estimate: Laptop CPU; a few GB of CSVs (verify after download); about 5-15 CPU-hours for the protocol ladder over
+    7 models and 3 seeds; US$0
+est_weeks: 6
 scores:
   feasibility: 5
   novelty: 3
-  fit: null
-risks: []
+  fit: 2
+risks:
+- 'Crowded field: an unidentified paper reportedly gives a 24.68% near-duplicate rate and 0.16% cross-split duplication
+  for CICIoMT2024; if it is a full audit, novelty falls to re-scoring published claims'
+- 'Novelty check ran on Crossref, Europe PMC and web search only (OpenAlex budget exhausted, arXiv API 429); rerun
+  OpenAlex cites: and arXiv before the protocol'
+- WUSTL-EHMS-2020 shares only 5-8 semantically matched features with CICIoMT2024 and has no pcaps; its identifier
+  columns (SrcMac, SrcAddr) leak the label and must be dropped
+- CICIoMT2024 Wi-Fi/MQTT row counts differ between papers (about 7.0-7.2 M train, 1.6-2.2 M test); record file names,
+  checksums and download date
+- CIC datasets have no formal licence (FAQ permission only) and WUSTL states none; never redistribute rows
+- Source code is GPL-3.0 and covers only the Bluetooth scenario
+- 'Low fit for a pathologist: no clinical-judgement component; value is the leakage-audit method shared with HepatoBench'
+- 'Defensive scope only: attack names appear only as dataset labels; no traffic generation or evasion work'
 access_actions:
-- CICIoMT2024 download form (free)
-candidate_journals: []
+- CIC registration form for CICIoMT2024 (free; name, email, organisation, job title, country)
+- Same CIC form for CICIoT2023 (free); download a stratified subset of the CSVs only
+- 'WUSTL-EHMS-2020: direct CSV download, no registration'
+- 'Optional: a Raspberry Pi 4/5 for measured edge latency'
+candidate_journals:
+- jisa
+- computers-security
+- jms
 added_at: '2026-11-04T08:30:00Z'
 added_by: scout
 run_id: 2026-W45 (initial)
+last_reviewed: '2026-11-06'
