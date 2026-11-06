@@ -3,14 +3,32 @@ name: NHANES (National Health and Nutrition Examination Survey)
 url: https://wwwn.cdc.gov/nchs/nhanes/
 modality: tabular (survey, labs, exam)
 organ_or_domain: population health; haematology; liver (elastography cycles)
-size: ~5,000 participants per year; 2-year cycles
+size: 'Two-year cycles of roughly 10,000–15,000 participants: 2017–Mar 2020 pre-pandemic file P_DEMO 15,560;
+  Aug 2021–Aug 2023 DEMO_L 11,933. Liver elastography records: P_LUX 10,409 (9,023 complete), LUX_L 7,199 (6,280 complete).
+  XPT files are small (LUX_L.xpt ~0.77 MB).'
 access: open
-licence: US government public data (verify exact terms)
+licence: US federal public-use data released under the NCHS Data Use Agreement (statistical reporting and analysis only;
+  no re-identification; no linkage to identifiable data). No formal open-content licence is stated.
+licence_notes: 'No account or click-through is needed, but use implies agreement to the NCHS Data Use Agreement
+  (https://www.cdc.gov/nchs/policy/data-user-agreement.html, checked 2026-11-06). Do not redistribute row-level derived
+  files in this repo; commit only code and aggregate results.'
 institution_country: USA (CDC/NCHS)
 labels: Labs, questionnaires, exam; liver transient elastography + CAP in 2017–Mar 2020 (P_LUX) and Aug 2021–Aug 2023 (LUX_L)
-notes: 'Use survey weights. Files used here: CBC_J, FERTIN_J, FETIB_J, HSCRP_J (2017–18); P_LUX; LUX_L, BIOPRO_L, CBC_L, BMX_L,
-  DEMO_L, HEPC_L (2021–23).'
+notes: 'Use survey weights with SDMVSTRA/SDMVPSU. 2017–Mar 2020 P_ files: use WTMECPRP (valid only for the combined
+  pre-pandemic file, not 2019–20 alone). Aug 2021–Aug 2023: phlebotomy weights WTPH2YR were introduced for the first time
+  and should be used for lab-based analyses (BIOPRO_L, CBC_L, GHB_L, HDL_L, HEPBD_L, HEPB_S_L, HEPC_L carry WTPH2YR);
+  fasting files use WTSAF2YR. Variable changes 2017–20 → 2021–23: LBXTR → LBXTLG (TRIGLY_L), BPQ040A → BPQ150, HEQ030
+  (self-reported HCV) dropped (HEQ_L has HEQ010 only). Hepatitis B serology exists for 2021–23 (HEPBD_L: LBDHBG HBsAg,
+  LBXHBC anti-HBc; HEPB_S_L: LBXHBS). ALQ130 is drinks on drinking days, not drinks per day. DEMO_L has 681 non-Hispanic
+  Asian participants (P_DEMO 1,638). Files used in this repo: CBC_J, FERTIN_J, FETIB_J, HSCRP_J (2017–18); P_LUX, P_DEMO,
+  P_BIOPRO, P_CBC, P_BMX, P_GHB, P_HDL, P_TRIGLY, P_BPXO, P_BPQ, P_DIQ, P_ALQ, P_HEPBD, P_HEPC, P_HEQ (2017–Mar 2020);
+  LUX_L, DEMO_L, BIOPRO_L, CBC_L, BMX_L, GHB_L, HDL_L, TRIGLY_L, BPXO_L, BPQ_L, DIQ_L, ALQ_L, HEPBD_L, HEPB_S_L,
+  HEPC_L, HEQ_L (2021–23). Direct XPT URL pattern: https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/<2017|2021>/DataFiles/<FILE>.xpt'
 alt_urls:
 - https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/FERTIN_J.htm
+- https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_LUX.htm
 - https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/LUX_L.htm
+- https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?Cycle=2021-2023
+- https://wwwn.cdc.gov/nchs/nhanes/tutorials/weighting.aspx
+- https://www.cdc.gov/nchs/policy/data-user-agreement.html
 last_checked: '2026-11-06'

@@ -1,13 +1,17 @@
 id: fib4-nhanes-extval
 legacy_id: gh-2026w45-fib4-nhanes-extval
-title: 'Who FIB-4 misses in MASLD: temporal external validation of a 2017–2020 ''FIB-4 Plus'' model on NHANES 2021–2023,
-  with an Asian / lean-MASLD subgroup analysis'
+title: 'Missed or mismeasured? How much of FIB-4''s ''missed fibrosis'' in MASLD survives correction for elastography
+  artefacts and laboratory variation: a survey-weighted multiverse analysis of NHANES 2017–2023 with locked second-stage
+  scores'
 area: gastro-hepatology
 tags:
 - masld
 - fib-4
 - survey-weighted
 - lean-masld
+- elastography
+- measurement-error
+- nhanes
 status: new
 status_history:
 - status: new
@@ -15,33 +19,61 @@ status_history:
   note: Migrated from the claude.ai register (2026-W45 (initial))
 source:
   type: code
-  title: 'Decoding Who FIB-4 Fails: An LLM-Augmented Clinical Phenotyping Study Using NHANES 2017–2020 (APASL STC
-    2026 oral)'
-  authors: verify
-  venue: GitHub repo + conference abstract
-  date: 2026-09
+  title: 'Decoding Who FIB-4 Fails: An LLM-Augmented Clinical Phenotyping Study Using NHANES 2017–2020 (presented
+    as ''FIB-4 False Negatives in MASLD: Clinical Phenotypes and an Augmented Triage Model'', APASL STC 2026 Kumamoto
+    oral FP5-2, abstract 10340)'
+  authors: Khan MA (single author)
+  venue: GitHub repo + APASL STC 2026 Kumamoto conference abstract (no indexed paper found, 2026-11-06)
+  date: '2026-09-19'
   url: https://github.com/MAUK9086/masld-fib4
   code_url: https://github.com/MAUK9086/masld-fib4
   code_licence: MIT
+  code_note: Abstract text is in results/APASL_STC2026_abstract.md. Download URLs in config.yaml return HTML, not
+    XPT (patch before use). LLM steps need a 24 GB GPU and are optional.
 datasets:
 - id: nhanes
   role: development
-study_type: Diagnostic accuracy / temporal external validation (survey-weighted)
-reporting_guideline: TRIPOD+AI; STARD
-novelty_delta: Original used only 2017–2020 with no external validation. Adds temporal validation on the 2021–2023
-  cycle, FIB-4 false-negative rates in non-Hispanic Asian and lean-MASLD subgroups (relevant to South Asians), and
-  a simple formula (FIB-4 + HSI + waist) vs XGBoost with DCA and NRI.
+study_type: 'Diagnostic accuracy under an imperfect reference standard: multiverse sensitivity analysis + measurement-uncertainty
+  simulation + temporal validation of locked scores (survey-weighted, cross-sectional)'
+reporting_guideline: STARD 2015 + RECORD; TRIPOD+AI for the locked-score validation arm
+novelty_delta: 'Temporal validation on 2021–23 and race/lean stratification have already been published (Jiang et
+  al., Gut and Liver 2026; Lasington et al., IDDF 2026). This study instead asks whether FIB-4 ''false negatives''
+  are real: it re-estimates them across defensible reference-standard and cohort choices (LSM reliability, probe,
+  CAP-aware thresholds, serology-based viral and correctly coded alcohol exclusions), quantifies the FIB-4 measurement
+  grey zone from AST/ALT/platelet biological and analytical variation, and only then compares locked SAFE, MAF-5,
+  LiverRisk, NFS and FIB-4 Plus in the 2021–23 FIB-4 < 1.3 stratum with design-based statistics.'
 compute:
   tier: laptop
-  estimate: Laptop
-est_weeks: 3
+  estimate: Laptop CPU only; ~300 MB of NHANES XPT files (verify); multiverse and Monte Carlo runs in minutes to
+    a few hours. No GPU (LLM arm dropped).
+est_weeks: 5
 scores:
   feasibility: 5
   novelty: 3
-  fit: null
-risks: []
-access_actions: []
-candidate_journals: []
+  fit: 4
+risks:
+- 'Crowded field: Jiang et al. 2026 (Gut and Liver) already did 2017–20 development with 2021–23 temporal validation
+  of a second-stage model; novelty rests on the reference-standard and measurement-error angle'
+- LSM is not histology; CAP-aware LSM thresholds and biological-variation CVs must come from cited published sources
+  (verify before use), or the multiverse looks arbitrary
+- Asian and lean subgroups are small (DEMO_L has 681 non-Hispanic Asian participants; source found 3 lean false
+  negatives); report wide CIs and NCHS reliability flags
+- 'Weighting errors: 2021–23 needs WTPH2YR (phlebotomy) with SDMVSTRA/SDMVPSU; 2017–20 P_ weights are valid only
+  for the combined pre-pandemic file; pooling cycles needs NCHS guidance'
+- Variable renames between cycles (LBXTR→LBXTLG, BPQ040A→BPQ150, HEQ030 dropped) silently create missing values
+  if not harmonised
+- Source repo download URLs return an HTML page with HTTP 200; unpatched runs write HTML files named .XPT
+- Source is a conference abstract with no peer-reviewed paper; its numbers come only from repo result files
+access_actions:
+- 'None needed: NHANES public-use files download without an account (NCHS data use agreement: statistical analysis
+  only, no re-identification or linkage)'
+- 'Optional: ask Jiang et al. for their locked coefficients and calculator files (available on request per the paper)
+  to add their pathway as a comparator'
+candidate_journals:
+- hepatology-international
+- jceh
+- ijg
 added_at: '2026-11-04T08:30:00Z'
 added_by: scout
 run_id: 2026-W45 (initial)
+last_reviewed: '2026-11-06'
