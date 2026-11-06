@@ -1,13 +1,17 @@
 id: hhs-breach-its
 legacy_id: cy-2026w45-hhs-breach-its
-title: 'US healthcare breaches 2010–2026 from the HHS OCR portal: interrupted time-series and changepoint analysis
-  of hacking/ransomware, with lessons for India''s DPDP breach-notification rules'
+title: Is healthcare ransomware really declining? Validated ransomware classification of US HHS breach reports 2010–2026,
+  changepoint analysis, and lessons for India's DPDP breach rules
 area: healthcare-cybersecurity
 tags:
 - breaches
 - ransomware
 - time-series
+- changepoint
+- classifier-validation
+- llm
 - dpdp
+- hipaa
 status: new
 status_history:
 - status: new
@@ -15,33 +19,60 @@ status_history:
   note: Migrated from the claude.ai register (2026-W45 (initial))
 source:
   type: journal
-  title: 'JAMA Network Open study on hacking/ransomware healthcare breaches 2010–2024 (title and DOI: verify)'
-  authors: verify
+  title: Ransomware Attacks and Data Breaches in US Health Care Systems (research letter)
+  authors: Jiang JX et al.
   venue: JAMA Network Open
-  date: 2025 (verify)
+  date: '2025-05-14'
   url: https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2833984
-  code_note: None; reimplementable in pandas/R (segmented regression, ruptures)
+  code_note: 'No code or labels shared (data-sharing statement: data not available; portal is public). The rule-based
+    Python regex classifier is described in eAppendix (Supplement 1) and must be reimplemented. Article licence
+    CC BY 4.0; open copy PMC12079295.'
+  doi: 10.1001/jamanetworkopen.2025.10180
 datasets:
 - id: hhs-ocr-breach-portal
   role: development
 - id: vcdb
-  role: external-validation
-study_type: Retrospective secondary-data analysis
-reporting_guideline: RECORD / STROBE (adapted)
-novelty_delta: Prior study ended in 2024 and was descriptive. Adds 2025–2026 data, formal changepoint/ITS models,
-  entity-type and business-associate breakdown, LLM-assisted ransomware tagging validated on a hand-labelled sample,
-  and the first DPDP-compliance translation for Indian hospitals.
+  role: benchmark
+study_type: Retrospective secondary analysis of public breach reports (interrupted time series and changepoint)
+  with a nested classifier-validation study
+reporting_guideline: RECORD (STROBE extension) for the trend analysis; TRIPOD-LLM items and STARD-style accuracy
+  tables for the ransomware classifier
+novelty_delta: Business-associate trends (Ignatovski 2026), ARIMA trends (Yankson 2025) and ransomware prediction
+  (Sun 2026) are already published, so a plain update is not new. This study validates the source's regex ransomware
+  label (and a local LLM) against a double-coded reference sample, tests whether the post-2021 fall in ransomware
+  is an artefact of undescribed open cases, adds changepoint/ITS models to 2026 with a laboratory subgroup, and
+  maps the findings to DPDP Rules 2025 Rule 7 (in force May 2027).
 compute:
   tier: laptop
-  estimate: Laptop
-est_weeks: 4
+  estimate: Laptop; local open-weight LLM via Ollama or a few US$ of API calls; about 600 hand-labelled descriptions
+est_weeks: 5
 scores:
   feasibility: 5
-  novelty: 3
-  fit: null
-risks: []
-access_actions: []
-candidate_journals: []
+  novelty: 4
+  fit: 3
+risks:
+- 'Crowded field: Ignatovski 2026, Jackman 2026, Yankson 2025, Sun 2026 and two Xu 2025 IEEE papers (methods unchecked;
+  may include changepoints) analyse the same portal'
+- The source's October 2024 ransomware labels and web-search descriptions are not shared; the artefact test compares
+  published aggregates with a new snapshot
+- Portal rows change (cases move to the archive, counts are revised, rows removed); every result depends on the
+  export date
+- Labelling about 600 breach descriptions needs a second coder and a written codebook
+- VCDB healthcare incidents are selected from and coded largely from HHS reports, so VCDB is a label cross-check,
+  not independent validation; CC BY-SA 4.0 ShareAlike on any shared adapted data
+- LLM labels drift with model version; pin the model and prompt
+- Outside a pathologist's core field; the laboratory/diagnostic subgroup may be small (verify)
+- 'Defensive scope only: categories, counts and dates; no ransom notes, leak-site content or gang tooling'
+access_actions:
+- 'None required: HHS OCR portal is open with no registration; export both the Under Investigation and Archive tabs
+  as CSV by hand in a browser (JSF post-back) and keep date-stamped copies outside the repo'
+- 'Optional: git clone vz-risk/VCDB (CC BY-SA 4.0) and record the commit hash'
+- Find a second coder for the ransomware reference sample
+candidate_journals:
+- hpt
+- jms
+- health-technology
 added_at: '2026-11-04T08:30:00Z'
 added_by: scout
 run_id: 2026-W45 (initial)
+last_reviewed: '2026-11-06'

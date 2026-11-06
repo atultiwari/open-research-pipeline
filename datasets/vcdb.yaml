@@ -1,9 +1,14 @@
 id: vcdb
 name: VERIS Community Database (VCDB)
 url: https://github.com/vz-risk/VCDB
-modality: structured incident records (JSON)
-organ_or_domain: security incidents (all sectors)
-size: verify
+modality: structured incident records (VERIS JSON; flattened CSV)
+organ_or_domain: publicly disclosed security incidents (all sectors), with a dedicated healthcare stream
+size: 'Repo about 1.6 GB (GitHub API, 2026-11-06); joined JSON zip about 4.6 MB and flattened CSV zip about 15 MB under data/joined and data/csv (last rebuilt 2026-07-31; latest commit 2026-09-30)'
 access: open
-licence: verify
+licence: CC BY-SA 4.0 (LICENSE.txt in the repo; GitHub reports "Other / NOASSERTION")
+licence_notes: 'ShareAlike: any adapted VCDB data you redistribute must also be CC BY-SA 4.0 (or compatible). Aggregate tables and statistics in a paper are fine; do not re-host modified VCDB files under a different licence.'
+institution_country: USA (Verizon RISK Team, community-coded)
+labels: VERIS schema (actor, action, asset, attribute, victim industry by NAICS, timeline, plus.sub_source)
+notes: 'Not independent of the HHS OCR portal: the README says healthcare incidents are deliberately selected (plus.sub_source = "phidbr") rather than sampled at random, and they are largely coded from HHS breach reports. Use VCDB as a coding cross-check (does VERIS also call it ransomware?) rather than as external validation of counts. Non-random selection and coding lag mean recent years are thin. The joined file excludes about 5,000 script-found web-skimmer breaches; only validated/overridden JSON is included. From August 2026 some incidents are drafted with an AI encoding skill and tagged in plus.analyst_notes; record whether you include them.'
+citation: 'VERIS Community Database, Verizon RISK Team, https://github.com/vz-risk/VCDB (cite the commit hash you used)'
 last_checked: '2026-11-06'

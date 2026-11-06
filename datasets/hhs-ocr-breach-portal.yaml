@@ -1,11 +1,15 @@
 id: hhs-ocr-breach-portal
-name: HHS OCR Breach Portal
+name: HHS OCR Breach Portal (breaches of unsecured PHI affecting 500+ individuals)
 url: https://ocrportal.hhs.gov/ocr/breach/breach_report.jsf
-modality: tabular (breach reports)
-organ_or_domain: US healthcare data breaches (500+ individuals)
-size: verify
+alt_urls:
+- https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-C/part-164/subpart-D
+modality: tabular (breach reports, with a free-text web description for resolved cases)
+organ_or_domain: US healthcare data breaches (HIPAA covered entities and business associates, 500+ individuals)
+size: '8,077 reports on 2026-11-06: 748 under investigation (reported in the last 24 months) plus 7,329 in the archive (resolved or older than 24 months); reports from late 2009 onwards'
 access: open
-licence: US government public data
-institution_country: USA (HHS)
-notes: 'Rows under investigation change: keep date-stamped snapshots (outside the repo).'
+licence: US federal government work (17 U.S.C. §105); no licence statement on the portal
+licence_notes: 'No registration. Each tab (Under Investigation, Archive) has its own Export as CSV / Excel / XML / PDF button; the export is a JSF post-back, so download by hand in a browser rather than by script. Columns: entity name, state, covered entity type, individuals affected, breach submission date, type of breach, location of breached information, business associate present, web description. Entity names are organisations, not patients, so there is no patient-level data.'
+institution_country: USA (HHS Office for Civil Rights)
+labels: 'OCR type of breach (seen on the portal: Hacking/IT Incident, Unauthorized Access/Disclosure, Theft, Improper Disposal; the source paper also groups loss and unknown causes); covered entity type (Healthcare Provider, Health Plan and Business Associate seen on the portal; clearinghouses also report); no ransomware field'
+notes: 'Rows change: under-investigation entries move to the archive, individuals-affected counts are revised (e.g. Change Healthcare), and some rows are removed. Keep date-stamped exports of both tabs outside the repo and record the download date. Breaches under 500 individuals are reported to HHS annually but are not listed. A separate listing on the portal front page holds 42 CFR Part 2 (substance-use record) breaches; keep it apart. Breach submission date is a reporting date, not the date of the breach.'
 last_checked: '2026-11-06'
