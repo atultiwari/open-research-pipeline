@@ -1,47 +1,79 @@
 id: mpib-small-llm
 legacy_id: cy-2026w45-mpib-small-llm
-title: Prompt-injection robustness of small, on-prem-deployable medical LLMs (<10B, quantised) on MPIB, with lightweight
-  defences and their false-refusal cost
+title: Does 4-bit quantisation make small on-prem medical LLMs easier to hijack? Clinical-harm rates under prompt
+  injection and the false-refusal cost of cheap detector defences on MPIB
 area: healthcare-cybersecurity
 tags:
 - prompt-injection
 - llm-safety
 - quantisation
+- small-llm
+- rag-security
+- on-prem
 status: new
 status_history:
 - status: new
   date: '2026-11-04'
   note: Migrated from the claude.ai register (2026-W45 (initial))
 source:
-  type: preprint
+  type: journal
   title: 'MPIB: A Benchmark for Medical Prompt Injection Attacks and Clinical Safety in LLMs'
-  authors: verify
-  venue: arXiv (cs.CL/cs.CR)
-  date: '2026-02-06'
-  url: https://arxiv.org/abs/2602.06268
-  arxiv_id: '2602.06268'
+  authors: Lee J et al.
+  venue: 'Findings of the Association for Computational Linguistics: EMNLP 2026 (pp. 35610–35628); preprint arXiv:2602.06268
+    (cs.CL)'
+  date: 2026-10
+  url: https://aclanthology.org/2026.findings-emnlp.1670
+  arxiv_id: 2602.06268v2
   code_url: https://github.com/jhlee0619/mpib-eval
-  code_licence: None stated on GitHub (no licence file)
+  code_licence: 'None (no licence file on GitHub, checked 2026-11-06): reimplement, do not copy'
+  doi: 10.18653/2026.findings-emnlp.1670
+  code_note: 'Minimal toolkit (v1.2): input reconstruction, subject-model inference, operational CHER/ASR from existing
+    judge scores. Judge pipeline and D2-D4 defence prompts are not released; rebuild from Section 3.5 and Appendix
+    S.'
 datasets:
 - id: mpib
   role: benchmark
 study_type: Benchmark / red-team evaluation
-reporting_guideline: TRIPOD-LLM (adapted)
-novelty_delta: Original tested 12 models (4B–72B) without newer small models or quantised variants. Adds Gemma-3/Qwen3/Phi-4-mini/Llama-3.2
-  in GGUF/AWQ, effect of quantisation on clinical-harm rate, one cheap defence stack, and optional Indian-guideline
-  RAG poisoning set.
+reporting_guideline: TRIPOD-LLM (adapted) + MI-CLEAR-LLM items for model version, quantisation and decoding
+novelty_delta: MPIB tested 13 full-precision models (newest small ones MedGemma-4B, Qwen2.5-7B, Llama-3.1-8B) and
+  only LLM-based rewriter/sanitiser defences. Adds the first paired test of whether INT8/INT4 and QAT quantisation
+  change clinical-harm rates (CHER) under direct and RAG-mediated injection, on 2026 small on-prem models (Gemma
+  4, Qwen3.5, Phi-4-mini, MedGemma 1.5), plus cheap classifier detectors with their false-refusal cost, a re-validated
+  open judge with a pathologist audit, and an Indian on-prem deployment framing.
 compute:
   tier: runpod
-  estimate: RunPod (~20–40 GPU-h)
-est_weeks: 6
+  estimate: ~40–70 GPU-h on RunPod (subject inference on L40S/A100; judging with Qwen2.5-72B-AWQ on A100 80 GB/H100),
+    roughly US$60–150; classifier detectors and analysis on a laptop
+est_weeks: 7
 scores:
   feasibility: 4
   novelty: 4
-  fit: null
-risks: []
+  fit: 3
+risks:
+- 'Results are judge-dependent: the original judge pipeline is not released and must be rebuilt (quantised 72B judge
+  is a deviation); V2 rankings were unstable across judges in the source paper'
+- Small cells (about 64-67 adversarial test items per model x defence) may hide quantisation effects; mitigate with
+  all 1,226 V1+V2 items and paired tests
+- 'Dual-use material: the V2 payload registry and any response or judge file that echoes it must stay outside the
+  repo; publish aggregates only'
+- MPIB is CC BY-NC 4.0 (non-commercial); MedGemma uses Health AI Developer Foundations terms; Llama 3.2 and Prompt
+  Guard 2 need manual Hugging Face approval
+- Current vLLM needed (toolkit pins vllm 0.6.6, which predates Gemma 4 and Qwen3.5); version differences can shift
+  outputs
+- 'Fit for a pathologist is moderate: mostly LLM-security engineering, with expert value in the judge audit and
+  error taxonomy'
 access_actions:
-- Hugging Face gated access (auto-approval) for MPIB
-candidate_journals: []
+- Hugging Face gated access (auto-approval) for MPIB v1.2; keep data/restricted/payload_registry.json outside the
+  repo
+- 'Hugging Face manual-approval access: meta-llama/Llama-3.2-3B-Instruct, meta-llama/Llama-3.1-8B-Instruct (anchor)
+  and meta-llama/Llama-Prompt-Guard-2-86M'
+- Accept Health AI Developer Foundations terms (auto-gated) for google/medgemma-1.5-4b-it
+- RunPod account with an A100 80 GB or H100 for the 72B judge
+candidate_journals:
+- jms
+- computers-security
+- jisa
 added_at: '2026-11-04T08:30:00Z'
 added_by: scout
 run_id: 2026-W45 (initial)
+last_reviewed: '2026-11-06'

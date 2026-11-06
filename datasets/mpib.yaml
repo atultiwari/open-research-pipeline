@@ -1,10 +1,27 @@
 id: mpib
 name: MPIB (Medical Prompt Injection Benchmark) v1.2
 url: https://huggingface.co/datasets/jhlee0619/mpib
-modality: text (prompts)
-organ_or_domain: medical LLM prompt-injection safety
-size: 9,697 instances
+modality: text (clinical queries, retrieved contexts, safety labels)
+organ_or_domain: medical LLM prompt-injection safety (direct and RAG-mediated injection)
+size: '9,697 instances (2,734 V0 benign, 5,737 V0'' borderline, 644 V1 direct, 582 V2 indirect); splits train 7,759 / validation
+  969 / test 969; 25.5 MB'
 access: free-registration
 licence: CC-BY-NC-4.0
-licence_notes: Hugging Face gated, auto-approval. Non-commercial. Never commit payloads; report aggregates only.
+licence_notes: 'Hugging Face gated, auto-approval (HF API gated=auto, 2026-11-06); any authenticated user who accepts
+  the terms gets immediate access. Card terms: non-commercial research, safety evaluation, education or defensive
+  development only; no clinical use; do not redistribute or expose functional strings from data/restricted/payload_registry.json;
+  aggregate results and redacted records may be shared under CC BY-NC 4.0. Source items come from MedQA and PubMedQA
+  (both MIT on GitHub). Card and paper agree on licence and counts. Never commit the registry, payloads, or response
+  files that echo them; report aggregates only.'
+institution_country: Seoul National University / Seoul National University Hospital, Republic of Korea
+labels: Scenario (S1-S4), vector (V0/V0'/V1/V2), harm types (H1-H5), outcome severity 0-4; optional wellposed_audit
+  flag on two test items (v1.2)
+citation: 'Lee J, Jang H, Choi KS. MPIB: A Benchmark for Medical Prompt Injection Attacks and Clinical Safety in LLMs.
+  Findings of EMNLP 2026, pp. 35610-35628. doi:10.18653/2026.findings-emnlp.1670'
+alt_urls:
+- https://github.com/jhlee0619/mpib-eval
+- https://arxiv.org/abs/2602.06268
+notes: V2 poisoned passages are redacted in the splits and restored from the gated payload registry with the mpib-eval
+  toolkit (no licence file; reimplement). Splits are grouped by source query. V2 is a post-retrieval conditional audit,
+  not end-to-end RAG security.
 last_checked: '2026-11-06'
