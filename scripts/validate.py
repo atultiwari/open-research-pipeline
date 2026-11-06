@@ -25,9 +25,18 @@ REQUIRED_MD = ("replication.md", "extension.md")
 FRONT_MATTER = re.compile(r"^---\n(.*?)\n---\n", re.S)
 
 
+class YamlError(ValueError):
+    """A file that is not valid YAML; reported as a validation error instead of crashing."""
+
+
 def load_yaml(path: Path):
-    with path.open(encoding="utf-8") as fh:
-        return yaml.safe_load(fh)
+    try:
+        with path.open(encoding="utf-8") as fh:
+            return yaml.safe_load(fh)
+    except yaml.YAMLError as err:
+        mark = getattr(err, "problem_mark", None)
+        where = f" (line {mark.line + 1}, column {mark.column + 1})" if mark else ""
+        raise YamlError(f"{path.relative_to(ROOT)}: not valid YAML{where}: {getattr(err, 'problem', err)}") from err
 
 
 def validator(name: str) -> Draft202012Validator:
@@ -56,8 +65,12 @@ def check_front_matter(md: Path) -> list[str]:
 def validate_datasets() -> tuple[set[str], list[str]]:
     v, errors, ids = validator("dataset.schema.json"), [], set()
     for path in sorted((ROOT / "datasets").glob("*.yaml")):
-        data = load_yaml(path)
         label = str(path.relative_to(ROOT))
+        try:
+            data = load_yaml(path)
+        except YamlError as err:
+            errors.append(str(err))
+            continue
         errors += schema_errors(v, data, label)
         if isinstance(data, dict):
             if data.get("id") != path.stem:
@@ -82,7 +95,10 @@ def validate_study(folder: Path, v, dataset_ids, journal_ids) -> tuple[dict | No
     yml = folder / "study.yaml"
     if not yml.exists():
         return None, [f"{label}: missing study.yaml"], []
-    data = load_yaml(yml)
+    try:
+        data = load_yaml(yml)
+    except YamlError as err:
+        return None, [str(err)], []
     errors = schema_errors(v, data, f"{label}/study.yaml")
     warnings: list[str] = []
     if not isinstance(data, dict):

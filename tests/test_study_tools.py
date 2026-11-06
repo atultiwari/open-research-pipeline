@@ -68,3 +68,14 @@ def test_set_status_needs_protocol_file(tmp_path):
     study = yaml.safe_load((root / "demo-study" / "study.yaml").read_text())
     assert study["status_history"][-1]["note"] == "looks good"
     assert set_status.main(["missing", "approved"], root) == 1
+
+
+def test_validate_reports_bad_yaml_instead_of_crashing(tmp_path, monkeypatch):
+    import validate
+    bad = tmp_path / "datasets"
+    bad.mkdir()
+    (bad / "broken.yaml").write_text("id: x\nname: a: b: c\n")
+    monkeypatch.setattr(validate, "ROOT", tmp_path)
+    monkeypatch.setattr(validate, "validator", lambda name: validate.Draft202012Validator({}))
+    ids, errors = validate.validate_datasets()
+    assert any("not valid YAML" in e for e in errors)
