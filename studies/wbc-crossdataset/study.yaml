@@ -1,51 +1,88 @@
 id: wbc-crossdataset
 legacy_id: cp-2026w45-wbc-crossdataset
-title: 'Hematology vs histopathology vs general foundation models for white-cell classification: cross-dataset validation
-  (WBCBench 2026 → PBC Barcelona → Raabin-WBC) and robustness to image degradation'
+title: 'Haematology vs histopathology vs general foundation models for the white-cell differential: a leakage-free
+  cross-analyser benchmark from WBCBench 2026 to PBC, CytologIA and Raabin-WBC, with calibration and case-level
+  blast flags'
 area: computational-pathology
 tags:
 - haematology
 - white-cells
 - foundation-models
+- cross-dataset
+- calibration
+- label-harmonisation
+- lmic
 status: new
 status_history:
 - status: new
   date: '2026-11-04'
   note: Migrated from the claude.ai register (2026-W45 (initial))
 source:
-  type: preprint
-  title: 'WBCBench 2026: A Challenge for Robust White Blood Cell Classification Under Class Imbalance'
-  authors: verify
-  venue: arXiv
-  date: '2026-04-12'
-  url: https://arxiv.org/html/2604.10797v1
-  arxiv_id: 2604.10797v1
+  type: journal
+  title: 'WBCBench 2026: A Challenge for Robust White Blood Cell Classification Under Class Imbalance (preprint:
+    arXiv 2604.10797)'
+  authors: Tian X, Ma X, Yang T et al.
+  venue: 2026 IEEE 23rd International Symposium on Biomedical Imaging (ISBI) (preprint arXiv cs.CV, 2026-04-12)
+  date: '2026-04-08'
+  url: https://doi.org/10.1109/ISBI61048.2026.11515899
+  arxiv_id: '2604.10797'
   code_url: https://github.com/marrlab/DinoBloom
-  code_licence: Apache-2.0
+  code_licence: 'DinoBloom: Apache-2.0 (weights CC BY 4.0 on Zenodo); WBCBench scripts/ folder: MIT'
+  doi: 10.1109/ISBI61048.2026.11515899
+  code_note: The challenge paper has no code repository (no organiser evaluator or baseline code found). Code link
+    is DinoBloom, the encoder the top teams built on. Participant repositories are listed on the Hugging Face card;
+    trongduc-nguyen/WBCBench2026 has no licence file (reimplement, do not copy).
 datasets:
 - id: wbcbench-2026
   role: development
 - id: pbc-barcelona
   role: external-validation
+- id: cytologia
+  role: external-validation
 - id: raabin-wbc
   role: external-validation
-study_type: Benchmark + external validation + robustness
-reporting_guideline: CLAIM 2024
-novelty_delta: Challenge entries reported only in-distribution macro-F1. Trains frozen-encoder probes on single-institution
-  WBCBench, tests zero-shot on Spanish and Iranian sets with pathologist-harmonised classes, compares DinoBloom
-  with UNI2-h, H-optimus-0, Virchow2 and DINOv2, and reports degradation curves and calibration.
+study_type: Benchmark + leakage-free external validation + calibration and case-level endpoints
+reporting_guideline: CLAIM 2024 (+ TRIPOD+AI calibration items)
+novelty_delta: WBCBench reported only in-distribution cell-level macro-F1, and the closest prior work (Sharma &
+  Tapadiya, arXiv 2608.25148) tested five mature classes from a source DinoBloom had held out, with first-generation
+  pathology encoders. This study trains on WBCBench (unseen by every haematology encoder), tests on PBC, the unused
+  19-laboratory CytologIA set and smartphone Raabin-WBC with pathologist-harmonised blast and immature-granulocyte
+  classes, adds UNI2-h, Virchow2, H-optimus-0 and H0-mini, and reports calibration and case-level differential error
+  and blast flags.
 compute:
   tier: colab
-  estimate: Colab (~1–3 GPU-h per model)
-est_weeks: 4
+  estimate: ~8–12 GPU-h for frozen features of ~210k crops with 10–12 encoders (Colab Pro or RunPod A40, ~US$3–6);
+    baselines ~1–2 GPU-h each; probes and statistics on a laptop
+est_weeks: 6
 scores:
   feasibility: 5
-  novelty: 3
-  fit: null
-risks: []
+  novelty: 4
+  fit: 5
+risks:
+- Sharma & Tapadiya (arXiv 2608.25148, MICCAI 2026 workshop) already benchmark 15 frozen encoders across PBC, Matek,
+  MLL23 and Raabin with calibration; novelty rests on the leakage-free WBCBench source, blast and immature-granulocyte
+  classes, CytologIA, current histopathology encoders and case-level endpoints
+- WBCBench licence is non-commercial with no redistribution; cases (not persons) define the splits, 24 people cross
+  splits, and 267 test labels changed after the challenge
+- Raabin-WBC has no stated licence (site and paper only say it is freely available); its training set was in DinoBloom
+  pretraining
+- CytologIA labels carry no centre or patient IDs, some images hold several cells, its stated dataset DOI did not
+  resolve, and its 23-class codes need expert mapping
+- Label harmonisation across four taxonomies (bands, reactive lymphocytes, blasts subtypes) is subjective; PBC is
+  healthy donors only (no blasts)
+- UNI2-h, Virchow2 and H0-mini are CC-BY-NC-ND and gated (H0-mini and DINOv3 need manual approval)
+- Image size reveals which DI-60 analyser took a WBCBench image; resize before training to avoid a shortcut
 access_actions:
-- Hugging Face gated access (auto-approval) for WBCBench 2026
-candidate_journals: []
+- Hugging Face gated access to WBCBench 2026 (form plus data-use agreement, automatic approval)
+- 'Hugging Face gated access: UNI2-h, Virchow2, H-optimus-0 (auto); H0-mini and DINOv3 (manual, institutional email)'
+- 'Direct downloads, no account: PBC (Mendeley Data), Raabin-WBC double-labelled crops (dl.raabindata.com), CytologIA
+  labels and images (data.gouv.fr)'
+- Email raabindata@gmail.com to confirm Raabin-WBC terms of use
+candidate_journals:
+- jiim
+- cmig
+- mbec
 added_at: '2026-11-04T08:30:00Z'
 added_by: scout
 run_id: 2026-W45 (initial)
+last_reviewed: '2026-11-06'

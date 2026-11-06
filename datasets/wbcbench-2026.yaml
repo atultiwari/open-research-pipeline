@@ -1,11 +1,36 @@
 id: wbcbench-2026
-name: WBCBench 2026
+name: WBCBench 2026 (ISBI 2026 white-cell classification challenge dataset)
 url: https://huggingface.co/datasets/Xin-Tian/wbcbench2026
-modality: blood smear cell images
-organ_or_domain: haematology (white cells)
-size: ~100k images, 13 classes
+alt_urls:
+- https://zenodo.org/records/23544488
+- https://www.kaggle.com/competitions/wbc-bench-2026
+doi: 10.5281/zenodo.23544488
+modality: blood smear single-cell images (CellaVision DI-60 analyser crops, 100x oil, Wright-Giemsa)
+organ_or_domain: haematology (peripheral blood white cells)
+size: '101,716 images: 55,002 pristine + 46,714 synthetically degraded copies; 493 cases (blood films); 13 classes;
+  about 3.9 GB of parquet (pristine config about 1.1 GB, degraded about 2.8 GB)'
 access: free-registration
-licence: other (custom; non-commercial, no redistribution — verify wording)
-licence_notes: Hugging Face gated, auto-approval (HF API 2026-11-06).
-notes: 267 test labels changed after the challenge.
+licence: 'WBCBench 2026 Data Use Licence v1.0 (Hugging Face tag: other): non-commercial research and teaching only,
+  no redistribution; the scripts/ folder is MIT'
+licence_notes: 'Hugging Face gated, automatic approval after a form (name, affiliation, intended use) and seven
+  undertakings: non-commercial use only, cite the paper, no re-identification, no redistribution or shared access,
+  no training of commercial products, report leaks, secure storage and deletion when access ends (card checked
+  2026-11-06). The card allows publishing results, aggregate statistics and code, up to 10 example images with
+  citation, and non-commercial model weights. The same data are on Zenodo as zips, access on request. Card vs
+  paper mismatches: the paper says 55,012 images split by patient with group-stratified sampling; the release has
+  55,002 pristine images, random case-level splits, and two image sizes. The paper states the data were commercially
+  obtained from Chulalongkorn University.'
+institution_country: Thailand (King Chulalongkorn Memorial Hospital, slides 2023–2024); curated by the Universities
+  of Oxford and Bristol and UCL (UK)
+labels: 'SNE, LY, MO, EO, BA, VLY, BNE, MMY, MY, PMY, BL, PC, PLY (pristine counts 25,532 SNE to 16 PLY); one expert
+  label per cell, ambiguous cells settled by five haematopathologists in consensus'
+citation: Tian X et al. WBCBench 2026. ISBI 2026. doi:10.1109/ISBI61048.2026.11515899 (arXiv 2604.10797)
+notes: 'Splits: phase1_train 74 cases / 8,288 images; phase2_train 222 / 24,897; phase2_eval 49 / 5,350; phase2_test
+  148 / 16,467, each with pristine and degraded copies linked by original_image_id; labels released for all splits.
+  patient_hash is a case (one film), not a person: 24 people with several films sit in more than one split (about
+  14% of phase2_test images), so splits are not fully person-separated. After the challenge 267 test images were
+  changed (257 relabelled, 10 removed; metadata/label_changes.csv), so current-label scores are not comparable
+  with the Kaggle leaderboard. Two DI-60 analysers in one laboratory: image size (368x370 vs 368x368) identifies
+  the analyser and partly the date. Per-image degradation settings are in metadata/degradation_params.csv. Released
+  2026, so it is not in DinoBloom (2024) pretraining.'
 last_checked: '2026-11-06'

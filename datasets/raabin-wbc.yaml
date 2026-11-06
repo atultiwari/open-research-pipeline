@@ -1,11 +1,29 @@
 id: raabin-wbc
 name: Raabin-WBC
 url: https://raabindata.com/
-modality: blood smear cell images
-organ_or_domain: haematology
-size: verify
+alt_urls:
+- https://dl.raabindata.com/Index%20of%20WBC%20Data/
+modality: blood smear images captured with smartphones on light microscopes (cropped single cells plus full fields)
+organ_or_domain: haematology (normal peripheral blood)
+size: 'About 40,000 WBC and artefact images. Double-labelled cropped subset (five classes): Train 10,175, Test-A
+  4,339, Test-B 2,119 cells (paper Table 7). Downloads: Train.rar 279 MB, TestA.rar 115 MB, TestB.zip 104 MB (server
+  listing 2026-11-06).'
 access: open
-licence: verify
+licence: verify (no licence stated on the site, the download server or in the paper, which says the data are freely
+  available to all)
+licence_notes: 'Direct download, no registration, from the "Free Data" section of the home page (checked 2026-11-06).
+  The Scientific Reports article is CC BY 4.0, but that licence covers the article, not the images. The paper''s
+  data link (raabindata.com/free-data/) now returns 404; the files moved to dl.raabindata.com. Compiled under the
+  supervision of a company (Nimaad Health Equipment Development Company, per the paper). Ask raabindata@gmail.com
+  for written terms before redistributing anything.'
 institution_country: Iran
-notes: 'Free data section on the home page (#freedata). Part of DinoBloom pretraining: declare leakage.'
+labels: 'Five mature classes in the double-labelled subset: neutrophil, lymphocyte (small and large), monocyte, eosinophil,
+  basophil; labelled identically by two experts'
+citation: Kouzehkanan ZM et al. A large dataset of white blood cells containing cell locations and types, along with
+  segmented nuclei and cytoplasm. Sci Rep 2022;12:1123 (doi:10.1038/s41598-021-04426-x)
+notes: 'Giemsa-stained normal smears from four Iranian laboratories; basophils come from one CML sample. Captured
+  with Samsung Galaxy S5 and LG G3 phones on Olympus CX18 and Zeiss microscopes at 100x through an adapter. Test-B
+  uses a different camera and microscope from Train and contains only neutrophils and lymphocytes, so it is a
+  built-in device-shift test. In DinoBloom pretraining: DinoBloom lists 10,175 Raabin cells, which equals the Train
+  count, so Test-A and Test-B may be unseen (verify). Declare exposure in any DinoBloom comparison.'
 last_checked: '2026-11-06'

@@ -1,11 +1,23 @@
 id: pbc-barcelona
-name: PBC dataset (peripheral blood cells, Barcelona)
+name: PBC dataset (normal peripheral blood cells, Hospital Clinic of Barcelona; "Acevedo")
 url: https://data.mendeley.com/datasets/snkd93bnjr/1
-modality: blood smear cell images
-organ_or_domain: haematology
-size: 17,092 images
+doi: 10.17632/snkd93bnjr.1
+modality: blood smear single-cell images (CellaVision DM96 analyser, JPG 360 x 363 px)
+organ_or_domain: haematology (peripheral blood)
+size: 17,092 images, 8 groups
 access: open
 licence: CC BY 4.0
+licence_notes: Licence shown on the Mendeley Data page (checked 2026-11-06). A resized derivative is distributed
+  as BloodMNIST (MedMNIST); use the original for full-resolution work.
 institution_country: Spain
-notes: 'Part of DinoBloom pretraining: declare leakage.'
+labels: 'Eight groups: neutrophils, eosinophils, basophils, lymphocytes, monocytes, immature granulocytes (promyelocytes,
+  myelocytes, metamyelocytes), erythroblasts, platelets. DinoBloom describes 11 labelled classes, so finer subtypes
+  (e.g. band vs segmented neutrophils, individual immature granulocytes) appear to be recoverable from file names:
+  verify on download.'
+citation: Acevedo A et al. A dataset of microscopic peripheral blood cell images for development of automatic recognition
+  systems. Data in Brief 2020 (doi:10.1016/j.dib.2020.105474)
+notes: 'Healthy donors only: no blasts, no reactive or abnormal lymphocytes. No patient or smear identifiers, so splits
+  are image-level. DinoBloom held this dataset out of pretraining and used it as its external test set (DinoBloom
+  paper, Section 3), so it is unseen by DinoBloom, but DinoBloom''s published results were reported on it. Earlier
+  register note saying it was in DinoBloom pretraining was wrong (corrected 2026-11-06).'
 last_checked: '2026-11-06'

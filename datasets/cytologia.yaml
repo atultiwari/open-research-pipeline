@@ -1,0 +1,28 @@
+id: cytologia
+name: CytologIA (multicentre leukocyte image database, GFHC / Health Data Hub data challenge)
+url: https://www.data.gouv.fr/datasets/cytologia
+alt_urls:
+- https://oos.eu-west-2.outscale.com/hdh-cytolog/cytologia_labels.csv
+- https://oos.eu-west-2.outscale.com/hdh-cytolog/cytologia_images.zip
+doi: verify
+modality: blood smear single-cell images (JPEG, PNG, TIFF from many laboratories), with cell bounding boxes
+organ_or_domain: haematology (normal and pathological peripheral blood leukocytes)
+size: 69,168 images with 75,437 labelled cell boxes, 23 classes; images zip 1.4 GB, labels CSV 2.6 MB
+access: open
+licence: Licence Ouverte / Open Licence 2.0 (Etalab), as recorded by data.gouv.fr; the description also names CC
+  BY 3.0 FR
+licence_notes: 'Direct download, no registration (checked 2026-11-06). Both licences allow reuse with attribution.
+  The challenge article in npj Precision Oncology is CC BY-NC-ND 4.0; that covers the article only, not the data.
+  The dataset DOI given in the description (10.60597/9st8-xe88) did not resolve on 2026-11-06.'
+institution_country: France (19–20 French-speaking haematology laboratories in France, Belgium and Switzerland)
+labels: 'Class codes in the CSV include PNN (segmented neutrophil), LY, MO, EO, BA, M (myelocyte), MM (metamyelocyte),
+  PM (promyelocyte), LAM3 (APL promyelocyte), B, MBL, LyB, MoB (blast types), LH_lyAct (reactive lymphocyte), LGL,
+  LLC, LF, LM, LZMG, SS (lymphoma and leukaemia cells), Er (erythroblast), Thromb, Lysee (smudge cell). Mapping
+  abbreviations to cell types needs a haematologist and the article''s class table.'
+citation: Sourdeau E et al. Multicentric data challenge for artificial intelligence-based classification of leukocytes.
+  npj Precis Oncol 2026 (doi:10.1038/s41698-026-01484-0)
+notes: 'The labels CSV has file name, box and class only: no centre, device or patient identifiers, so grouped splits
+  and per-site analysis are not possible. Some images hold more than one labelled cell; crop by box. Released June
+  2025, after DinoBloom, so it is not in DinoBloom pretraining. No band-neutrophil, plasma-cell or prolymphocyte
+  class.'
+last_checked: '2026-11-06'
