@@ -17,7 +17,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 UA = "open-research-pipeline/1.0 (+https://github.com/atultiwari/open-research-pipeline)"
-URL_RE = re.compile(r"https?://[^\s)'\"<>\]]+")
+URL_RE = re.compile(r"https?://[^\s)'\"<>\]`|]+")  # stop at backticks and table pipes
 BLOCKED = {401, 403, 405, 406, 429, 451, 503}
 DEAD = {404, 410}
 
