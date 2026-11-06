@@ -102,6 +102,9 @@ def parse_args(argv: list[str]) -> tuple[list[str], list[str], list[dict]]:
 
 
 def main(argv: list[str]) -> int:
+    if not argv or argv[0] in {"-h", "--help"}:
+        print(__doc__)
+        return 0
     inputs, titles, metas = parse_args(argv)
     if not (inputs or titles or metas):
         print(__doc__)
