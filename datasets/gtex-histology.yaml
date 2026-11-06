@@ -1,0 +1,14 @@
+id: gtex-histology
+name: GTEx histology whole-slide images (non-diseased postmortem tissues)
+url: https://gtexportal.org/home/histologyPage
+alt_urls:
+- https://portal.imaging.datacommons.cancer.gov/explore/
+modality: WSI (H&E; PAXgene fixation, verify) with per-sample pathology notes
+organ_or_domain: 50+ normal tissues, including esophagus mucosa and gastroesophageal junction
+size: 'IDC GTEx collection: 971 subjects (IDC API, 2026-11-06). GTEx v8 RNA-seq samples with notes: 622 esophagus mucosa, 401 gastroesophageal junction (GTEx API); histology slide counts per tissue: verify'
+access: open
+licence: verify
+licence_notes: Open access on the GTEx portal and in NCI Imaging Data Commons; no explicit licence checked yet. GTEx tissue is reported to be PAXgene-fixed (verify against the GTEx SOPs), like the BarrettNet cohort in Kazemi et al. 2026.
+institution_country: NIH Common Fund GTEx Consortium, USA
+labels: 'Tissue site and free-text pathology notes per sample. In v8 esophagus mucosa notes, only 2 of 622 mention Barrett esophagus or intestinal metaplasia (GTEx API search, 2026-11-06), so GTEx is not a Barrett cohort.'
+last_checked: '2026-11-06'

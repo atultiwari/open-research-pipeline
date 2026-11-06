@@ -1,0 +1,67 @@
+tags:
+- barrett-esophagus
+- esophageal-adenocarcinoma
+- foundation-models
+- ensemble
+- selection-bias
+- paxgene
+- not-directly-replicable
+status: new
+status_history:
+- status: new
+  date: '2026-11-06'
+  note: Added by atul
+datasets:
+- id: tcga
+  role: development
+- id: gtex-histology
+  role: development
+risks:
+- No Barrett's or dysplasia class in any open cohort, so the clinically important task is lost
+- Normal (GTEx, postmortem, PAXgene) vs cancer (TCGA, surgical, FFPE) differs in fixation, autolysis and site, so
+  detection is confounded by source
+- FM ensembling on TCGA is already published (Luo et al., Cancer Cell 2026)
+- Only 65 adenocarcinoma diagnostic slides in TCGA-ESCA
+access_actions:
+- 'None for data: TCGA (GDC) and GTEx (IDC/GTEx portal) are open'
+- Hugging Face gated access (auto) for UNI2-h, Virchow2, CONCHv1.5, H-optimus-0; Kaiko and Hibou per their cards
+candidate_journals:
+- jiim
+- cmig
+- ijpm
+added_at: '2026-11-06'
+added_by: atul
+id: barrett-fm-ensemble
+title: 'Open-data surrogate for Barrett''s foundation-model ensembling: does choosing models by agreement with the
+  reference inflate gains? Nested-selection benchmark for oesophageal adenocarcinoma detection on TCGA-ESCA and
+  GTEx'
+area: computational-pathology
+source:
+  type: journal
+  title: Towards reliable morphological subtyping and cancer detection on Barrett's esophagus pathology through
+    ensembling foundation models
+  authors: Kazemi A et al.
+  venue: npj Digital Medicine 9, 811 (2026); open access, CC BY 4.0
+  date: '2026-10-21'
+  url: https://doi.org/10.1038/s41746-026-03329-3
+  doi: 10.1038/s41746-026-03329-3
+  code_note: 'No custom code released: feature extraction and training used public TRIDENT and CLAM; evaluation,
+    ensembling and statistics scripts are ''available on reasonable request''.'
+  code_licence: n/a (no repository)
+study_type: Methodological benchmark (model selection and ensembling of pathology foundation models) on an open
+  surrogate cohort
+reporting_guideline: CLAIM 2024
+novelty_delta: 'The source cohort (BarrettNet, TUM) is private and no open cohort covers non-dysplastic Barrett''s
+  or dysplasia, so the subtyping task cannot be replicated. The surrogate keeps the testable method question: the
+  source picked its five ensemble members by agreement with the reference within the same cross-validation, which
+  can inflate ensemble gains. This study measures that inflation with nested selection on open TCGA-ESCA and GTEx
+  oesophagus slides.'
+compute:
+  tier: runpod
+  estimate: 'Features for ~160 TCGA-ESCA and ~1,000 GTEx oesophagus slides with 6–10 encoders: ~20–40 GPU-h (RunPod
+    L4/A40, ~US$10–25) plus ~1 TB transient slide download; CLAM training on laptop GPU or RunPod'
+est_weeks: 5
+scores:
+  fit: 3
+  feasibility: 4
+  novelty: 2
