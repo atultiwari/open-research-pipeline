@@ -1,12 +1,32 @@
 id: medhallu
-name: MedHallu
+name: MedHallu (medical hallucination detection benchmark)
 url: https://huggingface.co/datasets/UTAustin-AIHealth/MedHallu
-modality: text (QA pairs)
-organ_or_domain: medical LLM hallucination detection
-size: ~10k PubMedQA-derived pairs; pqa_labeled subset 1k
+alt_urls:
+- https://github.com/MedHallu/MedHallu
+- https://medhallu.github.io/
+- https://aclanthology.org/2025.emnlp-main.143/
+modality: text (biomedical question, PubMed abstract context, correct answer, LLM-generated hallucinated answer)
+organ_or_domain: medical LLM hallucination detection (PubMedQA-derived research questions)
+size: '10,000 items: pqa_labeled 1,000 (from PubMedQA expert-labelled split) and pqa_artificial 9,000 (from PubMedQA machine-labelled
+  split); about 21 MB of parquet. Difficulty easy/medium/hard 274/318/408 (pqa_labeled) and 2,926/2,892/3,182 (pqa_artificial)'
 access: open
-licence: Not stated on Hugging Face card (verify)
-licence_notes: 'HF API (2026-11-06): no licence field, not gated. Code repo is MIT.'
-institution_country: USA (UT Austin)
-notes: Hallucinated answers were LLM-generated.
+licence: MIT (stated in the dataset card text; no licence field in the card metadata)
+licence_notes: 'HF API (2026-11-06): not gated, no license tag, revision 515060458a945c633debc6fd5baac7764416b724 (last modified
+  2025-02-21). The card body says "License: MIT License". The code repo MedHallu/MedHallu is MIT (GitHub API). The project
+  page gives no licence. The paper says the source, PubMedQA, is MIT, which matches the PubMedQA card and repo. No mismatch,
+  but because the MIT statement is only in the card prose, cite the card revision. Hallucinated answers were generated with
+  Qwen2.5-14B and filtered with GPT-4o-mini, Gemma-2-9B and Qwen2.5-7B; no use restriction from those models is stated.'
+institution_country: University of Texas at Austin, with UNC Chapel Hill and Drexel University, USA
+labels: Per item one ground-truth answer (= PubMedQA long_answer, the abstract's conclusion), one hallucinated answer, difficulty
+  (easy/medium/hard, set by how many of three filter LLMs it fooled) and hallucination category (four types; "Misinterpretation
+  of Question" is about 75%)
+citation: 'Pandit S, Xu J, Hong J, Wang Z, Chen T, Xu K, Ding Y. MedHallu: A Comprehensive Benchmark for Detecting Medical
+  Hallucinations in Large Language Models. Proceedings of EMNLP 2025, pp. 2858-2873. doi:10.18653/v1/2025.emnlp-main.143'
+notes: 'Columns: Question, Knowledge (list of abstract sections), Ground Truth, Hallucinated Answer, Difficulty Level, Category
+  of Hallucination. No PMID column, but all 1,000 pqa_labeled questions join exactly to PubMedQA pqa_labeled by question text
+  (checked 2026-11-06), which gives PMIDs and MeSH terms. Construction artefact: in pqa_labeled, 75% of hallucinated answers
+  are shorter than the ground truth and only 14% fall within the paper''s stated +/-10% length limit (median 171 vs 251 characters).
+  "Knowledge" is the source abstract itself, so the with-knowledge setting is an oracle. Used by Stanford MedHELM (pqa_labeled,
+  both answers) and Medmarks. Medmarks (MedARC) lists MedHallu as MIT and scores a 2,000-item subset (per the quantised-labmed
+  review, 2026-11-06).'
 last_checked: '2026-11-06'

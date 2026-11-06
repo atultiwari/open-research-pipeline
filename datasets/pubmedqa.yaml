@@ -1,0 +1,22 @@
+id: pubmedqa
+name: PubMedQA
+url: https://huggingface.co/datasets/qiaojin/PubMedQA
+alt_urls:
+- https://github.com/pubmedqa/pubmedqa
+- https://pubmedqa.github.io
+modality: text (biomedical research question, PubMed abstract context, conclusion, yes/no/maybe label)
+organ_or_domain: biomedical research question answering (PubMed abstracts)
+size: 'pqa_labeled 1,000 expert-labelled; pqa_unlabeled about 61k; pqa_artificial 211,269 machine-labelled'
+access: open
+licence: MIT
+licence_notes: 'HF API (2026-11-06): license:mit, not gated. GitHub pubmedqa/pubmedqa: MIT. Abstract text in the
+  contexts comes from PubMed; use it for research and do not republish it in bulk.'
+institution_country: USA (author affiliations not confirmed; verify)
+labels: pubid (PMID), question, contexts with section labels, MeSH terms, long_answer (conclusion), final_decision
+  (yes/no/maybe)
+citation: 'Jin Q, Dhingra B, Liu Z, Cohen W, Lu X. PubMedQA: A Dataset for Biomedical Research Question Answering.
+  EMNLP-IJCNLP 2019. doi:10.18653/v1/D19-1259'
+notes: Source of MedHallu. Its PMIDs and MeSH terms let you exclude the source abstract during retrieval and pick
+  a lab-medicine subset of MedHallu (about 169 of the 1,000 pqa_labeled items carry laboratory, biopsy, biomarker,
+  pathology or diagnostic-accuracy MeSH terms; checked 2026-11-06, needs manual curation).
+last_checked: '2026-11-06'

@@ -1,46 +1,86 @@
 id: medhallu-small
 legacy_id: cl-2026w45-medhallu-small
-title: Can small open-weight models detect medical hallucinations? MedHallu on Gemma 3, MedGemma, Qwen3, Llama,
-  with and without retrieved knowledge, plus a pathologist-annotated lab-medicine subset
+title: Can small open-weight models catch medical hallucinations without the answer key? MedHallu with 2026 sub-10B
+  models and cheap verifiers under realistic PubMed retrieval, with artefact controls and a pathologist-audited
+  lab-medicine subset
 area: clinical-data-llm
 tags:
 - llm-safety
 - hallucination
 - small-models
+- retrieval
+- benchmark-artefacts
+- expert-annotation
+- lab-medicine
 status: new
 status_history:
 - status: new
   date: '2026-11-04'
   note: Migrated from the claude.ai register (2026-W45 (initial))
 source:
-  type: preprint
+  type: conference
   title: 'MedHallu: A Comprehensive Benchmark for Detecting Medical Hallucinations in Large Language Models'
-  authors: verify
-  venue: arXiv (EMNLP 2025)
-  date: '2025-02-20'
-  url: https://arxiv.org/abs/2502.14302
-  arxiv_id: '2502.14302'
+  authors: Pandit S et al.
+  venue: Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing (EMNLP 2025), pp.
+    2858-2873; preprint arXiv:2502.14302 (cs.CL)
+  date: 2025-11
+  url: https://aclanthology.org/2025.emnlp-main.143/
+  arxiv_id: 2502.14302v1
   code_url: https://github.com/MedHallu/MedHallu
   code_licence: MIT
+  doi: 10.18653/v1/2025.emnlp-main.143
+  code_note: 'Generation pipeline and a ''not sure'' detection script only (binary Table 2 script not released).
+    The detection script draws one answer per item with an unseeded RNG, its parser maps ''not sure'' and ''non-hallucinated''
+    to hallucinated, and it expects column names absent from the HF release: rewrite the evaluator.'
 datasets:
 - id: medhallu
   role: benchmark
-study_type: LLM safety / hallucination detection
-reporting_guideline: TRIPOD-LLM; MI-CLEAR-LLM
-novelty_delta: Original used GPT-4o, Llama-3.1, UltraMedical; best hard-item F1 was 0.625. Adds newer small open
-  models, a small-model safety-checker design, a pathology/lab-topic subset with expert error taxonomy, and cost/latency
-  trade-offs.
+- id: pubmedqa
+  role: development
+study_type: LLM evaluation / hallucination-detection benchmark study with expert label audit
+reporting_guideline: TRIPOD-LLM + MI-CLEAR-LLM items for model revision, decoding, prompts and retrieval
+novelty_delta: MedHallu tested 2024-era open models only with no evidence or with the source abstract (an answer
+  key), without artefact controls or human checks of its machine-generated hallucinations. Adds 2026 sub-10B open
+  models (Gemma 4, Qwen3.5, Phi-4-mini, MedGemma 1.5) and CPU-feasible verifiers (HHEM, MiniCheck, NLI) under realistic
+  PubMed retrieval with the source paper excluded, length-artefact and difficulty-circularity controls, calibration,
+  and a pathologist audit of label validity and error types on about 120-150 lab-medicine items.
 compute:
-  tier: api
-  estimate: Colab + API (~USD 20–40)
-est_weeks: 4
+  tier: runpod
+  estimate: ~15-25 GPU-h on one 24-48 GB GPU (RunPod L4/L40S/A6000) for 8 small LLM judges x 4 evidence conditions
+    x 2,000 paired judgements, roughly US$10-30; verifiers, PubMed retrieval (free NCBI E-utilities) and analysis
+    on a laptop; no paid API
+est_weeks: 6
 scores:
   feasibility: 5
-  novelty: 3
-  fit: null
-risks: []
-access_actions: []
-candidate_journals: []
+  novelty: 4
+  fit: 4
+risks:
+- 'Novelty check incomplete: arXiv and Semantic Scholar were rate-limited on 2026-11-06 and OpenAlex keyword search
+  ran out of budget; rerun before the protocol (active area: MedHELM, PARALLAX, jev harness)'
+- 'Retrieval leakage: PubMed may return the source paper, duplicates or citing papers that restate its conclusion;
+  exclude the source PMID, add a date-restricted condition and log near-duplicates'
+- Machine-generated labels and a single expert rater; add a second rater on 30% or an intra-rater washout re-rate,
+  and report kappa
+- Oracle-abstract setting is near ceiling for strong models, so headline differences may sit in the retrieval and
+  no-evidence conditions only
+- Released evaluator does not match the paper (unseeded draw, faulty parser, binary script missing), so replicated
+  numbers will differ from Table 2
+- 'Licences: MedHallu MIT is stated only in card text (pin revision 515060458a); MedGemma uses Health AI Developer
+  Foundations terms; Llama 3.2 needs manual HF approval; Bespoke-MiniCheck-7B is CC BY-NC 4.0; Qwen2.5-3B uses the
+  Qwen research licence'
+- Never commit row-level items, abstracts or model outputs; publish aggregates and the expert taxonomy counts only
+access_actions:
+- 'None for data: MedHallu and PubMedQA are open and not gated on Hugging Face (pin MedHallu revision 515060458a945c633debc6fd5baac7764416b724)'
+- Accept Health AI Developer Foundations terms (auto-gated) for google/medgemma-1.5-4b-it
+- 'Optional: Hugging Face manual approval for meta-llama/Llama-3.2-3B-Instruct (Table 2 anchor)'
+- Optional free NCBI API key for E-utilities (higher rate limit); send only a tool name, never Atul's email
+- RunPod account with a 24-48 GB GPU
+- Find a second pathologist or lab-medicine colleague to re-rate about 30% of the audit subset
+candidate_journals:
+- jbi
+- ijmi
+- jms
 added_at: '2026-11-04T08:30:00Z'
 added_by: scout
 run_id: 2026-W45 (initial)
+last_reviewed: '2026-11-06'
