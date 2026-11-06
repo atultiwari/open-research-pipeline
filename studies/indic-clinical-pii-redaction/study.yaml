@@ -7,7 +7,7 @@ tags:
 - dpdp-act
 - lab-reports
 - small-models
-status: approved
+status: protocol
 status_history:
 - status: new
   date: '2026-11-06'
@@ -15,6 +15,9 @@ status_history:
 - status: approved
   date: '2026-11-06'
   note: Gate 1 approved by Atul
+- status: protocol
+  date: '2026-11-06'
+  note: Protocol drafted; awaiting Atul's sign-off
 datasets:
 - id: indicpiidetx
   role: benchmark
@@ -78,3 +81,5 @@ scores:
   feasibility: 5
   novelty: 4
 last_reviewed: '2026-11-06'
+links:
+  protocol: studies/indic-clinical-pii-redaction/protocol.md
