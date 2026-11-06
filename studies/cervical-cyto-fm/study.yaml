@@ -1,51 +1,105 @@
 id: cervical-cyto-fm
 legacy_id: cp-2026w45-cervical-cyto-fm
-title: 'Cervical cytology foundation models: updated benchmark of 2025–26 models with cross-dataset (conventional
-  Pap → LBC) external validation and few-shot LoRA'
+title: 'Cytology vs histopathology vs general foundation models for cervical cells: a Bethesda-harmonised, slide-grouped
+  benchmark from conventional Pap (CRIC, RIVA, APCData, APACC) to liquid-based cytology (HiCervix, Indian MLCC,
+  BMT), with few-shot LoRA site adaptation and cytologist-disagreement analysis'
 area: computational-pathology
 tags:
 - cytology
 - cervix
 - foundation-models
+- cross-dataset
+- bethesda
+- label-harmonisation
+- lora
+- lmic
 status: new
 status_history:
 - status: new
   date: '2026-11-04'
   note: Migrated from the claude.ai register (2026-W45 (initial))
 source:
-  type: preprint
-  title: Exploring Foundation Models Fine-Tuning for Cytology Classification (ISBI 2025)
-  authors: verify
-  venue: arXiv
-  date: '2024-11-22'
-  url: https://arxiv.org/pdf/2411.14975
+  type: conference
+  title: 'Exploring Foundation Models Fine-Tuning for Cytology Classification (preprint: arXiv 2411.14975)'
+  authors: Dausort M, Godelaine T, Zanella M et al.
+  venue: 2025 IEEE 22nd International Symposium on Biomedical Imaging (ISBI) (preprint arXiv eess.IV, 2024-11-22)
+  date: '2025-04-14'
+  url: https://doi.org/10.1109/ISBI60581.2025.10981249
   arxiv_id: '2411.14975'
   code_url: https://github.com/mdausort/Cytology-fine-tuning
   code_licence: MIT
+  doi: 10.1109/ISBI60581.2025.10981249
+  code_note: Built on CLIP-LoRA. No split files are shipped; paths use a 'TO CHANGE' placeholder. The body-cavity-fluid
+    (BCFC) Kaggle dataset it links returned 404 on 2026-11-06.
 datasets:
-- id: sipakmed
+- id: cric-cervix
   role: development
+- id: hicervix
+  role: development
+- id: riva-pap
+  role: external-validation
+- id: apcdata
+  role: external-validation
+- id: apacc
+  role: external-validation
 - id: mendeley-lbc-cervical
   role: external-validation
-- id: body-cavity-fluid-cytology
+- id: bmt-thinprep
+  role: external-validation
+- id: sipakmed
   role: benchmark
-study_type: Benchmark + external validation
-reporting_guideline: CLAIM 2024
-novelty_delta: Source tested five earlier models within each dataset only. Adds UNI2-h, Virchow2, H-optimus, CONCHv1.5,
-  DinoBloom, MUSK and the first cross-dataset normal-vs-abnormal transfer from conventional Pap to liquid-based
-  cytology.
+study_type: Benchmark + cross-dataset external validation + few-shot adaptation + inter-observer analysis
+reporting_guideline: CLAIM 2024 (+ TRIPOD+AI calibration items)
+novelty_delta: The source tested five general or histology encoders within each dataset only, on random splits.
+  This study maps seven open cervical datasets to one pathologist-signed Bethesda scheme and tests transfer in both
+  directions between conventional Pap and liquid-based cytology. It gives the first independent cross-dataset comparison
+  of the new cytology encoders (CROWN, CervixFM, CytoFM) with UNI2-h, Virchow2, H-optimus and CONCH v1.5. It also
+  measures how many local cells few-shot LoRA needs to adapt to a new site, and whether model errors fall where
+  RIVA's four cytologists disagree. The closest planned work (Jordán, OSF 2026) covers conventional-smear cohorts
+  with frozen features and deferral only.
 compute:
-  tier: colab
-  estimate: Colab (~5–15 GPU-h for LoRA)
-est_weeks: 4
+  tier: runpod
+  estimate: ~15–20 GPU-h for frozen features of ~150k cell crops and tiles with ~14 encoders (ViT-g/H encoders ~1
+    h each on an A40), plus ~10–15 GPU-h for few-shot LoRA runs; RunPod A40 about US$12–18; probes, statistics and
+    the annotator analysis on a laptop
+est_weeks: 7
 scores:
-  feasibility: 5
+  feasibility: 4
   novelty: 3
-  fit: null
-risks: []
+  fit: 5
+risks:
+- Jordán's preregistered leave-one-dataset-out benchmark (OSF doi:10.17605/osf.io/kga5m, frozen encoders, APCData
+  and RIVA as external cohorts, deferral) may report first; keep the liquid-based arm, the cytology encoders and
+  the annotator analysis central
+- 'Novelty search was partial: OpenAlex hit its daily limit mid-search, and arXiv and Semantic Scholar returned
+  HTTP 429; rerun before drafting, including citations of CROWN and CervixFM'
+- Pretraining sources of CROWN (10M cytology patches) and CervixFM are not fully public; they may overlap the public
+  test sets
+- HiCervix needs manual Zenodo approval with an institutional email; its preparation method (liquid-based or not)
+  and slide identifiers are still to be confirmed
+- MLCC has no patient key (963 images from 460 patients), 972 files against 963 described, and an independent reclassification
+  disputes some labels
+- CRIC has no slide identifier, so fields from one slide may cross splits; APCData appears to hold duplicate images
+- Label harmonisation is lossy (SIPaKMeD morphological classes, APACC binary only, RIVA INF/ENDO, HiCervix glandular
+  and organism classes) and needs explicit sensitivity analyses
+- UNI2-h, Virchow2, CONCH v1.5, H-optimus-1 and H0-mini are CC-BY-NC-ND and gated; CytoFM and the CROWN and HiCervix
+  code repositories have no licence; SIPaKMeD states no licence
+- Two JASC 2026 meeting abstracts on foundation-model errors in cervical cytology could not be read and may overlap
+  Gap 4
 access_actions:
-- Gated access to some foundation models (UNI2-h, Virchow2; institutional email may be needed)
-candidate_journals: []
+- 'Zenodo access request for HiCervix (institutional email as primary Zenodo email, manual approval): do this first'
+- 'Hugging Face gated access: CROWN, UNI2-h, Virchow2, CONCH v1.5, H-optimus-0 (auto); H-optimus-1, DINOv3, H0-mini
+  (manual)'
+- Free Synapse account to download BMT (syn55259257)
+- 'Direct downloads, no account: CRIC (figshare), RIVA (Zenodo), APCData and MLCC (Mendeley Data), APACC (OSF),
+  SIPaKMeD (University of Ioannina)'
+- Download CervixFM and CytoFM weights from the authors' Google Drive links; email the CytoFM authors for licence
+  terms
+candidate_journals:
+- jiim
+- cmig
+- laboratory-investigation
 added_at: '2026-11-04T08:30:00Z'
 added_by: scout
 run_id: 2026-W45 (initial)
+last_reviewed: '2026-11-06'

@@ -1,12 +1,14 @@
 id: sipakmed
-name: SIPaKMeD
+name: SIPaKMeD (isolated Pap smear cells, University of Ioannina)
 url: https://www.cs.uoi.gr/~marina/sipakmed.html
-modality: cytology images (Pap smear cells)
+modality: cytology images (conventional Pap smear; isolated cell crops cut from microscope field images taken with a CCD camera)
 organ_or_domain: cervix
-size: 4,049 cells
+size: 4,049 isolated cell images cropped from 966 cluster (field) images; five 7z archives of 0.55–1.40 GB each, about 5.2 GB in total (HTTP headers, 2026-11-06)
 access: open
-licence: Research use with citation (verify)
+licence: verify (no licence stated; the page says the database is publicly available for experimental purposes, with a request to cite the ICIP 2018 paper)
+licence_notes: Direct download from the university page, no registration (checked 2026-11-06). No licence file or terms beyond the citation request, so treat it as research use with citation and do not redistribute images. The source paper downloaded it from a Kaggle mirror (prahladmehandiratta/cervical-cancer-largest-dataset-sipakmed), which was not checked; use the original archives.
 institution_country: Greece
-labels: 5 cell classes (not Bethesda categories)
-notes: Use the original source, not Kaggle mirrors.
+labels: 'Five morphological cell classes, not Bethesda categories: superficial-intermediate, parabasal, metaplastic (normal), koilocytotic, dyskeratotic (abnormal). Any mapping to Bethesda (for example koilocyte to LSIL) needs a cytopathologist and is approximate.'
+citation: Plissiti ME et al. SIPaKMeD a new dataset for feature and image based classification of normal and pathological cervical cells in Pap smear images. IEEE ICIP 2018 (doi:10.1109/ICIP.2018.8451588)
+notes: 'Cells cropped from the same cluster image are near-duplicates in stain and focus. Split by cluster (the 966 source images), not by cell, or results are inflated; H-XAI-Cervix (Research Square 2026) used cluster-preserving folds. No slide or patient identifiers. Also offers hand-crafted and CNN features, which are not needed.'
 last_checked: '2026-11-06'

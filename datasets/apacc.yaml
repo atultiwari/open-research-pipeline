@@ -1,0 +1,15 @@
+id: apacc
+name: APACC (Annotated PAp cell images and smear slices for Cell Classification, University of Debrecen)
+url: https://osf.io/fp2xe/
+doi: 10.17605/osf.io/fp2xe
+modality: cytology images (conventional Pap smear; cell crops, 2,000 x 2,000 smear slices and 34 whole-slide images)
+organ_or_domain: cervix
+size: '103,675 cell images from 21,371 smear slices of 107 smears (one smear per patient): healthy 34,721, unhealthy 2,942, rubbish 62,074, both 3,884 (Sci Data article). Download size verify.'
+access: open
+licence: CC BY 4.0
+licence_notes: CC BY 4.0 on the OSF project and in the Scientific Data article (checked 2026-11-06); no account needed.
+institution_country: Hungary
+labels: Four coarse classes (healthy, unhealthy, rubbish, both); no Bethesda grade. Usable only for a binary normal-vs-abnormal test.
+citation: Kupas D et al. Annotated Pap cell images and smear slices for cell classification. Sci Data 2024;11:743 (doi:10.1038/s41597-024-03596-3)
+notes: 'File names encode smear id, slice location, cell number and date, so smear-grouped splits are easy; the authors give a 20-smear test split. Used as an external test set by H-XAI-Cervix (Zenodo doi:10.5281/zenodo.22793515).'
+last_checked: '2026-11-06'

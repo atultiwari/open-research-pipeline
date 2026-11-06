@@ -1,0 +1,15 @@
+id: hicervix
+name: HiCervix (hierarchical multi-centre cervical cytology cell dataset)
+url: https://zenodo.org/records/11087263
+doi: 10.5281/zenodo.11087263
+modality: cervical cytology cell images cut from whole-slide images (preparation method - verify in the paper; needed before calling it the liquid-based arm)
+organ_or_domain: cervix
+size: 40,229 cells from 4,496 whole-slide images (TMI abstract); download size verify (files are hidden until access is granted)
+access: free-registration
+licence: CC BY 4.0
+licence_notes: 'Zenodo record is public but files are restricted (checked 2026-11-06). Request access through the Zenodo form; the conditions ask for full name, affiliation and an official (institutional) email that matches the primary email of the Zenodo account; personal domains (gmail, qq, outlook) are refused. Approval is manual. The code repository (github.com/Scu-sen/HiCervix) has no licence file: reimplement, do not copy.'
+institution_country: China (multi-centre)
+labels: '29 classes in a three-level tree (level 1 coarse, level 3 fine). The source paper and the HiCervix benchmark use level 3 (25 classes). Bethesda categories (NILM, ASC-US, LSIL, ASC-H, HSIL, SCC, AGC and others) can be read from the tree; check the class list on download.'
+citation: Cai D et al. HiCervix - an extensive hierarchical dataset and benchmark for cervical cytology classification. IEEE Trans Med Imaging 2024 (doi:10.1109/TMI.2024.3419697)
+notes: 'Official train, validation and test splits come with the dataset (source paper and HierSwin used them); check whether whole-slide or patient identifiers are included, or whether cells from one slide can cross splits. Cited by the CervixFM and other cytology foundation-model papers, so it may be in their evaluation (not pretraining) sets.'
+last_checked: '2026-11-06'

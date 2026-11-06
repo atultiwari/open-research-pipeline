@@ -1,0 +1,17 @@
+id: cric-cervix
+name: CRIC Cervix (Center for Recognition and Inspection of Cells, conventional Pap smear cell classification)
+url: https://figshare.com/articles/dataset/CRIC_Cervix_Classification/12233156
+alt_urls:
+- https://database.cric.com.br/
+doi: 10.6084/m9.figshare.12233156.v2
+modality: cytology images (conventional Pap smear; 400 microscope field images, PNG about 2.3 MB each, nucleus coordinates up to 1,384 px)
+organ_or_domain: cervix
+size: '400 field images with 11,534 nucleus-centre labels (classifications.csv, 2026-11-06): NILM 6,779, HSIL 1,703, LSIL 1,360, ASC-H 925, ASC-US 606, SCC 161. Images about 0.9 GB in total; each image is its own figshare item with its own DOI.'
+access: open
+licence: CC BY 4.0
+licence_notes: Licence stated on the figshare classification record and on the image records (checked 2026-11-06); direct download through the figshare API, no account. The README's "How to cite" line is incomplete; cite the Scientific Data article.
+institution_country: Brazil
+labels: Six Bethesda categories per cell (NILM, ASC-US, LSIL, ASC-H, HSIL, SCC), with the nucleus centre (x, y). Cells are not cropped; crop around the nucleus coordinate.
+citation: Rezende MT et al. Cric searchable image database as a public platform for conventional pap smear cytology data. Sci Data 2021 (doi:10.1038/s41597-021-00933-8)
+notes: 'The CSV has image and cell identifiers but no slide or patient identifier, so the field image is the smallest safe grouping unit; fields from one slide may still cross splits (state as a limitation). Bethesda labels make it the natural conventional-Pap development set.'
+last_checked: '2026-11-06'

@@ -1,10 +1,15 @@
 id: mendeley-lbc-cervical
-name: Mendeley LBC Cervical Cancer dataset
-url: https://data.mendeley.com/
-modality: cytology images (liquid-based)
+name: Liquid based cytology Pap smear images for multi-class diagnosis of cervical cancer (Mendeley LBC, "MLCC")
+url: https://data.mendeley.com/datasets/zddtpgzv63/4
+doi: 10.17632/zddtpgzv63.4
+modality: cytology images (liquid-based cytology Pap smear; whole microscope fields at 40x, Leica ICC50 HD camera; JPEG about 2.2 MB each)
 organ_or_domain: cervix
-size: verify
+size: 'Version 4 holds 972 JPEG field images plus Results.csv, 2.25 GB in total (Mendeley public API, 2026-11-06): NL (negative) 612, HSIL 173, LSIL 113, SCC 74 by file-name prefix. The description says 963 images from 460 patients; the 9-image difference is unexplained.'
 access: open
-licence: verify
-notes: Exact record URL and licence to verify.
+licence: CC BY 4.0
+licence_notes: 'Licence shown by the Mendeley Data API and DataCite (checked 2026-11-06); direct download, no account. The source paper used a Kaggle mirror (blank1508/mendeley-lbc-cervical-cancer-), which was not checked; use version 4 from Mendeley. A third-party reclassification of this set (Macias-Garcia L, Garcia-Gutierrez J, Zenodo 2025, doi:10.5281/zenodo.17259913) provides a CSV mapping each original image to a revised class or to exclusion; that CSV is CC BY-NC-ND 4.0.'
+institution_country: India (contributor institution on Mendeley Data - Institute of Advanced Study in Science and Technology; collecting hospital - verify in the Data in Brief article)
+labels: Four field-level classes under The Bethesda System, one label per image (NILM, LSIL, HSIL, SCC). No cell-level boxes, no ASC-US or ASC-H.
+citation: Hussain E et al. Liquid based-cytology Pap smear dataset for automated multi-class diagnosis of pre-cancerous and cervical cancer lesions. Data Brief 2020;30:105589 (doi:10.1016/j.dib.2020.105589)
+notes: 'No patient identifiers, but 460 patients gave 963 images, so several images share a patient; random image-level splits leak patients. Use it only as an external test set, never for both training and testing. Field-level labels: a cell classifier needs tiling plus aggregation (for example, maximum abnormal probability over tiles). The independent reclassification suggests some labels are disputed. Indian (LMIC) LBC data, which makes it the India-relevance test set.'
 last_checked: '2026-11-06'

@@ -1,0 +1,15 @@
+id: apcdata
+name: APCData cervical cytology cells (Rivera, Uruguay)
+url: https://data.mendeley.com/datasets/ytd568rh3p/1
+doi: 10.17632/ytd568rh3p.1
+modality: cytology images (Pap smear microscope fields, JPEG; preparation method verify) with bounding boxes and nucleus points
+organ_or_domain: cervix
+size: '425 field images; 2,121 files (850 JPEG, 425 CSV, 420 JSON, 426 TXT annotation files), 0.23 GB (Mendeley public API, 2026-11-06). Cell count verify.'
+access: open
+licence: CC BY 4.0
+licence_notes: Licence shown by the Mendeley Data API and DataCite (checked 2026-11-06); direct download, no account. File names look like Roboflow exports (".rf." hashes) and some images appear twice (850 JPEG for 425 fields); check for duplicates before use.
+institution_country: Uruguay (Universidad Tecnologica del Uruguay with Universidade Federal do Rio Grande, Brazil; laboratory in Rivera)
+labels: Six Bethesda categories per cell (NILM, ASC-US, ASC-H, LSIL, HSIL, SCC), boxes plus nucleus points.
+citation: Cuna Cabrera et al. APCData cervical cytology cells. Mendeley Data 2024 (doi:10.17632/ytd568rh3p.1); no peer-reviewed article found (verify)
+notes: 'File names carry what look like case or slide codes (for example 1170-19), which may allow grouping (verify). Used as a fixed external cohort in the Jordan preregistration (OSF, doi:10.17605/osf.io/kga5m).'
+last_checked: '2026-11-06'

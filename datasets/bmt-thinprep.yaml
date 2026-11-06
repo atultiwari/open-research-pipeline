@@ -1,0 +1,14 @@
+id: bmt-thinprep
+name: BMT (Brown Multicellular ThinPrep) Pap cytology dataset
+url: https://doi.org/10.7303/syn55259257
+modality: cytology images (ThinPrep liquid-based Pap; multicellular microscope fields, JPEG)
+organ_or_domain: cervix
+size: 600 field images (200 each NILM, LSIL, HSIL) from 180 slides of 180 patients; download size verify
+access: free-registration
+licence: CC BY 4.0
+licence_notes: 'Licence stated in the Scientific Data article (checked 2026-11-06). Hosted on Synapse (project syn55259257); the project lists no access requirements, but Synapse needs a free account to download. Annotated example images sit in a separate subfolder.'
+institution_country: USA (Brown University and Women and Infants Hospital of Rhode Island)
+labels: Three field-level classes with 100% expert consensus (NILM, LSIL, HSIL). No cell boxes.
+citation: Welch EC et al. BMT - a cross-validated ThinPrep Pap cervical cytology dataset for machine learning model training and validation. Sci Data 2024 (doi:10.1038/s41597-024-04328-3)
+notes: 'Up to five fields per slide; check whether file names identify the slide before any split. The authors report that a SurePath-trained model fell to about 60% accuracy on ThinPrep images, which is direct evidence of preparation shift. Analysis code at github.com/celwelch/BMTcode (not checked).'
+last_checked: '2026-11-06'

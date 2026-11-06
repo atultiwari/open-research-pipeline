@@ -1,0 +1,17 @@
+id: riva-pap
+name: RIVA (conventional Pap smear cytology with multiple independent annotations, Hospital Rivadavia, Buenos Aires)
+url: https://zenodo.org/records/17288879
+alt_urls:
+- https://github.com/LIA-DiTella/RIVA
+doi: 10.5281/zenodo.17288879
+modality: cytology images (conventional Pap smear; PNG patches cut from scanned slides) with nucleus-centre point annotations
+organ_or_domain: cervix
+size: '959 patches from 115 slides; 26,158 annotations of 15,949 distinct cells. 386 patches were annotated independently by four cytologists, 573 by one. Single zip riva_1.0.zip, 1.41 GB (Zenodo API, 2026-11-06).'
+access: open
+licence: CC BY 4.0
+licence_notes: 'CC BY 4.0 on the Zenodo record and in the GitHub README (checked 2026-11-06); direct download, no account. The Scientific Data article itself is CC BY-NC-ND 4.0 (article only). Code licence mismatch - the article says GPL-3.0, GitHub reports MIT; record both if code is reused. Full-resolution SVS slides are not public. The project website named in the article (beta-digitalpapsdb.exactas.uba.ar) refused connections on 2026-11-06; use Zenodo.'
+institution_country: Argentina
+labels: 'Eight categories per cell - SCC, HSIL, ASC-H, LSIL, ASC-US (lesional) and NILM, INF (inflammatory), ENDO (endocervical). Annotation counts in the article - NILM 9,457, INF 8,190, LSIL 3,048, HSIL 1,835, SCC 1,586, ENDO 1,270, ASC-H 416, ASC-US 356. Each file name carries the slide diagnosis and slide number.'
+citation: Perez Bianchi P et al. RIVA - an image dataset of conventional Pap smear cytology with multiple independent annotations. Sci Data 2025 (doi:10.1038/s41597-025-06280-2)
+notes: 'The only open cervical set with four independent expert labels per cell on a subset, so model errors can be compared with inter-observer disagreement. Slide numbers in file names allow slide-grouped splits. Published December 2025, after CROWN and CervixFM pretraining data were assembled (verify). Used as a fixed external cohort in the Jordan preregistration (OSF, doi:10.17605/osf.io/kga5m).'
+last_checked: '2026-11-06'
