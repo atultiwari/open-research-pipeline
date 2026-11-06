@@ -1,0 +1,69 @@
+tags:
+- computer-use-agents
+- ehr
+- lab-medicine
+- patient-safety
+- benchmark
+- synthetic-data
+status: new
+status_history:
+- status: new
+  date: '2026-11-06'
+  note: Added by atul
+datasets:
+- id: simehr
+  role: benchmark
+- id: synthea
+  role: development
+- id: nhanes
+  role: development
+- id: mimic-iv-demo
+  role: development
+risks:
+- The official harness and PhysicianBench-UI are not released; our own harness may differ, and the authors' benchmark
+  may overlap our tasks when released
+- LLM-judged checkpoints need human validation (Atul double-scores a sample)
+- Synthetic charts can look artificial; lab trends must be hand-calibrated
+- API cost grows quickly with screenshot-heavy long episodes
+- Do not commit derived MIMIC-IV demo charts; keep the public task set fully synthetic
+access_actions:
+- 'None for data: SimEHR, Synthea, NHANES and the MIMIC-IV demo are open'
+- API keys for the frontier models tested (Anthropic, OpenAI, Google) and a RunPod account for open-weight GUI agents
+candidate_journals:
+- jamia
+- jbi
+- ijmi
+added_at: '2026-11-06'
+added_by: atul
+id: simehr-lab-followup
+title: Do computer-use agents act on abnormal lab results in an EHR? A pathologist-authored results-review task
+  set in SimEHR, with a screenshot vs structured-data comparison
+area: clinical-data-llm
+source:
+  type: code
+  title: 'SimEHR: a high-fidelity EHR environment for computer-use agents (preview release)'
+  authors: SimEHR Team (HealthRex)
+  venue: GitHub preview release; paper and PhysicianBench-UI benchmark not yet released
+  date: '2026-11-02'
+  url: https://github.com/HealthRex/SimEHR
+  code_url: https://github.com/HealthRex/SimEHR
+  code_licence: Apache-2.0 (code); CC BY 4.0 (synthetic charts, demo task, trajectories)
+  code_note: 'Project page: https://healthrex.github.io/SimEHR/. The agent harness and LLM judge are not released
+    yet.'
+study_type: Benchmark development and evaluation of LLM computer-use agents (simulation study on synthetic charts)
+reporting_guideline: TRIPOD-LLM
+novelty_delta: SimEHR ships one task (travel VTE prophylaxis) and MedAgentBench tests EHR agents only through a
+  FHIR API. This study adds 30–40 pathologist-authored results-review tasks (critical values, slow trends, pre-analytical
+  artefacts such as EDTA contamination or haemolysis, missed follow-up) on synthetic charts, and runs each task
+  both through screenshots and through the same chart as structured JSON, to measure what the GUI costs in missed
+  abnormal results.
+compute:
+  tier: api
+  estimate: ~30–40 tasks × 3–4 models × 3 runs; ~60 screenshot turns per episode, roughly US$1–5 per frontier episode
+    (~US$400–1,500 total, verify against token logs); open-weight GUI models on RunPod (~10–20 GPU-h); LLM judge
+    extra
+est_weeks: 8
+scores:
+  fit: 5
+  feasibility: 3
+  novelty: 4

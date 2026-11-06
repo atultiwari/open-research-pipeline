@@ -1,0 +1,15 @@
+id: simehr
+name: SimEHR (simulated EHR environment with synthetic charts)
+url: https://github.com/HealthRex/SimEHR
+alt_urls:
+- https://healthrex.github.io/SimEHR/
+modality: interactive EHR web application (Next.js) with FHIR-aligned synthetic patient charts, tasks and agent trajectories
+organ_or_domain: general clinical medicine (outpatient chart, labs, orders, notes, patient messages)
+size: 'Preview release (2026-11-02): 1 synthetic chart (vte-prophylaxis-travel), 1 demo task with 6 checkpoints, 2 recorded agent sessions'
+access: open
+licence: 'Code Apache-2.0; charts, demo task, trajectories and project page CC BY 4.0 (LICENSE-DATA)'
+licence_notes: All patient data is stated to be synthetic. The agent harness and LLM judge are not released yet ("will be released with the benchmark", README, 2026-11-06).
+institution_country: HealthRex lab, USA (verify affiliation)
+labels: Per-task rubric checkpoints (audit-log checks and LLM-judged rubric text)
+notes: 'Cases follow public/cases/SCHEMA.md (LOINC, RxNorm, ICD-10, CPT codes). Grading reads final state through window.SimEHR (getState, getAuditLog).'
+last_checked: '2026-11-06'

@@ -1,0 +1,13 @@
+id: mimic-iv-demo
+name: MIMIC-IV Clinical Database Demo
+url: https://physionet.org/content/mimic-iv-demo/2.2/
+doi: 10.13026/dp1f-ex47
+modality: de-identified EHR tables (hospital and ICU modules)
+organ_or_domain: critical care / inpatient
+size: 100 patients; 15.5 MB uncompressed (PhysioNet page, 2026-11-06)
+access: open
+licence: Open Data Commons Open Database License v1.0
+licence_notes: Open access, no credentialing (PhysioNet page, 2026-11-06). ODbL is share-alike for derived databases. Real de-identified patients, so this repo still must not hold derived row-level charts.
+institution_country: Beth Israel Deaconess Medical Center / MIT, USA
+labels: Labs (labevents), diagnoses, prescriptions, admissions
+last_checked: '2026-11-06'

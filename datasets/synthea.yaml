@@ -1,0 +1,13 @@
+id: synthea
+name: Synthea synthetic patient generator
+url: https://github.com/synthetichealth/synthea
+modality: synthetic longitudinal EHR records (FHIR, C-CDA, CSV)
+organ_or_domain: general population, disease modules
+size: Generated on demand (any number of patients)
+access: open
+licence: Apache-2.0
+licence_notes: Licence of the generator code on GitHub (API 2026-11-06). Output records are fully synthetic.
+institution_country: MITRE, USA
+labels: Conditions, encounters, medications, observations (LOINC-coded labs) per synthetic patient
+notes: Lab value distributions and trends are module-driven and often unrealistic for lab-medicine tasks; hand-edit or recalibrate against aggregate NHANES ranges.
+last_checked: '2026-11-06'
