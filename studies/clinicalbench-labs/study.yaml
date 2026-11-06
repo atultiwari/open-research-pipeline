@@ -1,46 +1,85 @@
 id: clinicalbench-labs
 legacy_id: cl-2026w45-clinicalbench-labs
-title: Do routine laboratory values change LLM vs ML performance? Extend ClinicalBench (MIMIC-IV mortality, readmission,
-  length of stay) with admission CBC/biochemistry panels
+title: Do routine admission labs or leaky discharge codes decide LLM vs ML performance? A leakage-aware re-test
+  of ClinicalBench (MIMIC-IV v2.2, published splits) with admission CBC/chemistry panels, lab-report formatting
+  and 2026 local open-weight LLMs
 area: clinical-data-llm
 tags:
 - ehr
 - llm-vs-ml
 - laboratory-values
+- label-leakage
+- mimic-iv
+- calibration
 status: new
 status_history:
 - status: new
   date: '2026-11-04'
   note: Migrated from the claude.ai register (2026-W45 (initial))
 source:
-  type: preprint
+  type: conference
   title: 'ClinicalBench: Can LLMs Beat Traditional ML Models in Clinical Prediction?'
-  authors: verify
-  venue: arXiv (v2; KDD'26 per repo)
-  date: '2026-06-08'
-  url: https://arxiv.org/abs/2411.06469
-  arxiv_id: '2411.06469'
+  authors: Chen C, Yu J et al.
+  venue: Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2 (KDD '26); preprint
+    arXiv:2411.06469 (v1 Nov 2024, v2 Jun 2026)
+  date: '2026-08-08'
+  url: https://doi.org/10.1145/3770855.3818831
+  arxiv_id: 2411.06469v2
   code_url: https://github.com/canyuchen/ClinicalBench
   code_licence: MIT
+  doi: 10.1145/3770855.3818831
+  code_note: 'Vendors PyHealth v1.1.4 (BSD-3-Clause). Ships 108 split-index files valid only on MIMIC-IV v2.2 /
+    MIMIC-III v1.4. Released model outputs (HF canyuchen/clinicalbench-results, tagged MIT, auto-gated) are patient-level
+    MIMIC-derived data: never commit. Inputs are ICD diagnoses, ICD procedures and drug classes only (no labs).'
 datasets:
 - id: mimic-iv
   role: development
-study_type: EHR prediction / LLM vs ML (retrospective cohort)
+study_type: EHR prediction / LLM vs ML benchmark re-analysis (retrospective cohort, published splits)
 reporting_guideline: TRIPOD+AI; TRIPOD-LLM
-novelty_delta: ClinicalBench inputs had no lab values. Adding structured routine labs tests whether LLMs use numeric
-  lab data as well as gradient boosting, with a lab-only ablation, calibration and an optional small LoRA fine-tune.
+novelty_delta: ClinicalBench feeds models only whole-stay ICD diagnoses, procedures and drugs, the hindsight inputs
+  Ramadan et al. (JAMA Netw Open 2025) showed leak in-hospital mortality; nobody has tested whether its 'ML beats
+  LLMs' result survives without them. On the same patients and published v2.2 splits, this compares original, leak-pruned,
+  admission-time (routine CBC/chemistry/renal/liver/coagulation labs from -6 h to +24 h) and labs-only inputs, with
+  lab-report formatting (raw vs reference range + H/L flag vs flag-only), 2026 local open-weight LLMs, calibration
+  and a pathologist error taxonomy. Peng et al. (JAMIA 2026) and ClinicRealm (npj Digit Med 2026) already compare
+  LLMs with XGBoost on MIMIC-IV physiology/labs, so novelty rests on the leakage contrast, labs-only and format
+  arms, and the ClinicalBench cohort.
 compute:
   tier: runpod
-  estimate: RunPod (~40–80 GPU-h); XGBoost on laptop
-est_weeks: 8
+  estimate: About 60-100 GPU-h on a private RunPod A100/L40S (or a local 24-48 GB GPU) for 7 local open-weight LLMs
+    x 3 tasks x 4 input arms (logits scoring; format ablation on the 500-visit cohort) plus one optional LoRA; SQL,
+    XGBoost/LR and scoring on a laptop; no API use (DUA)
+est_weeks: 10
 scores:
   feasibility: 3
   novelty: 4
-  fit: null
-risks: []
+  fit: 4
+risks:
+- Partial overlap with Peng et al. (JAMIA 2026, MIMIC-IV first-24 h vitals+labs, LLMs vs XGBoost for mortality/LOS)
+  and ClinicRealm (npj Digit Med 2026); frame around leakage and the ClinicalBench cohort and cite both
+- 'PhysioNet DUA: MIMIC rows must never reach external LLM APIs (including this Claude session); local open-weight
+  models only, aggregates only leave Atul''s machine; confirm a private, wiped RunPod pod is acceptable'
+- Split indices are valid only on MIMIC-IV v2.2; lab itemids changed between v2.2 and v3.0, so map mimic-code lab
+  concepts against v2.2 d_labitems
+- Low mortality prevalence (200/5,768 per test split) gives wide AUROC intervals; pool 5 splits, report AUPRC and
+  paired bootstrap
+- Legacy answer-token lookup returns <unk> for some SentencePiece tokenisers; use --token_id_mode auto for new models
+  and report invalid rates
+- Released ClinicalBench result files are patient-level MIMIC-derived outputs; keep them outside the repo
+- Llama 3 and Gemma 2 anchors are manually gated with custom licences; MedGemma uses Health AI Developer Foundations
+  terms
 access_actions:
-- PhysioNet credentialing + CITI training (~1–2 weeks; start early)
-candidate_journals: []
+- PhysioNet credentialing + CITI 'Data or Specimens Only Research' training, then sign the DUA for MIMIC-IV v2.2
+  (~1-2 weeks; start early; shared with cirrhosis-sepsis-icu)
+- 'Hugging Face: request gated access to meta-llama/Meta-Llama-3-8B-Instruct and google/gemma-2-9b-it (manual),
+  accept terms for epfl-llm/meditron-7b and google/medgemma-1.5-4b-it (auto)'
+- Accept the auto gate on HF dataset canyuchen/clinicalbench-results to re-score the paper without a GPU
+- Private RunPod pod with encrypted volume (or local GPU) for LLM inference; no external LLM APIs
+candidate_journals:
+- jbi
+- ijmi
+- jms
 added_at: '2026-11-04T08:30:00Z'
 added_by: scout
 run_id: 2026-W45 (initial)
+last_reviewed: '2026-11-06'

@@ -18,11 +18,12 @@ citation: Johnson AEW et al. MIMIC-IV, a freely accessible electronic health rec
 alt_urls:
 - https://physionet.org/content/mimiciv/2.2/
 - https://github.com/MIT-LCP/mimic-code
-notes: v3.1 (released 11 Oct 2024) is the current version as of 2026-11-06. v3.0 added 2020–2022 stays and out-of-hospital
+notes: 'v3.1 (released 11 Oct 2024) is the current version as of 2026-11-06. v3.0 added 2020–2022 stays and out-of-hospital
   mortality up to 1 year after hospital or ED discharge; v3.1 fixed lab itemids that had changed between v2.2 and v3.0. Dates
   are shifted; calendar period is available only as patients.anchor_year_group (2008–2010 … 2020–2022). Official SQL concepts
   (Sepsis-3, SOFA, MELD, KDIGO) are in MIT-LCP/mimic-code (MIT licence). ClinicalBench split indices match v2.2; the cirrhosis-sepsis
   study uses v3.1. mimic-code also provides score/sirs.sql, firstday/first_day_gcs.sql and measurement/enzyme.sql (amylase;
   lipase is not in that concept, look it up in d_labitems). Free-text notes (discharge summaries, radiology reports) are a
-  separate credentialed dataset, MIMIC-IV-Note (datasets/mimic-iv-note.yaml).
+  separate credentialed dataset, MIMIC-IV-Note (datasets/mimic-iv-note.yaml). v2.2 DOI: 10.13026/6mm1-ek67 (released 2023-01-06);
+  ClinicalBench split indices work only on v2.2.'
 last_checked: '2026-11-06'
