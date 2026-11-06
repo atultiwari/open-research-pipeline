@@ -31,7 +31,7 @@
     "source": {
       "type": "object", "additionalProperties": false, "required": ["type", "title", "url"],
       "properties": {
-        "type": {"enum": ["preprint", "journal", "code", "dataset", "model"]},
+        "type": {"enum": ["preprint", "journal", "conference", "code", "dataset", "model"]},
         "title": {"type": "string"},
         "authors": {"type": "string"},
         "venue": {"type": "string"},

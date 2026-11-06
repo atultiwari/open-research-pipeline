@@ -10,7 +10,7 @@
     "name": {"type": "string"},
     "url": {"type": "string", "pattern": "^https?://\\S+$"},
     "alt_urls": {"type": "array", "items": {"type": "string", "pattern": "^https?://\\S+$"}},
-    "doi": {"type": "string", "pattern": "^(10\\.\\d{4,9}/\\S+|verify)$"},
+    "doi": {"description": "DOI of the dataset itself (not of the paper describing it; put that in citation)", "type": "string", "pattern": "^(10\\.\\d{4,9}/\\S+|verify)$"},
     "modality": {"type": "string"},
     "organ_or_domain": {"type": "string"},
     "size": {"type": "string"},

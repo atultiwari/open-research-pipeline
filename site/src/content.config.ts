@@ -23,7 +23,7 @@ const studies = defineCollection({
     status: z.enum(STATUSES),
     status_history: z.array(z.strictObject({ status: z.enum(STATUSES), date: dateish, note: z.string().optional() })).min(1),
     source: z.strictObject({
-      type: z.enum(['preprint', 'journal', 'code', 'dataset', 'model']),
+      type: z.enum(['preprint', 'journal', 'conference', 'code', 'dataset', 'model']),
       title: z.string(),
       authors: z.string().optional(),
       venue: z.string().optional(),

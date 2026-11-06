@@ -22,11 +22,11 @@ python3 scripts/fetch_meta.py --pretty <link> [<link> ...] > /tmp/meta.json
 
 It classifies the link and queries the public API: arXiv export API, bioRxiv/medRxiv API, Crossref (OpenAlex fallback), NCBI E-utilities, GitHub (`gh api`), Hugging Face API, Zenodo, Figshare, and PhysioNet/Kaggle/web pages via citation meta tags. Check `warnings` (gated access, NC/ND licences, no code licence, credentialing). If a fetch fails, say so and fall back to WebFetch of the page. Never guess the missing fields.
 
-Use `--excerpt 20000` when a README or dataset card is long (licence sections often sit near the end).
+Gated Hugging Face datasets return no card text through the API; WebFetch the dataset page instead. Use `--excerpt 20000` when a README or dataset card is long (licence sections often sit near the end).
 
 Then read the full text you need: the paper (arXiv HTML/PDF, PMC, publisher page) or the README/dataset card. If a publisher page redirects to a login (Nature, Elsevier), read the open copy instead: Europe PMC (`https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:<doi>&format=json&resultType=core`), PMC, or the arXiv HTML. `text_excerpt` is for your reading only. **Never paste it into a file;** summarise in your own words, with at most one short quoted sentence.
 
-**Preprint later published?** Point `source` at the peer-reviewed version (`type: journal`, its `doi`, `url`, `venue` and `date`), keep `arxiv_id`, and mention the preprint in `source.title` or `venue`. Read both versions: limitations and numbers can change.
+**Preprint later published?** `fetch_meta.py` does not detect this; search OpenAlex by title (`/works?search=<title>`) for a journal or conference version. Point `source` at the peer-reviewed version (`type: journal` or `conference`, its `doi`, `url`, `venue` and `date`), keep `arxiv_id`, and mention the preprint in `source.title` or `venue`. Read both versions: limitations and numbers can change.
 
 ## 2. Expand the graph
 
@@ -42,13 +42,14 @@ Run `fetch_meta.py` on each new link you adopt.
 python3 scripts/find_dupes.py --meta /tmp/meta.json [<extra links>] [--title "<source title>"]
 ```
 
+- In `enrich` mode the study itself appears in `matches`; that is expected. Look only for *other* matching slugs.
 - `matches` not empty → **update that study instead** (`new_study.py --update`), and tell Atul which slug you updated and why.
 - `related` lists studies that use the same dataset. Mention them, and avoid proposing the same extension twice.
 
 ## 4. Check data feasibility (never skip)
 
 Atul has no data of his own. For every dataset the study needs:
-1. Find or add it in `datasets/<slug>.yaml` (schema: `schema/dataset.schema.json`). For a new dataset, fetch its page or API and record `access` (`open` / `free-registration` / `credentialed`), the licence exactly as stated, size, gating, institution and country. Flag NC/ND terms, gated models needing an institutional email, and mismatches between the card and the paper in `licence_notes`.
+1. Find or add it in `datasets/<slug>.yaml` (schema: `schema/dataset.schema.json`). For a new dataset, fetch its page or API and record (`doi` = the dataset's own DOI; the paper goes in `citation`) `access` (`open` / `free-registration` / `credentialed`), the licence exactly as stated, size, gating, institution and country. Flag NC/ND terms, gated models needing an institutional email, and mismatches between the card and the paper in `licence_notes`.
 2. When a dataset has mirrors (Hugging Face, Kaggle, Owkin/TCIA copies), check that the mirror holds the *whole* dataset and the same licence. Preprocessed copies are often subsets (e.g. PLISM's Hugging Face copy omits the smartphone images). Record this in `licence_notes` or `notes`.
 3. Record access steps in `access_actions` (e.g. "PhysioNet credentialing + CITI training (~1–2 weeks)", "HF gated access for UNI2-h").
 
