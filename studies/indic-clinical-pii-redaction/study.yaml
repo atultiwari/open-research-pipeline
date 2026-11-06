@@ -7,7 +7,7 @@ tags:
 - dpdp-act
 - lab-reports
 - small-models
-status: protocol
+status: analysis
 status_history:
 - status: new
   date: '2026-11-06'
@@ -18,6 +18,9 @@ status_history:
 - status: protocol
   date: '2026-11-06'
   note: Protocol drafted; awaiting Atul's sign-off
+- status: analysis
+  date: '2026-11-06'
+  note: 'Gate 2: protocol signed off by Atul'
 datasets:
 - id: indicpiidetx
   role: benchmark
