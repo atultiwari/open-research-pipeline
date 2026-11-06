@@ -1,0 +1,12 @@
+id: indiapii-bench
+name: IndiaPII-Bench (synthetic adversarial Indian PII benchmark)
+url: https://huggingface.co/datasets/maskflow-ai/indiapii-bench
+modality: synthetic text with labelled PII spans and labelled hard negatives
+organ_or_domain: Indian documents in 7 domains, including 286 medical notes
+size: 2,000 documents; 13,468 labelled spans
+access: open
+licence: CC BY 4.0
+licence_notes: Not gated (HF API 2026-11-06). Deterministic generator (seed 20260827) linked from the card.
+institution_country: maskflow, verify
+labels: Aadhaar, PAN, GSTIN, IFSC, UPI, ABHA, mobile numbers, addresses, names; look-alike codes labelled as negatives
+last_checked: '2026-11-06'

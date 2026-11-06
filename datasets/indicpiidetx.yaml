@@ -1,0 +1,14 @@
+id: indicpiidetx
+name: IndicPIIDetX v0.1 (synthetic Indian PII detection benchmark)
+url: https://huggingface.co/datasets/CobuildX-AI/IndicPIIDetX
+doi: 10.57967/hf/11457
+modality: synthetic text with character-offset PII spans
+organ_or_domain: general Indian documents (ten domains, one of them healthcare)
+size: '10,035 documents (8,028 test); 48,492 gold spans; 27 labels; 12 Indian languages + Indian English, native script, romanised and code-mixed; median 412 characters'
+access: open
+licence: CC BY 4.0
+licence_notes: Not gated (HF API 2026-11-06). Built by the same group (CobuildX) that trained the cbx-indic-pii-extractor models, with a different generator and name lists, per the model card.
+institution_country: CobuildX-AI, India (verify)
+labels: 27 PII labels incl. AADHAAR, PAN, ABHA (NATIONAL_ID), PATIENT_ID, PERSON, PHONE, ADDRESS, DATE_OF_BIRTH
+notes: About 1,000 healthcare-domain documents (chats, emails, forms, transcripts, prompts), not structured lab or pathology reports. 1,489 PII-free documents with look-alike codes.
+last_checked: '2026-11-06'

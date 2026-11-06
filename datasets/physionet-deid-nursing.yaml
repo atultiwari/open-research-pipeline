@@ -1,0 +1,13 @@
+id: physionet-deid-nursing
+name: Deidentified Medical Text (PhysioNet gold-standard nursing notes)
+url: https://physionet.org/content/deidentifiedmedicaltext/1.0/
+doi: 10.13026/jc2a-ca12
+modality: clinical free text with PHI replaced by realistic surrogates
+organ_or_domain: ICU nursing notes (MIMIC II)
+size: 2,434 nursing notes
+access: credentialed
+licence: PhysioNet Credentialed Health Data License 1.5.0
+licence_notes: Credentialed access, DUA and CITI "Data or Specimens Only Research" training (PhysioNet page, 2026-11-06); allow 1–2 weeks. No redistribution. The scoring software (PhysioNet deid 1.1) is open, GPL, with an ODC-BY project licence.
+institution_country: MIT / Beth Israel Deaconess Medical Center, USA
+labels: PHI locations (surrogates) for scoring de-identification recall
+last_checked: '2026-11-06'

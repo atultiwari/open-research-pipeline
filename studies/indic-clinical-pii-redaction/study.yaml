@@ -1,0 +1,76 @@
+tags:
+- de-identification
+- pii
+- privacy
+- local-models
+- india
+- dpdp-act
+- lab-reports
+- small-models
+status: new
+status_history:
+- status: new
+  date: '2026-11-06'
+  note: Added by atul
+datasets:
+- id: indicpiidetx
+  role: benchmark
+- id: indiapii-bench
+  role: benchmark
+- id: ylemis-india-pii
+  role: benchmark
+- id: physionet-deid-nursing
+  role: external-validation
+risks:
+- No open real Indian clinical reports exist; results on synthetic reports may overstate real performance (state
+  this; seek an IRB-approved real-report check later)
+- Removing explicit identifiers does not remove re-identification risk from rare diagnoses, small towns or dates
+  (quasi-identifiers)
+- Meddies-PII (17 languages) and MedDeID may release multilingual clinical models during the study
+- DATE redaction destroys intervals that clinical questions need; date-shifting must be designed carefully
+- The models' own benchmark (IndicPIIDetX) comes from the same group
+access_actions:
+- None for the models or the three Indian benchmarks (open, not gated)
+- 'Optional English clinical check: PhysioNet credentialing + CITI training (~1–2 weeks) for the deidentified nursing-notes
+  corpus'
+- API key for one cloud LLM (Claude or GPT) for the utility arm, used only on synthetic reports
+candidate_journals:
+- jamia
+- ijmi
+- jbi
+added_at: '2026-11-06'
+added_by: atul
+id: indic-clinical-pii-redaction
+title: Can a 17–58M-parameter model on a clinic laptop strip patient identifiers from Indian lab, pathology and
+  discharge reports well enough to send them to a cloud LLM? Leakage, over-redaction and downstream-utility benchmark
+  on a synthetic Indian report corpus
+area: clinical-data-llm
+source:
+  type: model
+  title: 'cbx-indic-pii-extractor (17M, 36M, 58M): Indian PII extraction models (Hugging Face collection ''Indic
+    PII Extractor'')'
+  authors: CobuildX-AI
+  venue: Hugging Face model release
+  date: '2026-11-05'
+  url: https://huggingface.co/collections/CobuildX-AI/indic-pii-extractor
+  code_url: https://huggingface.co/CobuildX-AI/cbx-indic-pii-extractor-17M
+  code_licence: Apache-2.0 (models and bundled pii.py); base model mmBERT-small is MIT
+  code_note: No paper. Model cards report results on IndicPIIDetX (same group), Ylemis India-PII and IndiaPII-Bench.
+    Trained on ~74,000 synthetic documents; the 307M teacher is not released.
+study_type: Benchmark of small on-device de-identification models on a new synthetic Indian clinical-report corpus,
+  with a downstream cloud-LLM utility test
+reporting_guideline: TRIPOD+AI (adapted for NLP de-identification); TRIPOD-LLM items for the cloud-LLM utility arm
+novelty_delta: The Indic PII models were trained and tested on chats, emails and forms, and do not cover structured
+  Indian lab, pathology and discharge reports (UHID and lab IDs, referring doctors, sample barcodes, eponymous diseases).
+  This study builds a pathologist-designed synthetic corpus of such reports, measures identifier leakage on a CPU
+  laptop, measures over-redaction of clinically needed content (dates, eponyms, doses), and checks that cloud-LLM
+  answers on redacted reports match answers on the originals.
+compute:
+  tier: laptop
+  estimate: Inference and evaluation on a CPU laptop; optional fine-tuning of the 17M/58M models on Colab or RunPod
+    (1–3 GPU-h); cloud-LLM utility arm ~US$10–40 in API calls; corpus generation with a local or API LLM ~US$5–20
+est_weeks: 6
+scores:
+  fit: 5
+  feasibility: 5
+  novelty: 4

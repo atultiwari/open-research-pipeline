@@ -1,0 +1,11 @@
+id: ylemis-india-pii
+name: Ylemis India-PII benchmark
+url: https://huggingface.co/datasets/Pranshurs/ylemis-india-pii-benchmark
+modality: synthetic multilingual text with PII spans
+organ_or_domain: Indian business text (incl. OCR-style text)
+size: 10,000 cases; 16 entity types; 14 language/format slices
+access: open
+licence: CC0 1.0
+licence_notes: Not gated (HF API 2026-11-06). Published by a redaction vendor (Ylemis).
+labels: person, address, location, organization, account_id, medical_id and others
+last_checked: '2026-11-06'
