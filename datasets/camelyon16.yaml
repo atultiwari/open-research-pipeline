@@ -1,14 +1,27 @@
 id: camelyon16
 name: CAMELYON16
 url: https://camelyon16.grand-challenge.org/
-modality: WSI
-organ_or_domain: breast lymph nodes
-size: ~700 GB
+modality: WSI (H&E, generic TIFF)
+organ_or_domain: breast cancer sentinel lymph nodes
+size: '399 WSIs; 752.5 GB of images on the AWS bucket (S3 listing, 2026-11-06)'
 access: open
 licence: CC0
-licence_notes: Mirrored on AWS Open Data, no account.
-institution_country: Netherlands
-labels: Metastasis annotations
+licence_notes: 'license.txt in the AWS bucket states CC0 1.0 (checked 2026-11-06); the AWS registry page also says CC0. The
+  dataset paper (Litjens et al. 2018) is CC BY 4.0. Derived feature sets on Hugging Face carry their own, stricter
+  licences (e.g. owkin/camelyon16-features: Owkin non-commercial; kaczmarj/camelyon16-uni: CC BY-NC-SA 4.0, gated;
+  torchmil/Camelyon16_MIL: Apache-2.0).'
+institution_country: 'Radboud University Medical Center (Nijmegen) and University Medical Center Utrecht, Netherlands'
+labels: 'Slide-level normal/tumour labels and exhaustive polygon annotations of metastases (ASAP XML) plus tumour/tissue
+  masks; README lists 20 tumour slides whose annotations are not exhaustive'
+citation: 'Litjens G et al. 1399 H&E-stained sentinel lymph node sections of breast cancer patients: the CAMELYON dataset.
+  GigaScience 7(6), giy065 (2018). doi:10.1093/gigascience/giy065. Challenge: Ehteshami Bejnordi B et al., JAMA 2017.'
+doi: 10.5524/100439
 alt_urls:
 - https://registry.opendata.aws/camelyon/
+- https://gigadb.org/dataset/100439
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC6007545/
+notes: 'No account needed: aws s3 ls --no-sign-request s3://camelyon-dataset/CAMELYON16/ (bucket in us-west-2). Folders:
+  images, annotations, masks, evaluation, background_tissue. Scanners: RUMC slides on a 3DHistech Pannoramic 250 Flash II,
+  UMCU slides on a Hamamatsu NanoZoomer-XR (dataset paper). The README says normal_86 was renamed tumor_111 and test_049
+  (a duplicate) was removed. The GigaDB DOI covers snapshots of both CAMELYON16 and CAMELYON17.'
 last_checked: '2026-11-06'

@@ -1,13 +1,31 @@
 id: camelyon17
 name: CAMELYON17
 url: https://camelyon17.grand-challenge.org/
-modality: WSI
-organ_or_domain: breast lymph nodes (5 centres)
-size: verify
+modality: WSI (H&E, generic TIFF)
+organ_or_domain: breast cancer sentinel lymph nodes (5 Dutch centres)
+size: '1,000 WSIs (200 patients x 5 nodes); 2,973.8 GB of images on the AWS bucket, of which the 500 training WSIs
+  (patients 000-099) are 1,461 GB (S3 listing, 2026-11-06)'
 access: open
-licence: CC0 (verify)
-institution_country: Netherlands
+licence: CC0
+licence_notes: 'license.txt in the AWS bucket states CC0 1.0 (checked 2026-11-06); the AWS registry page also says CC0.
+  Size mismatch to note: the dataset paper gives 2.95 TB for CAMELYON16 and CAMELYON17 together, but the current AWS
+  bucket holds about 3.7 TB of images (752.5 GB + 2,973.8 GB). The WILDS Camelyon17 patch version is a separate,
+  patch-level derivative.'
+institution_country: 'Radboud UMC, Canisius-Wilhelmina Hospital (Nijmegen), UMC Utrecht, Rijnstate Hospital (Arnhem),
+  LabPON (Hengelo), Netherlands'
+labels: 'stages.csv gives patient pN-stage and slide labels (negative / ITC / micro / macro) for the 500 training WSIs
+  only: 318 negative, 36 ITC, 59 micro, 87 macro; 100 WSIs per centre. 50 WSIs (10 per centre) have exhaustive
+  metastasis contours. Test-set labels are not in stages.csv.'
+citation: 'Litjens G et al. GigaScience 7(6), giy065 (2018). doi:10.1093/gigascience/giy065. Challenge: Bandi P et al.,
+  IEEE TMI 2019.'
+doi: 10.5524/100439
 alt_urls:
 - https://registry.opendata.aws/camelyon/
-notes: 'Multi-centre: use for external validation of CAMELYON16 models.'
+- https://gigadb.org/dataset/100439
+- https://pmc.ncbi.nlm.nih.gov/articles/PMC6007545/
+notes: 'Multi-centre and multi-scanner: three centres (RUMC, CWZ, RST) scanned on a 3DHistech Pannoramic 250 Flash II at
+  RUMC, UMCU on a Hamamatsu NanoZoomer-XR, LabPON on a Philips Ultrafast Scanner (dataset paper). stages.csv codes centres
+  0-4; the mapping of codes to hospitals is verify. Training-set image size per centre code (GB): 0: 262, 1: 472, 2: 309,
+  3: 321, 4: 98. RUMC and UMCU also supplied CAMELYON16, so only CWZ, RST and LabPON are truly external to a CAMELYON16
+  model. No account needed: aws s3 ls --no-sign-request s3://camelyon-dataset/CAMELYON17/.'
 last_checked: '2026-11-06'
