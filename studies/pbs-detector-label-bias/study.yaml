@@ -1,0 +1,70 @@
+tags:
+- haematology
+- blood-smear
+- object-detection
+- yolo
+- annotation-bias
+- cross-dataset
+- lmic
+status: new
+status_history:
+- status: new
+  date: '2026-11-06'
+  note: Added by atul
+datasets:
+- id: txl-pbc
+  role: development
+- id: bccd
+  role: external-validation
+- id: pbc-barcelona
+  role: development
+- id: raabin-wbc
+  role: development
+- id: bbbc041
+  role: external-validation
+risks:
+- 'Crowded field: many YOLO-on-blood-smear papers; the contribution must be the bias and generalisation evidence,
+  not another leaderboard'
+- 'Pathologist re-annotation time: 126 test images with ~1,800 boxes (~2–3 days with a pre-label-free tool)'
+- TXL-PBC repackages PBC (CC BY 4.0) and Raabin-WBC (no stated licence) under MIT; keep use research-only and cite
+  all sources
+- BBBC041 is malaria smears (CC BY-NC-SA 3.0) with no platelet class
+access_actions:
+- 'None: TXL-PBC (GitHub/Figshare), BCCD (GitHub), PBC (Mendeley), Raabin-WBC and BBBC041 are direct downloads'
+candidate_journals:
+- jiim
+- ijpm
+- cmig
+added_at: '2026-11-06'
+added_by: atul
+id: pbs-detector-label-bias
+title: Do blood-smear detector rankings reflect the labeller? Pathologist re-annotation and leave-one-source-out
+  testing of YOLO and transformer detectors on TXL-PBC, with cell-count agreement
+area: computational-pathology
+source:
+  type: conference
+  title: Comparative Evaluation of YOLO Architectures for Automated Peripheral Blood Smear Cell Detection
+  authors: Shah A et al.
+  venue: 2026 International Conference on Intelligent Computing and Sustainable Innovations in Technology (IC-SIT),
+    IEEE; paywalled
+  date: '2026-09-08'
+  url: https://doi.org/10.1109/IC-SIT69723.2026.11735904
+  doi: 10.1109/IC-SIT69723.2026.11735904
+  code_note: No code found. Full text is paywalled; only the abstract and IEEE metadata were read.
+  code_licence: n/a (no repository)
+study_type: Methodological benchmark of object detectors (annotation-source bias, cross-source generalisation, count
+  agreement)
+reporting_guideline: CLAIM 2024
+novelty_delta: The source ranks YOLOv3–v8 on TXL-PBC and finds YOLOv8 best, but TXL-PBC labels were pre-drawn by
+  a YOLOv8n model and then reviewed, and its split mixes the four source datasets at random. This study has a pathologist
+  re-annotate the test set from scratch, tests whether detector rankings change, tests leave-one-source-out generalisation
+  and an external expert-labelled set (BBBC041), and reports per-field cell-count agreement instead of mAP alone.
+compute:
+  tier: colab
+  estimate: '1,260 small images: each detector trains in under 1 GPU-h on a Colab T4 or laptop GPU; ~8 detectors
+    × 5 seeds × (random + 4 leave-one-source-out splits) ≈ 20–40 GPU-h on RunPod (~US$10–20)'
+est_weeks: 5
+scores:
+  fit: 4
+  feasibility: 4
+  novelty: 3

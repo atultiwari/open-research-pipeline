@@ -1,0 +1,12 @@
+id: bbbc041
+name: BBBC041 (P. vivax malaria blood smears, Broad Bioimage Benchmark Collection)
+url: https://bbbc.broadinstitute.org/BBBC041
+modality: thin blood smear images with expert bounding boxes
+organ_or_domain: blood (malaria thin smears)
+size: verify
+access: open
+licence: CC BY-NC-SA 3.0
+licence_notes: Licence stated on the BBBC page (2026-11-06). Non-commercial, share-alike.
+labels: 'Uninfected RBCs and leukocytes, plus four infected-cell stages (gametocyte, ring, trophozoite, schizont); "difficult" flag'
+notes: Expert-drawn RBC and leukocyte boxes from a different lab, stain and scanner, so usable as an external test for RBC and WBC detection (no platelet class).
+last_checked: '2026-11-06'

@@ -1,0 +1,15 @@
+id: txl-pbc
+name: TXL-PBC (curated, re-annotated peripheral blood cell detection dataset)
+url: https://github.com/lugan113/TXL-PBC_Dataset
+doi: 10.6084/m9.figshare.27073186.v8
+modality: peripheral blood smear field images with YOLO-format bounding boxes
+organ_or_domain: blood (peripheral smear)
+size: '1,260 images (train 882, val 252, test 126); 18,143 boxes for WBC, RBC and platelets. Sources: 160 BCCD, 100 BCDD, 500 PBC, 500 Raabin-WBC'
+access: open
+licence: MIT
+licence_notes: 'Repo states MIT (GitHub API 2026-11-06), but it repackages third-party images: PBC is CC BY 4.0 (attribution needed) and Raabin-WBC has no stated licence (see datasets/raabin-wbc). The Sci Data paper is CC BY-NC-ND 4.0. Treat the images as research-only and cite all four sources.'
+institution_country: Northern Arizona University, USA / independent researcher, China
+labels: WBC, RBC, Platelet boxes. Pre-labelled by a YOLOv8n model trained on 250 hand-labelled images, then manually reviewed. Images shuffled across sources before a random split (Gan et al. 2025).
+citation: Gan L, Li X, Wang X. A curated and re-annotated peripheral blood cell dataset integrating four public resources. Sci Data 12, 1694 (2025). doi:10.1038/s41597-025-05980-z
+notes: 'metadata_file.xlsx maps each image to its source dataset, which allows leave-one-source-out splits. Also on Figshare (doi:10.6084/m9.figshare.27073186.v8). The dataset paper''s own baselines (Table 3) already reach mAP50 0.980 (YOLOv5s).'
+last_checked: '2026-11-06'

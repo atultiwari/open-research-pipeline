@@ -1,0 +1,11 @@
+id: bccd
+name: BCCD (Blood Cell Count and Detection)
+url: https://github.com/Shenggan/BCCD_Dataset
+modality: peripheral blood smear field images with VOC-format bounding boxes
+organ_or_domain: blood (peripheral smear)
+size: 364 images, 640 x 480 (Gan et al. 2025)
+access: open
+licence: MIT
+licence_notes: Licence as reported by GitHub (API 2026-11-06). Gan et al. (Sci Data 2025, Fig. 9) show missing or wrong RBC labels in the original annotations; TXL-PBC kept and re-annotated 160 images.
+labels: WBC, RBC, Platelets boxes
+last_checked: '2026-11-06'
