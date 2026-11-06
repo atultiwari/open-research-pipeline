@@ -53,6 +53,8 @@ Atul has no data of his own. For every dataset the study needs:
 2. When a dataset has mirrors (Hugging Face, Kaggle, Owkin/TCIA copies), check that the mirror holds the *whole* dataset and the same licence. Preprocessed copies are often subsets (e.g. PLISM's Hugging Face copy omits the smartphone images). Record this in `licence_notes` or `notes`.
 3. Record access steps in `access_actions` (e.g. "PhysioNet credentialing + CITI training (~1–2 weeks)", "HF gated access for UNI2-h").
 
+If a supposedly de-identified open dataset turns out to contain direct identifiers (names, phone numbers, record numbers linked to names): stop using it, delete any downloaded copy, do **not** add it to `datasets/`, and do **not** describe the identifiers in any committed file (the repo is public; say only "excluded: de-identification concerns, pending clarification with the depositors"). Tell Atul privately in your report so he can decide whether to notify the depositors.
+
 If the source used private or paid data, or UK Biobank, write "Not directly replicable" in `replication.md`. Then either name the closest open surrogate and redesign around it, or set `status: rejected` with the reason (via `scripts/set_status.py`). Say this plainly to Atul.
 
 ## 5. Write `replication.md`
