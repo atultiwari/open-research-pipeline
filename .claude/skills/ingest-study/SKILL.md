@@ -98,6 +98,13 @@ Useful searches (all public, with the project User-Agent). Prefer OpenAlex: Sema
 - `https://export.arxiv.org/api/query?search_query=all:<terms>&sortBy=submittedDate&max_results=50`
 - `https://api.biorxiv.org/details/medrxiv/<YYYY-MM-DD>/<YYYY-MM-DD>` (date-range listing)
 
+**When a service refuses** (OpenAlex daily budget used up, arXiv or Semantic Scholar 429), fall back in this order and record which one you used:
+1. Crossref: `https://api.crossref.org/works?query.bibliographic=<terms>&filter=from-pub-date:<YYYY-MM-DD>&rows=50`.
+2. Europe PMC (includes medRxiv/bioRxiv preprints): `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=<terms>%20AND%20FIRST_PDATE:[<YYYY-MM-DD>%20TO%20<YYYY-MM-DD>]&format=json&pageSize=50`.
+3. Web search.
+
+If fewer than two independent sources could be searched for a gap, mark that gap's novelty check "incomplete, rerun before the protocol".
+
 ## 7. Write `study.yaml`
 
 Copy the essence of the recommended extension into `study.yaml`:
