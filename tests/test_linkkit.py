@@ -48,3 +48,8 @@ def test_find_links_sorts_code_data_papers():
     assert out["datasets"] == ["https://huggingface.co/datasets/c/d", "https://zenodo.org/records/123"]
     assert out["papers"] == ["https://arxiv.org/abs/2501.00001"]
     assert out["dois"] == ["10.1000/xyz"]
+
+
+def test_doi_cleaning_strips_markdown_but_keeps_balanced_parens():
+    text = "See (doi 10.48550/arXiv.2411.14975)** and 10.1016/S0140-6736(20)30183-5."
+    assert find_links(text)["dois"] == ["10.1016/S0140-6736(20)30183-5", "10.48550/arXiv.2411.14975"]

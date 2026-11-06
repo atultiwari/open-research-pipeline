@@ -63,7 +63,9 @@ def http_json(url: str) -> dict | list:
 
 
 def _clean_doi(doi: str) -> str:
-    doi = urllib.parse.unquote(doi).rstrip(".,;)")
+    doi = urllib.parse.unquote(doi).rstrip(".,;*_`]")
+    while doi.endswith(")") and doi.count(")") > doi.count("("):  # markdown "(doi)" leftovers
+        doi = doi[:-1].rstrip(".,;*_`]")
     doi = re.sub(r"/(full|abstract|pdf|epdf|html|meta)$", "", doi, flags=re.I)
     return re.sub(r"(v\d+)?(\.full(\.pdf)?|\.abstract|\.pdf)?$", "", doi) if doi.startswith("10.1101/") else doi
 
