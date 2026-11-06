@@ -1,0 +1,12 @@
+id: nci-thesaurus
+name: NCI Thesaurus (NCIt)
+url: https://evs.nci.nih.gov/ftp1/NCI_Thesaurus/
+modality: biomedical terminology / ontology (concepts, synonyms, relations)
+organ_or_domain: oncology (neoplasms, morphology, anatomy)
+size: verify
+access: open
+licence: CC BY 4.0
+licence_notes: 'Terms of use page (2026-11-06): released under CC BY 4.0; "NCI Thesaurus" is a trademark. An open alternative to UMLS, which needs a UTS account and the UMLS licence agreement.'
+institution_country: National Cancer Institute (EVS), USA
+labels: Concept codes and semantic relations, including neoplasm-by-morphology hierarchies
+last_checked: '2026-11-06'

@@ -1,0 +1,82 @@
+tags:
+- report-generation
+- mllm
+- knowledge-graph
+- explainability
+- faithfulness
+- shortcut-learning
+- tcga
+- cptac
+status: new
+status_history:
+- status: new
+  date: '2026-11-06'
+  note: Added by atul
+datasets:
+- id: wsi-bench
+  role: benchmark
+- id: tcga
+  role: development
+- id: conch-v15-features-tcga
+  role: development
+- id: cptac
+  role: external-validation
+- id: nci-thesaurus
+  role: development
+risks:
+- Weights not yet released; retraining from the unlicensed repo is allowed for research, but publishable code should
+  be a reimplementation
+- WSI-Bench has no stated licence; the HF copy is gated with conditions
+- CONCH v1.5 and TITAN are CC-BY-NC-ND and gated; research use only
+- CPTAC has no free-text reports, so the external arm tests diagnosis and morphology claims, not BLEU
+- 'Pathologist review time: ~100 slides × 10–15 min on the GDC slide viewer'
+- Knowledge graph was curated from WSI-Bench ground-truth reports; whether test reports were excluded is not stated
+  (possible leakage)
+access_actions:
+- 'Hugging Face: accept WSI-Bench conditions (Lucas-yuc/WSI-Bench, auto); request CONCH v1.5 and TITAN (auto); the
+  CONCH v1.5 TCGA/CPTAC feature set (auto)'
+- 'Qwen2.5-1.5B/3B/7B-Instruct: open, Apache-2.0, no gating'
+- 'Optional, to reproduce the original UMLS graph: free UTS account and UMLS licence agreement (not needed for the
+  NCIt arm)'
+- Neo4j Community Edition for the graph store
+candidate_journals:
+- jiim
+- aim
+- cmig
+added_at: '2026-11-06'
+added_by: atul
+id: pathkgen-faithfulness
+title: Is the knowledge-graph explanation in PathKGen slide-specific? A pathologist audit of morphological claims,
+  metadata shortcuts and out-of-TCGA transfer, with an open NCIt-based graph
+area: computational-pathology
+source:
+  type: preprint
+  title: 'PathKGen: Pathology Knowledge Assisted MLLM for Explainable Histopathology (accepted to WACV 2027)'
+  authors: Rajapaksha N et al.
+  venue: arXiv (cs.CV); accepted to WACV 2027
+  date: '2026-10-24'
+  url: https://arxiv.org/abs/2610.33691
+  arxiv_id: 2610.33691v1
+  code_url: https://github.com/nadunnr/PathKGen
+  code_licence: 'None (no licence file on GitHub, 2026-11-06): run for research, reimplement rather than copy'
+  code_note: 'README says data and model weights ''will be available soon''. The authors'' preprocessed WSI-Bench
+    JSONs and TITAN slide features are already on Hugging Face (deepshark43/wsi_bench_pathkgen, no licence stated).
+    Project page: https://deepshark-uom.github.io/PathKGen/'
+study_type: Faithfulness and robustness audit of an LLM-based pathology report generator (expert review of generated
+  claims, counterfactual inputs, out-of-cohort transfer)
+reporting_guideline: TRIPOD-LLM
+novelty_delta: PathKGen's knowledge tokens are identical for every slide given one predicted TCGA cohort, the cohort
+  classifier leans on primary-site metadata, and the paper reports only BLEU/ROUGE/LLM-judge scores on 208 TCGA
+  slides. This study has a pathologist grade every morphological claim against the slide, measures how much of the
+  'explanation' survives site removal or swapping, tests transfer to CPTAC slides, and rebuilds the graph from the
+  openly licensed NCI Thesaurus instead of UMLS.
+compute:
+  tier: runpod
+  estimate: 'Inference only if the authors release weights (~2–4 GPU-h on an A40/L40S); otherwise retrain stage
+    1 + QLoRA stage 2 at 3B and 7B (~15–30 GPU-h on one A100 80 GB, ~US$25–50). TITAN features for CPTAC from the
+    released CONCH v1.5 features: ~2 GPU-h'
+est_weeks: 7
+scores:
+  fit: 5
+  feasibility: 4
+  novelty: 4

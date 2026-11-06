@@ -1,0 +1,17 @@
+id: wsi-bench
+name: WSI-Bench (slide-level VQA and report generation benchmark built on TCGA)
+url: https://huggingface.co/datasets/Lucas-yuc/WSI-Bench
+alt_urls:
+- https://huggingface.co/datasets/deepshark43/wsi_bench_pathkgen
+- https://github.com/XinhengLyu/WSI-LLaVA
+modality: WSI-text pairs (pathology reports, open and closed questions); slides from TCGA
+organ_or_domain: pan-cancer (TCGA)
+size: 'Report-generation subset: 9,749 train and 208 test pairs (as used by Rajapaksha et al. 2026); WSIs themselves come from the GDC'
+access: free-registration
+licence: verify
+licence_notes: 'Hugging Face copy is gated (auto: accept conditions to share your HF details) and has no dataset card or licence (2026-11-06). The WSI-LLaVA code repo is Apache-2.0, which does not cover the data. The PathKGen copy (deepshark43/wsi_bench_pathkgen) is not gated, states no licence, and bundles TITAN slide features, which derive from CC-BY-NC-ND models (CONCH v1.5, TITAN); treat it as research-only.'
+institution_country: verify
+labels: Free-text pathology reports and question-answer pairs per TCGA slide
+citation: 'Liang Y et al. WSI-LLaVA: a multimodal large language model for whole slide image. ICCV 2025; arXiv:2412.02141'
+notes: The underlying slides follow the TCGA/GDC terms (see datasets/tcga).
+last_checked: '2026-11-06'
