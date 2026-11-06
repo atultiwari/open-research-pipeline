@@ -1,0 +1,17 @@
+id: oicsad
+name: Open ICS Advisory Dataset (OICSAD) v0.1.0
+url: https://zenodo.org/records/22985479
+doi: 10.5281/zenodo.22985479
+modality: tabular (CSV) plus pipeline code
+organ_or_domain: industrial-control-system and medical-device advisories joined to KEV
+size: 3,937 advisories (3,749 ICSA, 188 ICSMA), 14,487 advisory-CVE links, 12,346 unique CVEs (CSAF commit 369141e,
+  2026-09-24)
+access: open
+licence: Data and documents CC BY 4.0; code MIT
+licence_notes: Built from CISA CSAF and KEV. Not endorsed by CISA or DHS. NVD and EPSS are not joined in v0.1.0 (the
+  record says v0.2 is planned). The author states that code and first drafts were produced with AI assistance.
+institution_country: verify
+citation: Ikwuogu FO. Open ICS Advisory Dataset (OICSAD) v0.1.0. Zenodo, 2026. doi:10.5281/zenodo.22985479
+notes: Use as an independent cross-check of the ICSMA parse (advisory and CVE counts, KEV joins), not as the primary
+  source.
+last_checked: '2026-11-06'

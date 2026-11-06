@@ -1,10 +1,19 @@
 id: cisa-kev
-name: CISA Known Exploited Vulnerabilities catalogue
+name: CISA Known Exploited Vulnerabilities (KEV) catalogue
 url: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
-modality: tabular
-organ_or_domain: exploited vulnerabilities
-size: verify
+alt_urls:
+- https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
+- https://www.cisa.gov/sites/default/files/licenses/kev/license.txt
+- https://github.com/cisagov/kev-data
+modality: tabular (CSV/JSON)
+organ_or_domain: vulnerabilities with confirmed exploitation in the wild
+size: 1,768 CVEs (catalogue version 2026.11.04)
 access: open
-licence: US government public data
+licence: CC0 1.0
+licence_notes: CISA's licence file states CC0 1.0; third-party links inside the catalogue keep their own terms, and
+  use does not permit the CISA logo or DHS seal. The GitHub mirror cisagov/kev-data shows NOASSERTION in the GitHub
+  API but contains the same CC0 licence text.
 institution_country: USA (CISA)
+labels: cveID, vendorProject, product, dateAdded, dueDate, knownRansomwareCampaignUse, cwes, notes
+notes: KEV starts on 2021-11-03 and is a floor for exploitation, not a complete record. Pin the catalogue version.
 last_checked: '2026-11-06'

@@ -1,0 +1,15 @@
+id: fda-cyber-communications
+name: FDA cybersecurity safety communications and alerts (medical devices)
+url: https://www.fda.gov/medical-devices/digital-health-center-excellence/cybersecurity
+modality: web documents (regulatory safety communications)
+organ_or_domain: medical-device cybersecurity regulation
+size: 18 communications, June 2013 to January 2025 (Menon 2026, Table 1); the most recent listed on 2026-11-06 is
+  dated 2025-01-30
+access: open
+licence: Public domain (FDA website policy, unless otherwise noted)
+licence_notes: FDA's website policy says its text and graphics are not copyrighted and may be reused freely; credit
+  is appreciated but not required.
+institution_country: USA (FDA CDRH)
+notes: Small hand-built table (date, device, vendor, linked CISA advisory). Older items sit lower on the page or in
+  archived communications; record the archive URL for each item you use.
+last_checked: '2026-11-06'

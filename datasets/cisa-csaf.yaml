@@ -1,11 +1,23 @@
 id: cisa-csaf
-name: CISA CSAF advisories (incl. ICS Medical Advisories)
+name: CISA CSAF advisories (incl. ICS Medical Advisories, ICSMA)
 url: https://github.com/cisagov/CSAF
-modality: structured advisories (CSAF JSON)
-organ_or_domain: medical-device vulnerabilities
-size: ICSMA subset ~400 advisories (verify)
+alt_urls:
+- https://www.cisa.gov/news-events/cybersecurity-advisories
+- https://www.cisa.gov/sites/default/files/csaf/provider-metadata.json
+modality: structured advisories (CSAF 2.0 JSON)
+organ_or_domain: medical-device and industrial-control-system vulnerabilities
+size: 191 ICSMA files in csaf_files/OT/white (first released 2016-10 to 2026-10; 534 vulnerability entries, 527 unique
+  CVEs, 83 vendors), checked 2026-11-06 on branch develop. The repo holds about 12,000 files in total (IT, OT, VA).
 access: open
-licence: US government public data (verify)
+licence: No licence file in the GitHub repo; CISA content is a US federal government work, marked TLP:WHITE
+  ("Disclosure is not limited") (formal licence statement - verify)
+licence_notes: Each file carries a DHS "as is" legal disclaimer and a TLP:WHITE marking. A third-party derivative
+  (OICSAD, Zenodo, CC BY 4.0) describes the CSAF files as public domain. CISA also republishes vendor CSAFs, which keep
+  the vendor's original dates and revision history.
 institution_country: USA (CISA)
-notes: Check coverage of pre-CSAF advisories.
+labels: Per vulnerability, CVE, CWE, CVSS v3 base score and vector, product IDs, remediation category (only vendor_fix
+  and mitigation appear in the ICSMA files); per advisory, initial release date and revision history.
+notes: The CSAF corpus is incomplete for early ICSMAs. For example, ICSMA-16-089-01 (CareFusion Pyxis) is on
+  cisa.gov but not in the repo, which starts at ICSMA-16-279-01. Reconcile against the cisa.gov advisory listing and
+  record any hand-added advisories. No CVSS v4 blocks appear in the ICSMA files (CSAF 2.0 has no v4 field).
 last_checked: '2026-11-06'

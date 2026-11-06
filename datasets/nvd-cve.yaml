@@ -1,10 +1,20 @@
 id: nvd-cve
-name: NVD CVE API
+name: NVD CVE API 2.0
 url: https://nvd.nist.gov/developers/vulnerabilities
-modality: structured vulnerability records
-organ_or_domain: software vulnerabilities (CVSS, CWE)
-size: verify
+alt_urls:
+- https://services.nvd.nist.gov/rest/json/cves/2.0
+- https://nvd.nist.gov/developers/terms-of-use
+modality: structured vulnerability records (JSON)
+organ_or_domain: software vulnerabilities (CVSS, CWE, CPE)
+size: 420,021 CVE records (API totalResults, 2026-11-06)
 access: open
-licence: US government public data
+licence: NVD API Terms of Use (NIST public service); no explicit licence or public-domain statement found (verify)
+licence_notes: The Terms of Use ask products that use the API to show the notice "This product uses the NVD API but is
+  not endorsed or certified by the NVD", and forbid implying NVD endorsement. Without a key the limit is 5 requests per
+  rolling 30 s; a free API key (email, must accept the terms) raises it to 50. The NVD pages are JavaScript-rendered,
+  so the terms were confirmed via a web search summary, not a direct fetch (verify wording before publication).
 institution_country: USA (NIST)
+notes: Many recent CVEs carry vulnStatus "Deferred" or "Awaiting Analysis" because of the NVD enrichment backlog; CVSS
+  and CWE then come from the CNA or from CISA as an Authorized Data Publisher (ADP). Record which source each score
+  came from. Example checked 2026-11-06 (CVE-2025-0626) was Deferred, with CVSS v4.0, v3.1 and SSVC metrics present.
 last_checked: '2026-11-06'
