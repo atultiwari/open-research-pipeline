@@ -4,6 +4,7 @@
 Usage:
     python3 scripts/fetch_meta.py <url-or-id> [more ...]      # prints a JSON list
     python3 scripts/fetch_meta.py --pretty https://arxiv.org/abs/2601.04163
+    python3 scripts/fetch_meta.py --excerpt 20000 <url>          # keep more README/card text
 
 Supports arXiv, bioRxiv/medRxiv, DOI (Crossref, OpenAlex fallback), PubMed/PMC (E-utilities),
 GitHub, Hugging Face datasets and models, Zenodo, Figshare, PhysioNet, Kaggle, and any web page
@@ -19,6 +20,7 @@ import re
 import shutil
 import subprocess
 import sys
+import time
 import urllib.parse
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -27,7 +29,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from linkkit import FetchError, Link, classify, find_links, http_get, http_json  # noqa: E402
 
 ATOM = {"a": "http://www.w3.org/2005/Atom", "arxiv": "http://arxiv.org/schemas/atom"}
-EXCERPT = 4000  # characters of abstract/README kept for reading
+EXCERPT = 4000  # default characters of abstract/README kept; override with --excerpt N
 
 
 def record(link: Link, **fields) -> dict:
@@ -42,9 +44,21 @@ def record(link: Link, **fields) -> dict:
     return merged
 
 
+def _arxiv_feed(url: str, tries: int = 3) -> ET.Element:
+    """arXiv answers rate-limited requests with a non-XML page; wait and retry (arXiv asks for 3 s between calls)."""
+    for attempt in range(tries):
+        raw = http_get(url)
+        try:
+            return ET.fromstring(raw)
+        except ET.ParseError:
+            if attempt == tries - 1:
+                raise FetchError("arXiv API returned a non-XML page (rate limited?); wait a minute and retry")
+            time.sleep(3 * (attempt + 1))
+    raise FetchError("unreachable")
+
+
 def fetch_arxiv(link: Link) -> dict:
-    raw = http_get(f"https://export.arxiv.org/api/query?id_list={link.key}")
-    entry = ET.fromstring(raw).find("a:entry", ATOM)
+    entry = _arxiv_feed(f"https://export.arxiv.org/api/query?id_list={link.key}").find("a:entry", ATOM)
     if entry is None or entry.find("a:title", ATOM) is None:
         raise FetchError(f"arXiv has no record for {link.key}")
     text = lambda tag: (entry.findtext(tag, default="", namespaces=ATOM) or "").strip()  # noqa: E731
@@ -259,7 +273,12 @@ def fetch(raw: str) -> dict:
 
 
 def main(argv: list[str]) -> int:
+    global EXCERPT
     pretty = "--pretty" in argv
+    if "--excerpt" in argv:
+        i = argv.index("--excerpt")
+        EXCERPT = int(argv[i + 1])
+        argv = argv[:i] + argv[i + 2:]
     items = [a for a in argv if not a.startswith("--")]
     if not items:
         print(__doc__)

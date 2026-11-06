@@ -22,7 +22,11 @@ python3 scripts/fetch_meta.py --pretty <link> [<link> ...] > /tmp/meta.json
 
 It classifies the link and queries the public API: arXiv export API, bioRxiv/medRxiv API, Crossref (OpenAlex fallback), NCBI E-utilities, GitHub (`gh api`), Hugging Face API, Zenodo, Figshare, and PhysioNet/Kaggle/web pages via citation meta tags. Check `warnings` (gated access, NC/ND licences, no code licence, credentialing). If a fetch fails, say so and fall back to WebFetch of the page. Never guess the missing fields.
 
-Then read the full text you need: the paper (arXiv HTML/PDF, PMC, publisher page) or the README/dataset card. `text_excerpt` is for your reading only. **Never paste it into a file;** summarise in your own words, with at most one short quoted sentence.
+Use `--excerpt 20000` when a README or dataset card is long (licence sections often sit near the end).
+
+Then read the full text you need: the paper (arXiv HTML/PDF, PMC, publisher page) or the README/dataset card. If a publisher page redirects to a login (Nature, Elsevier), read the open copy instead: Europe PMC (`https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:<doi>&format=json&resultType=core`), PMC, or the arXiv HTML. `text_excerpt` is for your reading only. **Never paste it into a file;** summarise in your own words, with at most one short quoted sentence.
+
+**Preprint later published?** Point `source` at the peer-reviewed version (`type: journal`, its `doi`, `url`, `venue` and `date`), keep `arxiv_id`, and mention the preprint in `source.title` or `venue`. Read both versions: limitations and numbers can change.
 
 ## 2. Expand the graph
 
@@ -45,7 +49,8 @@ python3 scripts/find_dupes.py --meta /tmp/meta.json [<extra links>] [--title "<s
 
 Atul has no data of his own. For every dataset the study needs:
 1. Find or add it in `datasets/<slug>.yaml` (schema: `schema/dataset.schema.json`). For a new dataset, fetch its page or API and record `access` (`open` / `free-registration` / `credentialed`), the licence exactly as stated, size, gating, institution and country. Flag NC/ND terms, gated models needing an institutional email, and mismatches between the card and the paper in `licence_notes`.
-2. Record access steps in `access_actions` (e.g. "PhysioNet credentialing + CITI training (~1–2 weeks)", "HF gated access for UNI2-h").
+2. When a dataset has mirrors (Hugging Face, Kaggle, Owkin/TCIA copies), check that the mirror holds the *whole* dataset and the same licence. Preprocessed copies are often subsets (e.g. PLISM's Hugging Face copy omits the smartphone images). Record this in `licence_notes` or `notes`.
+3. Record access steps in `access_actions` (e.g. "PhysioNet credentialing + CITI training (~1–2 weeks)", "HF gated access for UNI2-h").
 
 If the source used private or paid data, or UK Biobank, write "Not directly replicable" in `replication.md`. Then either name the closest open surrogate and redesign around it, or set `status: rejected` with the reason (via `scripts/set_status.py`). Say this plainly to Atul.
 
@@ -83,7 +88,7 @@ For each worthwhile gap (usually 3–6), write a `### Gap N: <name>` block with:
 
 End with `## Recommended extension`: the single best gap, and why (feasibility × novelty, fit for a pathologist, speed to a preprint, journal fit).
 
-Useful searches (all public, with the project User-Agent):
+Useful searches (all public, with the project User-Agent). Prefer OpenAlex: Semantic Scholar and arXiv rate-limit without a key (HTTP 429). Pause at least 3 s between arXiv calls, never run arXiv searches in parallel, and if Semantic Scholar refuses, record "rate-limited, not checked" rather than skipping silently.
 - `https://api.openalex.org/works?filter=cites:<openalex_id>&sort=publication_date:desc&per-page=50`
 - `https://api.openalex.org/works?search=<terms>&filter=from_publication_date:<YYYY-MM-DD>`
 - `https://api.semanticscholar.org/graph/v1/paper/arXiv:<id>/citations?fields=title,year,externalIds&limit=100`

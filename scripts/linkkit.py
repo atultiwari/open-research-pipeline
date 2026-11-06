@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import json
 import re
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -30,15 +31,27 @@ class FetchError(RuntimeError):
     """Raised when a remote request fails; the message is safe to show to the user."""
 
 
-def http_get(url: str, accept: str = "*/*") -> bytes:
+RETRY_STATUS = {429, 500, 502, 503, 504}
+
+
+def http_get(url: str, accept: str = "*/*", retries: int = 2, backoff: float = 3.0) -> bytes:
+    """GET with a polite User-Agent; retries rate limits and server errors with a growing pause."""
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": accept})
-    try:
-        with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
-            return resp.read()
-    except urllib.error.HTTPError as err:
-        raise FetchError(f"HTTP {err.code} for {url}") from err
-    except (urllib.error.URLError, TimeoutError) as err:
-        raise FetchError(f"Could not reach {url}: {getattr(err, 'reason', err)}") from err
+    for attempt in range(retries + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
+                return resp.read()
+        except urllib.error.HTTPError as err:
+            if err.code in RETRY_STATUS and attempt < retries:
+                time.sleep(backoff * (attempt + 1))
+                continue
+            raise FetchError(f"HTTP {err.code} for {url}") from err
+        except (urllib.error.URLError, TimeoutError) as err:
+            if attempt < retries:
+                time.sleep(backoff * (attempt + 1))
+                continue
+            raise FetchError(f"Could not reach {url}: {getattr(err, 'reason', err)}") from err
+    raise FetchError(f"Gave up on {url}")
 
 
 def http_json(url: str) -> dict | list:
