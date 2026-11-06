@@ -1,12 +1,17 @@
 id: medmcqa-path
 legacy_id: cl-2026w45-medmcqa-path
-title: 'Pathology and lab-medicine slice of MedMCQA (AIIMS/NEET-PG style): prompt sensitivity, answer-order bias
-  and permutation voting across open-weight and frontier models, with a pathologist-built error taxonomy'
+title: Wrong key or wrong model? A pathologist-adjudicated, order-robust re-evaluation of the 630 MedMCQA pathology,
+  microbiology and biochemistry items across 2026 open-weight LLMs, testing permutation consensus as a detector
+  of faulty answer keys and as an abstention signal
 area: clinical-data-llm
 tags:
 - llm-benchmark
 - prompt-sensitivity
 - pathology-education
+- answer-order-bias
+- benchmark-audit
+- expert-annotation
+- lab-medicine
 status: new
 status_history:
 - status: new
@@ -15,32 +20,77 @@ status_history:
 source:
   type: preprint
   title: 'When Chain-of-Thought Backfires: Evaluating Prompt Sensitivity in Medical Language Models'
-  authors: verify
-  venue: arXiv
+  authors: Sadanandan B, Behzadan V
+  venue: arXiv preprint (cs.CL, cs.AI), v1; earlier version on Research Square (doi:10.21203/rs.3.rs-8759042/v1,
+    2026-02-03); code README calls it a camera-ready for '2AI 2025' but no proceedings record was found (verify)
   date: '2026-03-26'
   url: https://arxiv.org/abs/2603.25960
-  arxiv_id: '2603.25960'
+  arxiv_id: 2603.25960v1
   code_url: https://github.com/UNHSAILLab/MedMCQA-Robustness-Study
   code_licence: MIT
+  doi: 10.48550/arXiv.2603.25960
+  code_note: 'Full pipeline (experiments 1-5, Colab notebook, LaTeX source). Its answer parser (parse_mcq_answer)
+    returns the first A-D character anywhere in the upper-cased output, and CoT is capped at 256 tokens: re-score
+    with a strict parser. The option shuffler also moves ''all of the above''-type options.'
 datasets:
 - id: medmcqa
   role: benchmark
-study_type: LLM benchmarking / robustness evaluation
-reporting_guideline: TRIPOD-LLM; MI-CLEAR-LLM
-novelty_delta: Source tested only MedGemma 4B/27B with aggregate accuracy. Adds per-subject pathology/microbiology/biochemistry
-  results, newer open models plus 1–2 frontier APIs, a pathologist error taxonomy, an audit of wrong answer keys
-  in pathology items, and cost per correct answer.
+study_type: LLM benchmarking / robustness evaluation with expert answer-key adjudication (diagnostic accuracy of
+  model consensus for key errors)
+reporting_guideline: TRIPOD-LLM; MI-CLEAR-LLM items for prompts, decoding and answer parsing; STARD items for the
+  key-error detection analysis
+novelty_delta: The source tested only MedGemma 4B/27B on pooled MedMCQA with a parser that reads the first A-D character
+  in any output, and Medmarks has since shown answer-order sensitivity across 61 models. No MedMCQA answer-key audit
+  or validated 'model consensus finds wrong keys' study was found. Adds a pathologist audit (with second rater)
+  of all 630 pathology/microbiology/biochemistry validation items, anchored-aware 24-permutation and cloze scoring
+  of 11 open 2026 models with a strict parser, tests whether order flips and CoT changes concentrate in flawed items,
+  and measures permutation consensus as a key-error detector (AUROC against expert labels) and as an abstention
+  signal.
 compute:
   tier: runpod
-  estimate: RunPod (~20–40 GPU-h) + API (~USD 30–80)
-est_weeks: 5
+  estimate: About 30-50 GPU-h on RunPod (vLLM, BF16; L40S/A100, 80 GB for 27-31B and gpt-oss) for 11 models x 630
+    items x up to 24 orderings (direct and cloze) plus thinking/CoT on 4 cyclic orderings; roughly US$40-90. Optional
+    frontier API arm about US$20-40. Expert audit about 20-25 h for Atul plus about 190 items for a second rater
+est_weeks: 6
 scores:
-  feasibility: 5
-  novelty: 3
-  fit: null
-risks: []
-access_actions: []
-candidate_journals: []
+  feasibility: 4
+  novelty: 4
+  fit: 5
+risks:
+- 'Novelty check incomplete: OpenAlex budget exhausted, Semantic Scholar and arXiv API rate-limited on 2026-11-06
+  (Crossref, Europe PMC and web search used); rerun arXiv and OpenAlex searches before the protocol'
+- Medmarks (arXiv 2605.01417) already reports multi-model answer-order sensitivity on MedMCQA; novelty rests on
+  the expert key audit, item-flaw stratification and the consensus-as-detector analysis, not on order sensitivity
+  itself
+- Source headline numbers may be parser artefacts (first A-D character anywhere in the output; 256-token CoT cap)
+  and the paper has internal inconsistencies (distractor-swap drop -8.9 in text vs 0.0 in table; 1,000-item subsets
+  for 27B cloze and voting); replicate with both the original and a strict parser
+- 'Expert time and single-rater bias: about 25 h of auditing; a second rater on a stratified 30% with Cohen''s kappa
+  is needed'
+- Model consensus can be confidently wrong where coaching sources share a misconception; use it only to triage items
+  for expert review, never to overturn keys
+- 'Ceiling effects: newer models may exceed 90% on old items, where position bias is hard to detect; include 4B
+  models and report by size'
+- 'Licences: MedMCQA HF card says Apache-2.0 in metadata but ''Needs More Information'' in text, GitHub repo is
+  MIT; question text comes from exam/coaching material, so release only item ids, audit labels and aggregates; MedGemma
+  uses Health AI Developer Foundations terms'
+- 'Contamination: MedMCQA is old and public, inflating absolute accuracies; within-item paired comparisons are less
+  affected'
+- 'Overlap inside this repo: quantised-labmed uses the same 630 items for quantisation and plans a pathology key
+  audit (its Gap 5); do the audit once here and share it, and keep the model panel aligned with quantised-labmed
+  and mpib-small-llm'
+access_actions:
+- 'None needed for data: MedMCQA is open and not gated on Hugging Face (pin revision 91c6572c454088bf71b679ad90aa8dffcd0d5868)'
+- Accept Health AI Developer Foundations terms (auto-gated) for google/medgemma-4b-it, google/medgemma-1.5-4b-it
+  and google/medgemma-27b-text-it
+- RunPod account with an L40S and an A100/H100 80 GB
+- Find a second pathologist (or microbiologist/biochemist) to re-rate about 190 items blind
+- 'Optional: API keys for one or two frontier models (about US$20-40)'
+candidate_journals:
+- jms
+- jbi
+- ijmi
 added_at: '2026-11-04T08:30:00Z'
 added_by: scout
 run_id: 2026-W45 (initial)
+last_reviewed: '2026-11-06'
