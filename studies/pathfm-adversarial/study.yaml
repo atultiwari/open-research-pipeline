@@ -1,12 +1,16 @@
 id: pathfm-adversarial
 legacy_id: cy-2026w45-pathfm-adversarial
-title: Adversarial vulnerability and cheap defences for patch-level pathology foundation models in MIL pipelines
-  (Camelyon16/TCGA), with cross-FM transferability
+title: Can one or two invisible patch changes flip slide-level diagnoses in foundation-model MIL pipelines, and
+  does the attention map give them away? A defensive benchmark of eight patch-level pathology encoders on CAMELYON16
+  and TCGA-NSCLC
 area: healthcare-cybersecurity
 tags:
 - adversarial-robustness
 - foundation-models
 - wsi
+- multiple-instance-learning
+- attack-detection
+- defensive-security
 status: new
 status_history:
 - status: new
@@ -15,35 +19,82 @@ status_history:
 source:
   type: preprint
   title: 'The Butterfly Effect in Pathology: Exploring Security in Pathology Foundation Models'
-  authors: verify
-  venue: arXiv (cs.CV/cs.CR)
+  authors: Liu J et al.
+  venue: 'arXiv (cs.CV), v1; expanded version retitled ''The Butterfly Effect in Pathology: Exploring Adversarial
+    Attack in Pathology Foundation Models'' posted on SSRN 2026 (doi:10.2139/ssrn.7383688), not peer-reviewed; no
+    journal version found 2026-11-06'
   date: '2025-05-30'
   url: https://arxiv.org/abs/2505.24141
-  arxiv_id: '2505.24141'
+  arxiv_id: 2505.24141v1
   code_url: https://github.com/Jiashuai-Liu-hmos/Attack-WSI-pathology-foundation-models
-  code_licence: None stated on GitHub (no licence file)
+  code_licence: 'None (no licence file on GitHub, checked 2026-11-06): run locally to check numbers, reimplement
+    rather than copy'
+  doi: 10.48550/arXiv.2505.24141
+  code_note: Last commit 2025-12-08 ('complete attack pipeline', likely matching the SSRN version). Includes attack,
+    defence (bit-depth, blur, randomised smoothing) and within-model noise-transfer scripts, plus label CSVs and
+    splits. No requirements file.
 datasets:
 - id: camelyon16
   role: development
 - id: tcga
   role: development
-study_type: Adversarial robustness benchmark
-reporting_guideline: CLAIM items optional
-novelty_delta: 'Original attacked slide-level FMs (CHIEF, PRISM, TITAN): ~0.1% perturbed patches dropped TITAN Camelyon16
-  accuracy from 98% to 42%. Extends to patch-level FMs (Phikon-v2, H-optimus, UNI2) under ABMIL/CLAM, transferability
-  between FMs, JPEG/stain-normalisation defences, and a pathologist''s threat-plausibility view.'
+- id: conch-v15-features-tcga
+  role: development
+- id: uni2h-features-tcga
+  role: development
+- id: virchow2-features-tcga
+  role: development
+- id: gigapath-features-tcga
+  role: development
+- id: plism
+  role: benchmark
+study_type: Defensive adversarial-robustness benchmark (vulnerability, detection and defence cost)
+reporting_guideline: CLAIM 2024, plus a pre-specified threat model and adversarial-evaluation items (budget, attacker
+  knowledge, defence-aware evaluation)
+novelty_delta: The source attacked slide-level models with frozen aggregators, and UTAP (Light Sci Appl 2026) already
+  showed universal patch perturbations transfer between patch encoders with linear probes. Adds the first test of
+  sparse, label-free perturbations against task-trained attention-MIL heads on eight current patch encoders, uses
+  the MIL attention map and encoder disagreement as cheap detectors with their false-alarm cost, measures the clean
+  cost of JPEG and stain-normalisation defences, and adds a pathologist's attention audit and threat-plausibility
+  analysis.
 compute:
   tier: runpod
-  estimate: RunPod (~30–60 GPU-h)
+  estimate: 'About 80-150 GPU-h on RunPod A100/L40S, roughly US$100-250 (verify current prices); defence grid limited
+    to three encoders on CAMELYON16; storage: stream CAMELYON16 (762.5 GB in full) and about 150 TCGA-NSCLC test
+    slides (about 120 GB); TCGA training heads from precomputed features'
 est_weeks: 8
 scores:
   feasibility: 3
   novelty: 4
-  fit: null
-risks: []
+  fit: 4
+risks:
+- 'Dual-use: attack code, settings, perturbed images and perturbations must stay in a private analysis repo and
+  never be released; publish aggregate metrics only (CLAUDE.md rule 6)'
+- 'Overlap risk: SSRN v2 of the source (full text unread, HTTP 403) or a UTAP follow-up may add task-trained MIL
+  heads or cross-model transfer; re-check before the protocol'
+- 'Novelty check incomplete: OpenAlex (daily budget used) and Semantic Scholar keyword search (HTTP 429) could not
+  be run on 2026-11-06'
+- Most encoders are CC-BY-NC-ND and gated (H-optimus-1 manual approval); Phikon-v2 uses an Owkin non-commercial
+  licence; CHIEF licence stated as AGPL-3.0 on GitHub but GPLv3 non-commercial in its README
+- Results depend on attack settings; defences tested only against naive attackers overstate protection, so pre-register
+  settings and report defence-aware results
+- 'Pretraining overlap: several encoders (e.g. Phikon-v2, Midnight) saw TCGA; CAMELYON16 is the cleaner test'
+- Small encoder count (n = 8) for the size and natural-robustness correlations; treat as descriptive
+- 'Source repo has no licence: reimplement, do not copy'
 access_actions:
-- Hugging Face gated access for some foundation-model weights (free registration)
-candidate_journals: []
+- 'Hugging Face gated access (auto): UNI2-h, Virchow2, CONCH v1.5, H-optimus-0, Prov-GigaPath, and the four precomputed
+  TCGA feature sets; manual approval with institutional email: H-optimus-1'
+- Phikon-v2 and Midnight are not gated (Owkin non-commercial licence; MIT)
+- 'For replication only: TITAN and PRISM (HF gated, auto), Virchow (HF gated, auto), CHIEF weights by request via
+  the link in its GitHub README'
+- CAMELYON16 from the AWS Open Data bucket (no account); TCGA-NSCLC slides from the GDC (open, no login)
+- 'Optional: EBRAINS account and data use agreement for the brain tasks'
+- RunPod account with an A100 or L40S and a network volume of about 1 TB
+candidate_journals:
+- jms
+- jiim
+- cmig
 added_at: '2026-11-04T08:30:00Z'
 added_by: scout
 run_id: 2026-W45 (initial)
+last_reviewed: '2026-11-06'

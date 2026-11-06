@@ -12,5 +12,10 @@ notes: 'Projects used here: BRCA, LUAD/LUSC, GBM/LGG, RCC, LIHC. TCGA-LIHC: 379 
   503.5 GB (GDC API, 2026-11-06). Use the TCGA Pan-Cancer Clinical Data Resource (TCGA-CDR) for survival endpoints. Demographics (GDC API, 2026-11-06):
   TCGA-LUAD+LUSC 1,089 cases, 744 white, 84 Black, 17 Asian, rest not reported; the 84 Black patients come from 20
   of 43 tissue source sites, and three sites hold 46% of them (race is confounded with site). TCGA-BRCA 1,098 cases,
-  757 white, 183 Black, 61 Asian. TCGA-LGG 516 and TCGA-GBM 617 cases, 72 Black and 21 Asian in total.'
+  757 white, 183 Black, 61 Asian. TCGA-LGG 516 and TCGA-GBM 617 cases, 72 Black and 21 Asian in total. Open diagnostic
+  slides (data_type Slide Image, experimental_strategy Diagnostic Slide; GDC API, 2026-11-06): TCGA-LUAD 541 slides
+  from 478 cases, 415.1 GB; TCGA-LUSC 512 slides from 478 cases, 408.6 GB; TCGA-BRCA 1,133 slides from 1,062 cases,
+  1,158.8 GB; TCGA-KIRC+KIRP+KICH 939 slides from 897 cases, 937.4 GB (about 0.8-1.0 GB per slide). Precomputed
+  patch features for these slides exist on Hugging Face (see uni2h-features-tcga, virchow2-features-tcga, conch-v15-features-tcga,
+  gigapath-features-tcga), which avoids most slide downloads when only a subset needs pixels.'
 last_checked: '2026-11-06'
