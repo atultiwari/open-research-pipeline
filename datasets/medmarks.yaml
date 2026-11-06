@@ -1,11 +1,26 @@
 id: medmarks
 name: Medmarks benchmark suite
 url: https://github.com/MedARC-AI/Medmarks
-modality: text (benchmark harness)
-organ_or_domain: medical LLM evaluation
-size: Multiple subsets
+alt_urls:
+- https://medmarks.ai
+- https://arxiv.org/abs/2605.01417
+modality: text (benchmark harness of 30 public medical LLM benchmarks)
+organ_or_domain: medical LLM evaluation (QA, calculations, hallucination, clinical notes, open-ended tasks)
+size: 30 benchmarks (19 verifiable Medmarks-V, 11 open-ended Medmarks-OE); per-subset counts in the repo README
 access: open
-licence: Harness MIT (verify); subset licences vary
-licence_notes: Skip subsets with unclear licences (Medbullets, MTSamples, MedConceptsQA).
-notes: 'Subsets used: MedMCQA, MedCalc-Bench, MedHallu, MEDEC, Med-HALT.'
+licence: Harness code MIT (GitHub API, 2026-11-06); each benchmark keeps its own licence
+licence_notes: 'Subset licences as listed in the Medmarks README (checked against sources 2026-11-06): MedCalc-Bench
+  CC-BY-SA-4.0 (share-alike); MedMCQA Apache-2.0 (but the harness loads the lighteval/med_mcqa mirror, whose card
+  states no licence); Med-HALT Apache-2.0; MEDEC CC BY 4.0; MedHallu listed as MIT by Medmarks, but the Hugging Face
+  card states no licence (MIT applies to the MedHallu code repo); MedExQA CC-BY-NC-SA-4.0 (non-commercial). Medmarks
+  marks Medbullets, MedConceptsQA, MedDialog and MTSamples as "Not specified": skip them. Open-ended subsets are graded
+  by proprietary LLM judges (GPT-5 mini with Gemini 3 Flash or Grok 4.1 Fast); MEDEC can instead be scored with paper
+  metrics (--eval-method metrics) without an API.'
+institution_country: MedARC (international open-science collaboration)
+citation: 'Warner B et al. Medmarks: A Comprehensive Open-Source LLM Benchmark Suite for Medical Tasks. arXiv:2605.01417
+  (2026)'
+notes: 'Runs on any OpenAI-compatible endpoint (vLLM, llama.cpp llama-server). Datasets are pulled from Hugging Face
+  at run time; some environments use mirrors (MedMCQA: lighteval/med_mcqa; MEDEC: sauravlmx/MEDEC-MS, which now redirects
+  to expx/MEDEC-MS, MS subset only). The endpoint registry still names cpatonn/... AWQ checkpoints, which now redirect
+  to cyankiwi/.... Subsets used by quantised-labmed: MedCalc-Bench, MedMCQA, Med-HALT, MedHallu, MEDEC.'
 last_checked: '2026-11-06'

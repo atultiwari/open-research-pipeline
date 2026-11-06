@@ -1,0 +1,21 @@
+id: medec
+name: MEDEC (Medical Error Detection and Correction)
+url: https://github.com/abachaa/MEDEC
+alt_urls:
+- https://huggingface.co/datasets/mkieffer/MEDEC-MS
+- https://huggingface.co/datasets/expx/MEDEC-MS
+modality: text (clinical notes with zero or one injected error)
+organ_or_domain: clinical note error detection and correction
+size: 3,848 texts; MS train 2,189, MS validation 574, MS test 597, UW validation 160, UW test 328
+access: open
+licence: CC BY 4.0
+licence_notes: CC BY 4.0 stated in the abachaa/MEDEC README (GitHub reports no licence file) and on the mkieffer/MEDEC-MS
+  HF card ("upload with fixes"). Medmarks loads sauravlmx/MEDEC-MS, which now redirects to expx/MEDEC-MS (MS subset only).
+institution_country: verify
+labels: Error flag, error type (diagnosis, management, treatment, pharmacotherapy, causal organism), error sentence id,
+  corrected sentence
+citation: 'Ben Abacha A, Yim W, Fu Y, Sun Z, Yetisgen M, Xia F, Lin T. MEDEC: A Benchmark for Medical Error Detection
+  and Correction in Clinical Notes. Findings of ACL 2025, pp. 22539-22550'
+notes: Subtasks A (error flag) and B (error sentence) are verifiable; subtask C (correction) needs ROUGE/BERTScore/BLEURT
+  or an LLM judge. The README notes known issues and points to an updated version on Hugging Face.
+last_checked: '2026-11-06'

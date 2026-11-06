@@ -1,12 +1,22 @@
 id: medmcqa
 name: MedMCQA
 url: https://huggingface.co/datasets/openlifescienceai/medmcqa
+alt_urls:
+- https://huggingface.co/datasets/lighteval/med_mcqa
 modality: text (MCQ)
 organ_or_domain: medical entrance exams (AIIMS/NEET-PG)
-size: Validation split 4,183 questions
+size: About 194k questions; train 182,822, validation 4,183 (the evaluation split used by Medmarks), test without public
+  answers
 access: open
 licence: Apache-2.0
+licence_notes: 'Apache-2.0 on openlifescienceai/medmcqa (HF card, 2026-11-06, not gated). The lighteval/med_mcqa mirror
+  that the Medmarks harness loads states no licence on its card; cite and license from the original.'
 institution_country: India
-labels: Answer key, subject field (Pathology, Microbiology, Biochemistry, …)
-notes: Answer keys are noisy.
+labels: Answer key, subject field (Pathology, Microbiology, Biochemistry, …), single/multi choice type, explanation
+citation: 'Pal A, Umapathi LK, Sankarasubbu M. MedMCQA: A Large-scale Multi-Subject Multi-Choice Dataset for Medical domain
+  Question Answering. Proceedings of CHIL 2022, PMLR 174:248-260'
+notes: 'Answer keys are noisy (Medmarks Appendix P found unclear or wrong items). Validation subject counts (HF dataset
+  viewer statistics, 2026-11-06): Pathology 337, Biochemistry 171, Microbiology 122, Dental 1,318. Med-HALT reasoning
+  FCT/NOTA validation items reuse MedMCQA validation stems: all 577 Pathology/Biochemistry/Microbiology Med-HALT validation
+  questions match MedMCQA validation text exactly (3,810 of 5,154 overall), so the two are not independent.'
 last_checked: '2026-11-06'

@@ -1,0 +1,21 @@
+id: med-halt
+name: Med-HALT (Medical Domain Hallucination Test)
+url: https://huggingface.co/datasets/openlifescienceai/Med-HALT
+alt_urls:
+- https://github.com/medhalt/medhalt
+modality: text (MCQ-based hallucination tests; PubMed retrieval tests)
+organ_or_domain: medical LLM hallucination (reasoning and memory)
+size: 'Reasoning FCT, NOTA and fake-question tests (18,866 rows each for FCT and NOTA, of which 5,154 are split_type val)
+  plus four PubMed information-retrieval tests'
+access: open
+licence: Apache-2.0
+licence_notes: Apache-2.0 on the HF card (not gated, 2026-11-06). GitHub repo medhalt/medhalt reports no licence file.
+institution_country: verify
+labels: Correct option, proposed student answer (FCT), subject name, split_type
+citation: 'Pal A, Umapathi LK, Sankarasubbu M. Med-HALT: Medical Domain Hallucination Test for Large Language Models.
+  CoNLL 2023; arXiv:2307.15343'
+notes: 'Medmarks evaluates reasoning_FCT and reasoning_nota on the val subset. Its environment README cites the wrong
+  authors (Jeblick et al.). Many items are rebuilt from MedMCQA: all 577 Pathology/Biochemistry/Microbiology val items
+  match MedMCQA validation stems exactly, so treat them as paired formats of the same questions. FCT val is deliberately
+  imbalanced (most proposed answers are wrong); report balanced accuracy.'
+last_checked: '2026-11-06'

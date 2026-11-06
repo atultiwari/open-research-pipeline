@@ -1,0 +1,24 @@
+id: medcalc-bench
+name: MedCalc-Bench Verified
+url: https://huggingface.co/datasets/nsk7153/MedCalc-Bench-Verified
+alt_urls:
+- https://github.com/ncbi-nlp/MedCalc-Bench
+- https://huggingface.co/datasets/ncbi/MedCalc-Bench-v1.2
+modality: text (patient notes with calculation questions, numeric/date answers)
+organ_or_domain: clinical calculators (lab tests, risk and severity scores, dosage, dates)
+size: 1,100 test items (55 calculators x 20) and 10,538 training items; test categories lab test 380, risk 240, physical
+  240, severity 80, date 60, diagnosis 60, dosage 40
+access: open
+licence: CC-BY-SA-4.0
+licence_notes: 'CC-BY-SA-4.0 on the Verified and v1.2 HF cards (not gated, 2026-11-06). Share-alike because notes partly
+  come from PMC-Patients (CC-BY-SA-4.0), as the NCBI repo README explains; GitHub reports no licence file for the repo.
+  The Verified set is revised over time (card asks users to cite the release tag).'
+institution_country: USA (NCBI/NLM, NIH, with collaborators)
+labels: Ground-truth value with lower/upper tolerance bounds, calculator id and category, step-by-step explanation
+citation: 'Khandekar N et al. MedCalc-Bench: Evaluating Large Language Models for Medical Calculations. NeurIPS 2024
+  Datasets and Benchmarks Track; arXiv:2406.12036'
+notes: Medmarks uses the Verified variant by default and runs it without tools (tool runs in its Appendix L). The 19
+  "lab test" calculators include anion gap, delta gap/ratio (with albumin-corrected versions), calcium correction for
+  hypoalbuminemia, sodium correction for hyperglycemia, serum osmolality, free water deficit, FENa, LDL, HOMA-IR, CKD-EPI,
+  MDRD, Cockcroft-Gault, FIB-4 and MELD Na (category per HF dataset viewer statistics).
+last_checked: '2026-11-06'

@@ -1,12 +1,16 @@
 id: quantised-labmed
 legacy_id: cl-2026w45-quantised-labmed
-title: 'Laptop-deployable medical LLMs: accuracy and hallucination cost of 4/8-bit quantisation on a lab-medicine
-  slice of Medmarks (MedMCQA-pathology, MedCalc-Bench, MedHallu, MEDEC)'
+title: Is a 4-bit laptop LLM safe for lab-medicine questions? Paired BF16 vs Q8/Q4 vs quantisation-aware Q4 evaluation
+  of 2026 small open models on a pathology and lab slice of Medmarks, with laptop speed, memory and cost for Indian
+  deployment
 area: clinical-data-llm
 tags:
 - llm-benchmark
 - quantisation
 - low-resource
+- small-llm
+- lab-medicine
+- medical-calculation
 status: new
 status_history:
 - status: new
@@ -15,36 +19,72 @@ status_history:
 source:
   type: preprint
   title: 'Medmarks: A Comprehensive Open-Source LLM Benchmark Suite for Medical Tasks'
-  authors: verify
-  venue: arXiv (ICML 2026)
+  authors: Warner B et al.
+  venue: arXiv preprint (cs.CL); no peer-reviewed version found as of 2026-11-06 (earlier 'ICML 2026' label unconfirmed)
   date: '2026-05-02'
   url: https://arxiv.org/abs/2605.01417
-  arxiv_id: '2605.01417'
+  arxiv_id: 2605.01417v1
   code_url: https://github.com/MedARC-AI/Medmarks
   code_licence: MIT
+  code_note: Harness accepts any OpenAI-compatible endpoint (vLLM or llama.cpp llama-server). Open-ended subsets
+    use proprietary LLM judges; MEDEC can be scored with paper metrics instead.
 datasets:
 - id: medmarks
   role: benchmark
+- id: medcalc-bench
+  role: benchmark
 - id: medmcqa
+  role: benchmark
+- id: med-halt
   role: benchmark
 - id: medhallu
   role: benchmark
-study_type: LLM benchmarking / deployment evaluation
-reporting_guideline: TRIPOD-LLM; MI-CLEAR-LLM
-novelty_delta: Medmarks evaluated 61 models at full precision only. Adds quantisation levels on consumer GPU and
-  CPU laptop for Indian low-resource deployment, with tokens/sec, RAM, cost per 1,000 questions and calibration,
-  restricted to lab-medicine tasks (anion gap, eGFR, corrected calcium via MedCalc-Bench).
+- id: medec
+  role: benchmark
+study_type: LLM benchmarking / deployment evaluation (paired precision comparison)
+reporting_guideline: TRIPOD-LLM; MI-CLEAR-LLM items for model version, quantisation format, engine build and decoding
+novelty_delta: Medmarks tested quantisation on one 30B MoE model (Qwen3-30B-A3B, FP8/AWQ) on H100s and could not
+  test quantisation-aware training; Twagirayezu & Mitra (2026) covered GPTQ INT4/INT8 on older 7-8B models for MedMCQA
+  and Med-HALT. Adds the first test of numerical lab calculations (380 MedCalc-Bench lab items) under quantisation,
+  a same-format QAT vs post-training Q4 contrast (Gemma 4 official QAT GGUFs), 2026 small models run as GGUF on
+  llama.cpp with laptop speed, RAM and rupee cost, hallucination/abstention and calibration outcomes, and a pathologist
+  taxonomy of answers that flip at 4-bit.
 compute:
   tier: runpod
-  estimate: Laptop/Colab + RunPod (~10–20 GPU-h) + API (~USD 20–50)
-est_weeks: 4
+  estimate: About 30-50 GPU-h on RunPod (llama.cpp and vLLM on an L40S/A100; roughly US$30-70) for 7 models x 4-5
+    precisions x ~4,800 items with greedy decoding plus 3-seed sensitivity on a subset; timing runs on a real laptop
+    (CPU/Apple silicon); no paid API
+est_weeks: 6
 scores:
-  feasibility: 5
-  novelty: 3
-  fit: null
-risks: []
-access_actions: []
-candidate_journals: []
+  feasibility: 4
+  novelty: 4
+  fit: 4
+risks:
+- Quantisation effects of 1-3 points may sit inside confidence intervals; mitigate with paired greedy runs, all
+  1,100 MedCalc items and a mixed-effects model across tasks
+- Engine and chat-template confounds (vLLM vs llama.cpp, Gemma 4/Qwen3.5 thinking toggles) can masquerade as quantisation
+  loss; run each comparison on one pinned engine build and check parsing before full runs
+- Partial overlap with Twagirayezu & Mitra (arXiv 2609.22216) on MedMCQA/Med-HALT INT4 effects; frame those as confirmation
+  on 2026 models, with novelty resting on calculations, QAT vs PTQ and laptop deployment
+- Med-HALT lab items reuse MedMCQA validation stems (577/577 exact matches), so they are not independent evidence;
+  analyse as paired formats
+- MedHallu card states no dataset licence (MIT applies to the code repo); MedCalc-Bench is CC-BY-SA-4.0 share-alike;
+  MedGemma uses Health AI Developer Foundations terms; report aggregates only
+- 'Contamination: MedMCQA and PubMedQA are old and public, inflating absolute scores of newer models (paired differences
+  are less affected)'
+- 'Overlap risk inside this repo: keep MedMCQA prompt-sensitivity (medmcqa-path) and full-precision MedHallu detection
+  (medhallu-small) questions out of scope; align the model panel with mpib-small-llm'
+access_actions:
+- 'None needed for data: MedCalc-Bench Verified, MedMCQA, Med-HALT, MedHallu and MEDEC are open and not gated on
+  Hugging Face/GitHub'
+- Accept Health AI Developer Foundations terms (auto-gated) for google/medgemma-1.5-4b-it
+- RunPod account with an L40S or A100 (80 GB needed only for the Qwen3-30B-A3B BF16 replication)
+- Access to a typical laptop (8-16 GB RAM, CPU-only and/or Apple silicon) for the timing subset
+candidate_journals:
+- jms
+- ijmi
+- jbi
 added_at: '2026-11-04T08:30:00Z'
 added_by: scout
 run_id: 2026-W45 (initial)
+last_reviewed: '2026-11-06'
