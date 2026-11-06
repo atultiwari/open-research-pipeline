@@ -1,0 +1,37 @@
+name: Add a link
+description: Suggest a paper, preprint, code repository or dataset to turn into a study
+title: "Add: "
+labels: ["inbox"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Paste one or more links. The next scout run or `/process-inbox` turns them into a study entry
+        (summary, replication guide and gap analysis). Only issues opened by the maintainer are processed automatically.
+  - type: textarea
+    id: links
+    attributes:
+      label: Link(s)
+      description: arXiv, medRxiv, bioRxiv, DOI, PubMed/PMC, journal page, GitHub, Hugging Face, Zenodo, Figshare, Kaggle or PhysioNet. One per line.
+      placeholder: https://arxiv.org/abs/2601.04163
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area (optional)
+      options:
+        - Not sure
+        - Computational pathology
+        - Gastro & hepatology AI
+        - Clinical data & LLMs
+        - Healthcare cybersecurity
+    validations:
+      required: false
+  - type: textarea
+    id: note
+    attributes:
+      label: Note
+      description: Optional. What interests you about it, or the direction you want the extension to take.
+    validations:
+      required: false
