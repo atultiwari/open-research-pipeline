@@ -1,11 +1,26 @@
 id: eicu-crd
 name: eICU Collaborative Research Database
 url: https://physionet.org/content/eicu-crd/2.0/
+doi: 10.13026/C2WM1R
 modality: EHR
 organ_or_domain: critical care (multi-centre)
-size: verify
+size: Over 200,000 ICU unit stays for over 139,000 unique patients in 335 units at 208 US hospitals, admitted 2014–2015.
+  Download size not shown publicly (verify).
 access: credentialed
-licence: PhysioNet Credentialed Health Data License (verify version)
-licence_notes: Same PhysioNet credential as MIMIC-IV.
-institution_country: USA (multi-centre)
+licence: PhysioNet Credentialed Health Data License 1.5.0
+licence_notes: Same PhysioNet credential, CITI "Data or Specimens Only Research" training and Credentialed Health Data Use
+  Agreement 1.5.0 as MIMIC-IV. No redistribution and no data to external LLM APIs (PhysioNet notice on GPT-style services);
+  no attempts to identify individuals or hospitals (keep hospitalid anonymous).
+institution_country: USA (multi-centre; Philips eICU telehealth programme, curated by MIT LCP)
+citation: Pollard TJ et al. The eICU Collaborative Research Database, a freely available multi-center database for critical
+  care research. Sci Data 2018;5:180178. doi:10.1038/sdata.2018.178
+alt_urls:
+- https://eicu.mit.edu/
+- https://github.com/MIT-LCP/eicu-code
+notes: 'v2.0 (15 Apr 2019) is the current version as of 2026-11-06. Table documentation moved to eicu.mit.edu (old eicu-crd.mit.edu
+  deep links redirect to the home page). Diagnoses (diagnosis table) are ICU-documented in eCareManager with ICD-9 codes, not
+  billing discharge codes; pasthistory and apachepredvar carry cirrhosis flags. Outcome: in-hospital only (patient.hospitaldischargestatus);
+  no post-discharge follow-up. Ages over 89 are stored as "> 89". APACHE IV/IVa predicted mortality is in apachepatientresult.
+  Mapped lab names include total bilirubin, PT - INR, creatinine, sodium, albumin, lactate, WBC x 1000 (eicu-code pivoted-lab.sql).
+  hospital table gives region, bed-size category and teaching status. No ready-made Sepsis-3 concept.'
 last_checked: '2026-11-06'

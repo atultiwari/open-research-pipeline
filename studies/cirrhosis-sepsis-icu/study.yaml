@@ -1,13 +1,19 @@
 id: cirrhosis-sepsis-icu
 legacy_id: gh-2026w45-cirrhosis-sepsis-icu
-title: 'Cirrhosis with sepsis, ICU mortality: independent reimplementation of a 13-variable nomogram on MIMIC-IV,
-  head-to-head with MELD 3.0 and CLIF-C scores in eICU, and a reduced bedside score for Indian ICUs'
+title: Which score for cirrhosis with sepsis in the ICU? Independent reimplementation and head-to-head external
+  validation of published cirrhosis–sepsis models against MELD 3.0, CLIF-C AD/ACLF and APACHE IVa in MIMIC-IV and
+  208 eICU hospitals, with a lactate-free bedside variant
 area: gastro-hepatology
 tags:
 - cirrhosis
 - sepsis
 - icu
 - prognosis
+- meld-3.0
+- clif-c
+- external-validation
+- mimic-iv
+- eicu
 status: new
 status_history:
 - status: new
@@ -15,35 +21,63 @@ status_history:
   note: Migrated from the claude.ai register (2026-W45 (initial))
 source:
   type: journal
-  title: 'Development and validation of a prediction model for in-hospital mortality in ICU patients with cirrhosis
-    and sepsis: a multicentre retrospective cohort study'
-  authors: verify
-  venue: Frontiers in Medicine
-  date: '2026-01-20'
+  title: 'Development and validation of a prediction model for in-hospital mortality in intensive care unit patients
+    with cirrhosis and sepsis: a multicentre retrospective cohort study'
+  authors: Xu Z et al. (9 authors; Shenzhen People's Hospital)
+  venue: Frontiers in Medicine 13:1759988 (CC BY 4.0; open full text PMC12926366)
+  date: '2026-02-09'
   url: https://www.frontiersin.org/journals/medicine/articles/10.3389/fmed.2026.1759988/full
   doi: 10.3389/fmed.2026.1759988
-  code_note: None; reimplementable (13 predictors listed)
+  code_note: No code released. Full coefficient table with intercept (Table 2) allows exact reimplementation; web
+    calculator at https://szph-icu.shinyapps.io/Cirrhosis-Sepsis-ICU/ for spot checks with made-up inputs. Cirrhosis
+    ICD list is in Supplementary Table 1 (not read). SZPH-ICU cohort is private (not replicable).
 datasets:
 - id: mimic-iv
   role: development
 - id: eicu-crd
   role: external-validation
-study_type: Prognostic model external validation + comparison with liver scores
+study_type: Prognostic model replication + head-to-head external validation of multiple published models and liver/ICU
+  scores (temporal and multi-hospital), with a reduced-variable model
 reporting_guideline: TRIPOD+AI; RECORD
-novelty_delta: Independent replication plus the head-to-head with MELD 3.0 and CLIF scores the original lacked;
-  a reduced-variable score usable where lactate/urine output are missing; open SQL/R code as a contribution.
+novelty_delta: At least seven MIMIC-IV cirrhosis–sepsis mortality models (2024–2026) were each tested only by their
+  own authors; none has been compared head-to-head in one external cohort. This study reimplements them with locked
+  coefficients on MIMIC-IV 2017–2022 and eICU, adds MELD 3.0, CLIF-C AD (non-ACLF only) and APACHE IVa, which have
+  not been evaluated in cirrhosis with sepsis, reports calibration, recalibration and between-hospital heterogeneity
+  across eICU, and tests a lactate-free bedside variant.
 compute:
   tier: laptop
-  estimate: Laptop
-est_weeks: 5
+  estimate: Laptop CPU, 16 GB RAM, ~100 GB disk for local PostgreSQL/DuckDB builds of MIMIC-IV and eICU (verify).
+    SQL builds take hours; modelling minutes. No GPU, no API (DUA forbids external LLM APIs).
+est_weeks: 7
 scores:
   feasibility: 4
   novelty: 3
-  fit: null
-risks: []
+  fit: 3
+risks:
+- 'Very crowded field: new MIMIC-IV cirrhosis papers appear almost weekly; rerun OpenAlex novelty checks (rate-limited
+  on 2026-11-06) before the protocol'
+- Some competing models may not publish an intercept or full equation; those can be validated for discrimination
+  only
+- 'eICU phenotyping is ambiguous: no billing discharge diagnoses and no ready-made Sepsis-3 concept; results depend
+  on the cirrhosis and sepsis definitions (pre-specify, run sensitivity analyses)'
+- Hepatic encephalopathy grade has no direct field in either database; CLIF-OF/ACLF/Child-Pugh need a GCS-based
+  proxy
+- Many eICU hospitals will have <10 events; site-level heterogeneity must be pooled by region/bed-size strata
+- 'Indian relevance of the lactate-free variant is a framing only: no open Indian ICU data exist for validation'
+- 'PhysioNet DUA: no row-level data to Claude or any external LLM API; analysis must run locally with aggregates
+  only shared back'
+- Source's cirrhosis ICD list (Supplementary Table 1) not yet read; MIMIC calendar split via anchor_year_group is
+  approximate
 access_actions:
-- PhysioNet credentialing + CITI training (~1–2 weeks; start early)
-candidate_journals: []
+- PhysioNet credentialing + CITI 'Data or Specimens Only Research' training + sign the Credentialed Health Data
+  Use Agreement 1.5.0 on both the MIMIC-IV v3.1 and eICU-CRD v2.0 pages (~1–2 weeks; start early)
+- Read the source's Supplementary Table 1 (cirrhosis ICD codes) from the Frontiers/PMC article page
+- Check whether Lin 2024, Hu 2026 and Xu X 2026 print full model equations; email authors for intercepts if not
+candidate_journals:
+- jceh
+- ijg
+- hepatology-international
 added_at: '2026-11-04T08:30:00Z'
 added_by: scout
 run_id: 2026-W45 (initial)
+last_reviewed: '2026-11-06'
