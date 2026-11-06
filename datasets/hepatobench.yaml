@@ -1,11 +1,21 @@
 id: hepatobench
 name: HepatoBench
 url: https://huggingface.co/datasets/xtxx/HepatoBench
-modality: histology patches
-organ_or_domain: liver
-size: 87,301 patches, 7 classes
+doi: 10.57967/hf/8231
+modality: histology patches (H&E, 150×150 px at 20×, PNG)
+organ_or_domain: liver (hepatocellular carcinoma resections)
+size: 87,301 patches in 7 class zips, ~3.6 GB (HF file listing, 2026-11-06)
 access: open
-licence: CC BY 4.0 on card; CC BY-NC 4.0 in paper — treat as CC BY-NC 4.0
-licence_notes: Licence mismatch between dataset card (cc-by-4.0, HF API 2026-11-06) and paper. Paper says not for diagnosis-focused
-  algorithms.
+licence: CC BY 4.0 on the dataset card; CC BY-NC 4.0 in the paper's Usage Notes — treat as CC BY-NC 4.0
+licence_notes: 'Three-way mismatch: HF card says cc-by-4.0, the paper''s Usage Notes say CC BY-NC 4.0, and the Scientific
+  Data article itself is CC BY-NC-ND 4.0. The authors also state it is not intended for developing diagnosis-focused algorithms.
+  Not gated (HF API, 2026-11-06).'
+institution_country: China (Beijing Tsinghua Changgung Hospital; Tsinghua University)
+labels: '7 tissue classes: TUM 13,200; FIB 26,364; INF 4,776; NEC 22,023; NOR 13,200; REA (bile duct/ductular reaction) 1,540;
+  STE (steatosis, labelled ''Steroidal Degeneration'' on the card) 6,198'
+citation: Xiao Y et al. A Comprehensive Digital Pathology Dataset for Liver Cancer Research. Scientific Data (2026). doi:10.1038/s41597-026-08036-y
+notes: No patient or slide identifiers and no split files in the release (file names are <class>_<index>.png), so the paper's
+  slide-level 7:2:1 split cannot be reproduced. PathJev (arXiv:2610.32478) reports exact duplicate images in the release and
+  that consecutive indices appear to come from the same tissue. Paper text gives '140,000 patches (example numbers)' but the
+  class counts sum to 87,301, matching dataset_meta.json.
 last_checked: '2026-11-06'

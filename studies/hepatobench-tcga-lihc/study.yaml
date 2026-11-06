@@ -1,50 +1,78 @@
 id: hepatobench-tcga-lihc
 legacy_id: gh-2026w45-hepatobench-tcga-lihc
-title: 'Liver histology tissue classification: benchmark open pathology foundation models on HepatoBench, then test
-  slide-level tissue composition (fibrosis, necrosis, steatosis) against TCGA-LIHC survival'
+title: How much of liver tissue-classification accuracy is leakage? A duplicate-aware, group-split re-benchmark
+  of open pathology foundation models on HepatoBench, with calibration, a pathologist error audit and external testing
+  on PAIP 2019
 area: gastro-hepatology
 tags:
 - liver
+- hepatocellular-carcinoma
 - tissue-classification
 - foundation-models
-- survival
+- data-leakage
+- benchmark
 status: new
 status_history:
 - status: new
   date: '2026-11-04'
   note: Migrated from the claude.ai register (2026-W45 (initial))
 source:
-  type: preprint
-  title: A Digital Pathology Resource for Liver Cancer Quantification with Datasets, Benchmarks, and Tools (HepatoBench
-    / HepatoQuant)
-  authors: verify
-  venue: arXiv (cs.CV)
-  date: '2026-04-22'
-  url: https://arxiv.org/abs/2604.22858
+  type: journal
+  title: 'A Comprehensive Digital Pathology Dataset for Liver Cancer Research (preprint: A Digital Pathology Resource
+    for Liver Cancer Quantification with Datasets, Benchmarks, and Tools)'
+  authors: Xiao Y, Tang S, Ling X et al.
+  venue: Scientific Data (preprint arXiv cs.CV, 2026-04-22)
+  date: '2026-10-30'
+  url: https://doi.org/10.1038/s41597-026-08036-y
   arxiv_id: '2604.22858'
   code_url: https://github.com/lingxitong/PFM_Segmentation
-  code_licence: None stated on GitHub (no licence file)
+  code_licence: 'None (no licence file on GitHub, checked 2026-11-06): reimplement, do not copy'
+  doi: 10.1038/s41597-026-08036-y
+  code_note: Repository covers the WSI segmentation part only; no code or weights link for the patch classifier
+    was found in the paper.
 datasets:
 - id: hepatobench
-  role: benchmark
+  role: development
+- id: paip2019
+  role: external-validation
 - id: tcga
   role: external-validation
-study_type: Benchmark + prognostic feature study
-reporting_guideline: CLAIM 2024; REMARK / TRIPOD+AI for survival
-novelty_delta: Paper benchmarked only UNI-v1, Virchow-2 and GigaPath. Adds lighter open encoders (H0-mini, Phikon-v2,
-  UNI2, CONCH v1.5), label-efficiency curves, pathologist per-class error review, and a TCGA-LIHC survival test
-  of tissue fractions.
+study_type: Benchmark + data-quality (leakage) audit + external validation
+reporting_guideline: CLAIM 2024
+novelty_delta: HepatoBench was released without slide or patient identifiers or split files and contains exact duplicates,
+  so its published foundation-model results (UNI, Virchow2, GigaPath; linear probe; no confidence intervals) cannot
+  be reproduced with a leakage-free split. This study measures how much random patch splits inflate accuracy, re-benchmarks
+  newer and lighter open encoders under duplicate-aware grouped splits with calibration, adds a pathologist error
+  taxonomy, and tests transfer to an independent Korean cohort (PAIP 2019).
 compute:
-  tier: runpod
-  estimate: Colab + RunPod (~15–30 GPU-h for ~370 WSIs)
+  tier: colab
+  estimate: ~6–12 GPU-h on Colab/RunPod to embed 87k patches with 6–8 encoders (~3.6 GB data); probes and statistics
+    on a laptop; optional PAIP 2019 tiling ~5 GPU-h
 est_weeks: 6
 scores:
-  feasibility: 4
+  feasibility: 5
   novelty: 4
-  fit: null
-risks: []
-access_actions: []
-candidate_journals: []
+  fit: 5
+risks:
+- 'Licence conflict (card CC BY vs paper CC BY-NC vs article CC BY-NC-ND): use for non-commercial research only
+  and never redistribute patches'
+- 'Authors state the dataset is not for diagnosis-focused algorithms: frame the work as benchmark quality and quantification,
+  not diagnosis'
+- Pseudo-groups reconstructed from consecutive indices and embedding clusters are an approximation of slides; report
+  sensitivity to the grouping rule
+- Several encoders (UNI2-h, Virchow2, H-optimus) are gated with non-commercial licences; access may be refused or
+  delayed
+- PAIP 2019 post-challenge access and publication terms must be confirmed before the external arm
+- Original paper reports results only in a figure; target numbers must be read from Figure 2
+access_actions:
+- Hugging Face account; request gated access for UNI2-h, Virchow2, H-optimus-0/1 and CONCH v1.5 (institutional email
+  may be needed)
+- Grand Challenge account and PAIP 2019 data use agreement (external arm)
+candidate_journals:
+- jiim
+- cmig
+- laboratory-investigation
 added_at: '2026-11-04T08:30:00Z'
 added_by: scout
 run_id: 2026-W45 (initial)
+last_reviewed: '2026-11-06'

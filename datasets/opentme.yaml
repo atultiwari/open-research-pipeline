@@ -1,0 +1,15 @@
+id: opentme
+name: OpenTME (pre-computed TME profiles for TCGA H&E slides)
+url: https://huggingface.co/datasets/Aignostics/OpenTME
+modality: tabular (slide-level TME readouts derived from WSIs)
+organ_or_domain: five cancers incl. liver (TCGA-LIHC)
+size: 3,634 WSIs; >4,500 readouts per slide (paper)
+access: free-registration
+licence: other (HF card); paper says non-commercial academic research only (verify exact terms)
+licence_notes: Hugging Face gated with manual approval (HF API, 2026-11-06). Non-commercial.
+institution_country: Germany (Aignostics) (verify)
+citation: 'Galama M et al. OpenTME: An Open Dataset of AI-powered H&E Tumor Microenvironment Profiles from TCGA. arXiv:2604.12075
+  (2026).'
+notes: Independent, foundation-model-derived tissue and cell readouts for TCGA-LIHC slides; usable as a comparator for slide-level
+  tissue composition.
+last_checked: '2026-11-06'

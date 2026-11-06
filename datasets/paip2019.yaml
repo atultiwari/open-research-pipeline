@@ -1,0 +1,16 @@
+id: paip2019
+name: PAIP 2019 (Liver Cancer Segmentation challenge)
+url: https://paip2019.grand-challenge.org/
+modality: WSI (H&E, Aperio AT2, 20×) + pathologist XML annotations and binary masks
+organ_or_domain: liver (hepatocellular carcinoma resections)
+size: 50 training WSIs with masks (validation/test sets also released for the challenge; verify post-challenge availability)
+access: free-registration
+licence: Challenge data use and confidentiality agreement (exact terms verify)
+licence_notes: Grand Challenge account and agreement to the PAIP data use and confidentiality agreement; check that the agreement
+  permits post-challenge research use and publication before relying on it.
+institution_country: South Korea (SNUH, SNUBH, SMG-SNU BMC; cases 2005–June 2018)
+labels: Whole tumour area and viable tumour area masks; viable tumour burden per slide
+citation: 'Kim YJ et al. PAIP 2019: Liver cancer segmentation challenge. Medical Image Analysis 67, 101854 (2021).'
+notes: Independent centre and scanner from HepatoBench; useful external test for tumour vs non-tumour and for non-viable (necrosis/stroma)
+  fraction inside the tumour.
+last_checked: '2026-11-06'
