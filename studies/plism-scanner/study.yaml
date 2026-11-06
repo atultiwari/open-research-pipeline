@@ -1,13 +1,15 @@
 id: plism-scanner
 legacy_id: cp-2026w45-plism-scanner
-title: Do pathology foundation models see the scanner or the tissue? Open-data test of embedding stability across
-  scanners and smartphones (PLISM)
+title: 'From scanner to smartphone: do pathology foundation-model embeddings that drift across imaging devices also
+  break calibration? A registered public benchmark on PLISM'
 area: computational-pathology
 tags:
 - robustness
 - scanner-shift
 - smartphone
+- calibration
 - foundation-models
+- lmic
 status: new
 status_history:
 - status: new
@@ -16,33 +18,47 @@ status_history:
 source:
   type: preprint
   title: Scanner-Induced Domain Shifts Undermine the Robustness of Pathology Foundation Models
-  authors: verify
-  venue: arXiv
+  authors: Thiringer E et al.
+  venue: arXiv (eess.IV)
   date: '2026-01-07'
   url: https://arxiv.org/abs/2601.04163v1
   arxiv_id: 2601.04163v1
-  code_note: 'None from source; reimplementable. Feature extraction: https://github.com/mahmoodlab/TRIDENT'
-  code_licence: 'Feature extraction: TRIDENT, Other (NOASSERTION on GitHub)'
+  code_note: 'No public code: the paper says the MIL code is based on CLAM (https://github.com/mahmoodlab/CLAM),
+    with details on request. PLISM metrics reference: https://github.com/owkin/plism-benchmark'
+  code_licence: 'plism-benchmark: no licence file on GitHub (reimplement, do not copy); CLAM: see repo'
 datasets:
 - id: plism
   role: benchmark
-study_type: Robustness benchmark
-reporting_guideline: CLAIM 2024
-novelty_delta: Source's 14-model result used in-house data with no code. Re-running its embedding-stability metrics
-  on public, tile-registered PLISM makes it reproducible, adds newer models (H-optimus-0/1, Virchow2, UNI2-h, OpenMidnight,
-  CONCHv1.5) and a smartphone axis relevant to low-resource Indian settings.
+study_type: Robustness and calibration benchmark (public surrogate for a private multiscanner cohort)
+reporting_guideline: CLAIM 2024 (+ TRIPOD+AI calibration items)
+novelty_delta: Source cohort is private, and plismbench and Lee et al. (2026) test only scanner embeddings. Adds
+  the first foundation-model test on PLISM's 57,902 registered smartphone images, links embedding drift to calibration
+  loss (ECE, Brier, prediction flips) with tissue-type probes, tests cheap mitigations, and adds a pathologist error
+  taxonomy relevant to phone-on-microscope practice in India.
 compute:
   tier: runpod
-  estimate: RunPod (~10–20 GPU-h); analysis on laptop
+  estimate: ~10–20 GPU-h for embeddings (RunPod L4/A40, ~US$5–15); smartphone subset fits on Colab; analysis on
+    laptop
 est_weeks: 5
 scores:
   feasibility: 5
   novelty: 4
-  fit: null
-risks: []
+  fit: 4
+risks:
+- plismbench and Lee et al. (bioRxiv 2026) cover scanner embedding stability; novelty depends on the smartphone
+  and calibration arms
+- Several encoders are CC-BY-NC-ND and gated (H-optimus-1 and H0-mini need manual approval)
+- Smartphone images are at 400x through an eyepiece; magnification and field differ from WSI tiles
+- Tissue-type probe is a proxy task; clinical endpoints are not available on PLISM
 access_actions:
-- Gated access to several foundation models (CC-BY-NC-ND; institutional email)
-candidate_journals: []
+- 'Hugging Face gated access: UNI2-h, Virchow2, CONCHv1.5, H-optimus-0 (auto); H-optimus-1, H0-mini (manual, institutional
+  email)'
+- Download PLISM-sm from figshare+ (the Owkin Hugging Face copies are WSI-only)
+candidate_journals:
+- jiim
+- cmig
+- mbec
 added_at: '2026-11-04T08:30:00Z'
 added_by: scout
 run_id: 2026-W45 (initial)
+last_reviewed: '2026-11-06'

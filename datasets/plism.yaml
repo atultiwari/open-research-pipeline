@@ -1,12 +1,21 @@
 id: plism
-name: PLISM (multi-scanner, smartphone and multi-stain tiles)
-url: https://huggingface.co/datasets/owkin/plism-dataset
-modality: WSI tiles (registered)
-organ_or_domain: multiple tissues
-size: ~225 GB full set
+name: PLISM (PathoLogy Images of Scanners and Mobile phones)
+url: https://doi.org/10.25452/figshare.plus.c.6773925
+modality: histology tiles, registered across devices (WSI scanners and smartphones)
+organ_or_domain: 46 human tissue types (TMA)
+size: 'PLISM-wsi: 91 WSIs, 310,947 patches (512 px); PLISM-sm: 57,902 smartphone images; Owkin HF .h5 copy ~225 GB'
 access: open
 licence: CC BY 4.0
-licence_notes: Not gated per HF API 2026-11-06; Hugging Face login helps for bulk download.
-citation: Ochi et al., Scientific Data 2024 (verify)
-institution_country: Japan (verify)
+licence_notes: figshare+ and Hugging Face copies both CC BY 4.0 (HF API 2026-11-06, not gated). The Owkin Hugging Face copies
+  contain only the WSI subset (13 stains x 7 scanners = 91 slides), not smartphones.
+citation: Ochi M et al. Registered multi-device/staining histology image dataset for domain-agnostic machine learning models.
+  Sci Data 11, 330 (2024). doi:10.1038/s41597-024-03122-5
+institution_country: University of Tokyo, Japan
 last_checked: '2026-11-06'
+alt_urls:
+- https://huggingface.co/datasets/owkin/plism-dataset
+- https://huggingface.co/datasets/owkin/plism-dataset-tiles
+doi: 10.25452/figshare.plus.c.6773925
+labels: Tissue type, stain condition, device and coordinates for every quality-controlled image (CSV)
+notes: '13 H&E stain conditions; 7 scanners (Hamamatsu S360, S210, SQ, S60; Leica AT2, GT450; Philips UFS); 6 smartphones
+  (Galaxy S20 5G, moto g8, Redmi Note9 Pro, iPhone 6, iPhone 13 mini, iTel P33). Paper: https://pmc.ncbi.nlm.nih.gov/articles/PMC10991301/'
