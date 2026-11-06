@@ -13,7 +13,8 @@ licence_notes: 'No account or click-through is needed, but use implies agreement
   (https://www.cdc.gov/nchs/policy/data-user-agreement.html, checked 2026-11-06). Do not redistribute row-level derived
   files in this repo; commit only code and aggregate results.'
 institution_country: USA (CDC/NCHS)
-labels: Labs, questionnaires, exam; liver transient elastography + CAP in 2017–Mar 2020 (P_LUX) and Aug 2021–Aug 2023 (LUX_L)
+labels: Labs, questionnaires, exam; liver transient elastography + CAP in 2017–Mar 2020 (P_LUX) and Aug 2021–Aug 2023 (LUX_L);
+  iron status (ferritin, serum iron/TSAT, sTfR) with CBC including RDW
 notes: 'Use survey weights with SDMVSTRA/SDMVPSU. 2017–Mar 2020 P_ files: use WTMECPRP (valid only for the combined
   pre-pandemic file, not 2019–20 alone). Aug 2021–Aug 2023: phlebotomy weights WTPH2YR were introduced for the first time
   and should be used for lab-based analyses (BIOPRO_L, CBC_L, GHB_L, HDL_L, HEPBD_L, HEPB_S_L, HEPC_L carry WTPH2YR);
@@ -23,7 +24,16 @@ notes: 'Use survey weights with SDMVSTRA/SDMVPSU. 2017–Mar 2020 P_ files: use 
   Asian participants (P_DEMO 1,638). Files used in this repo: CBC_J, FERTIN_J, FETIB_J, HSCRP_J (2017–18); P_LUX, P_DEMO,
   P_BIOPRO, P_CBC, P_BMX, P_GHB, P_HDL, P_TRIGLY, P_BPXO, P_BPQ, P_DIQ, P_ALQ, P_HEPBD, P_HEPC, P_HEQ (2017–Mar 2020);
   LUX_L, DEMO_L, BIOPRO_L, CBC_L, BMX_L, GHB_L, HDL_L, TRIGLY_L, BPXO_L, BPQ_L, DIQ_L, ALQ_L, HEPBD_L, HEPB_S_L,
-  HEPC_L, HEQ_L (2021–23). Direct XPT URL pattern: https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/<2017|2021>/DataFiles/<FILE>.xpt'
+  HEPC_L, HEQ_L (2021–23); for the iron study also P_FERTIN, P_FETIB, P_HSCRP, TFR_J, FERTIN_L, HSCRP_L. Direct XPT URL
+  pattern: https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/<2017|2021>/DataFiles/<FILE>.xpt.
+  Iron status (doc pages checked 2026-11-06): ferritin eligibility changes by cycle. FERTIN_J (2017–18) and P_FERTIN
+  (2017–Mar 2020) measured ferritin in examined children aged 1–5 years and everyone aged 12 years and over (FERTIN_J
+  6,589 values of 7,332 records; P_FERTIN 10,557 of 11,983). FERTIN_I (2015–16) and FERTIN_L (2021–23) cover only
+  children 1–5 and females 12–49; FERTIN_L carries WTPH2YR. FETIB_J (serum iron, UIBC, TIBC, transferrin saturation
+  LBDPCT) covers ages 12+ (5,922 iron values); no FETIB_L documentation page exists for 2021–23 (HTTP 404). TFR_J
+  (soluble transferrin receptor) covers ages 1–5 and 12+. CBC files are from a Beckman Coulter DxH 800 in the MEC and
+  include LBXRDW, LBXMC (MCHC), LBXMCHSI, LBXMCVSI; HSCRP_J has LBXHSCRP (ages 1+). 2017–18 lab files have no phlebotomy
+  weight: use WTMEC2YR (J files) or WTMECPRP (P_ files).'
 alt_urls:
 - https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/FERTIN_J.htm
 - https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_LUX.htm
@@ -31,4 +41,9 @@ alt_urls:
 - https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?Cycle=2021-2023
 - https://wwwn.cdc.gov/nchs/nhanes/tutorials/weighting.aspx
 - https://www.cdc.gov/nchs/policy/data-user-agreement.html
+- https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/FETIB_J.htm
+- https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/CBC_J.htm
+- https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/HSCRP_J.htm
+- https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2017/DataFiles/P_FERTIN.htm
+- https://wwwn.cdc.gov/Nchs/Data/Nhanes/Public/2021/DataFiles/FERTIN_L.htm
 last_checked: '2026-11-06'

@@ -1,0 +1,23 @@
+id: kenya-ifcc-iron
+name: Haemoglobin, red cell and iron status parameters from a healthy adult population in Kenya (IFCC reference-interval study)
+url: https://figshare.com/articles/dataset/Haemoglobin_red_blood_cell_and_iron_status_parameters_from_a_healthy_adult_population_in_Kenya/21107986
+doi: 10.6084/m9.figshare.21107986
+modality: tabular (CBC + iron studies + hs-CRP)
+organ_or_domain: haematology; iron deficiency
+size: 528 healthy adults aged 18–65 (254 male, 274 female); one Excel file (Iron_Dryad.xlsx, 49,921 bytes)
+access: open
+licence: CC BY 4.0
+licence_notes: Licence as shown by the Figshare API (2026-11-06). No direct identifiers in the file. Keep the file outside
+  the repo anyway; commit only code and aggregate results.
+institution_country: Kenya (ethics approval Aga Khan University Hospital Nairobi; testing at PathCare laboratories, Nairobi and Cape Town)
+labels: 'Columns: Age, Sex, RBC, Hb, MCV, MCH, MCHC, RDW, Tsat, hsCRP, Ferr (ferritin), Iron, Transferrin. No missing values.
+  No platelet, WBC or haematocrit column (haematocrit is derivable as MCV x RBC / 10). Ferritin < 15: 81 (75 female);
+  < 30: 158 (140 female); hs-CRP > 5 mg/L: 81 (aggregate checks, 2026-11-06).'
+citation: 'Omuse G, Chege A, Kawalya DE, Kagotho E, Maina D. Ferritin and its association with anaemia in a healthy adult
+  population in Kenya. PLoS One 2022;17:e0275098. doi:10.1371/journal.pone.0275098'
+notes: 'Healthy volunteers recruited in four Kenyan counties at 1,683–2,099 m altitude for the IFCC global reference-interval
+  study; exclusions included HIV, HBV, HCV and pregnancy. CBC on a Beckman Coulter ACT 5 DIFF CP (Nairobi); chemistry and
+  immunoassays on Beckman Coulter AU 5800 and DxI (Cape Town). Altitude raises haemoglobin, so Hb-based features shift.
+  Pullakhandam and McRoy (BioMedInformatics 2024, doi:10.3390/biomedinformatics4010036) cite this study as the source of
+  their Kenyan validation set for an NHANES-trained iron-deficiency-anaemia model.'
+last_checked: '2026-11-06'

@@ -1,48 +1,82 @@
 id: cbc-iron-deficiency
 legacy_id: cl-2026w45-cbc-iron-deficiency
-title: 'Predicting iron deficiency (low ferritin) from routine CBC: develop on NHANES, externally validate on an
-  open Yemeni hospital dataset; logistic regression, XGBoost and TabPFN vs zero/few-shot LLMs'
+title: Can a routine blood count tell who needs a ferritin test? Zero/few-shot LLMs, TabPFN and classical models
+  against haematology rules, developed on NHANES 2017–March 2020 (survey-weighted) with temporal (NHANES 2021–23)
+  and Kenyan external validation
 area: clinical-data-llm
 tags:
 - haematology
 - anaemia
+- iron-deficiency
 - tabular-ml
 - llm
+- tabpfn
+- nhanes
+- external-validation
 status: new
 status_history:
 - status: new
   date: '2026-11-04'
   note: Migrated from the claude.ai register (2026-W45 (initial))
 source:
-  type: preprint
+  type: journal
   title: 'Predicting Iron Deficiencies Using Routine Complete Blood Cell Count Parameters: A Machine Learning Approach
-    and Evaluation'
-  authors: verify
-  venue: Preprints.org
-  date: '2026-04-02'
-  url: https://www.preprints.org/manuscript/202604.0073
-  code_note: None; reimplementable (sklearn/xgboost)
+    and Evaluation (preprint: Preprints.org 2026-04-02, doi:10.20944/preprints202604.0073.v1)'
+  authors: Negrini D et al.
+  venue: Journal of Clinical Medicine 2026;15(12):4783 (MDPI, CC BY 4.0; PMC13302493)
+  date: '2026-06-19'
+  url: https://doi.org/10.3390/jcm15124783
+  code_note: No code shared (R 4.5.2 with caret, xgboost, e1071, pROC); data from the Verona laboratory information
+    system, available on request only. Not directly replicable; reimplement on NHANES.
+  doi: 10.3390/jcm15124783
 datasets:
 - id: nhanes
   role: development
-- id: mendeley-yemen-cbc
+- id: kenya-ifcc-iron
   role: external-validation
-study_type: Diagnostic prediction model + external validation; LLM vs ML
-reporting_guideline: TRIPOD+AI (+TRIPOD-LLM); STARD-AI elements
-novelty_delta: Source used a private single-centre dataset with no code. Adds a fully open pipeline, external validation
-  in an LMIC hospital population relevant to India's anaemia burden, LLM and TabPFN head-to-head, pathologist check
-  against Mentzer/MCH logic, and decision-curve analysis.
+study_type: Diagnostic prediction model development + temporal and external validation; LLM vs tabular foundation
+  model vs ML vs haematology rules
+reporting_guideline: TRIPOD+AI and TRIPOD-LLM (LLM arms); STARD elements for the ferritin reference-standard analysis
+novelty_delta: CBC-based low-ferritin models and NHANES-to-Kenya/India validation of iron-deficiency-anaemia models
+  already exist (Pullakhandam 2024; Palika 2026), and their IDA labels leak Hb. This study adds a head-to-head of
+  zero/few-shot LLMs and TabPFN against spline logistic regression, XGBoost and pathologist rules (MCH, Mentzer),
+  a ferritin-label analysis (sex-specific, 15/30 µg/L, inflammation-aware, physiological, IDA with and without Hb)
+  across men, women and older adults, and survey-weighted calibration and test-utilisation decision curves in NHANES
+  2021–23 and Kenyan healthy adults.
 compute:
   tier: api
-  estimate: Laptop; API (~USD 10–30) for the LLM arm
-est_weeks: 4
+  estimate: Laptop CPU for NHANES (a few tens of MB, verify) and models; TabPFN on CPU; LLM arm ~USD 20–60 in API
+    calls (verify current prices) plus one small open-weight model run locally
+est_weeks: 6
 scores:
   feasibility: 5
   novelty: 3
-  fit: null
-risks: []
-access_actions: []
-candidate_journals: []
+  fit: 5
+risks:
+- 'Crowded field: NHANES-based CBC models with Kenyan and Indian validation (Pullakhandam 2024; Palika 2026) and
+  multi-site deployed models (Chang 2025) exist; novelty rests on the LLM/TabPFN head-to-head, honest rule baselines
+  and the label analysis'
+- Source data are private and code is not shared; replication is a method replication on a different population
+  (NHANES household sample vs outpatients sent for iron studies), so AUCs will differ
+- 'Ferritin eligibility differs by NHANES cycle: men and older adults only in 2017–2020; FERTIN_L (2021–23) covers
+  females 12–49 and children 1–5 only, and there is no FETIB_L, so TSAT cannot be validated temporally'
+- Small Kenyan external set (528 adults; 81 with ferritin < 15, mostly women) gives wide CIs; altitude raises Hb
+- Analyser shift (source Sysmex XN; NHANES DxH 800 and Kenya ACT 5 DIFF are Beckman) affects RDW and MCHC
+- 'LLM arm: check API terms before sending NHANES/Kenyan rows (no training on inputs); output parsing failures and
+  run-to-run instability must be reported; TabPFN weight licence and row limit to verify'
+- 'The register''s planned Yemeni external set is excluded: de-identification and data-quality concerns found on
+  2026-11-06, pending clarification with the depositors'
+- 'Survey weights: WTMECPRP/WTMEC2YR for 2017–2020 labs, WTPH2YR for 2021–23, always with SDMVSTRA/SDMVPSU'
+access_actions:
+- 'None needed for NHANES: public-use XPT files without an account (NCHS data use agreement: statistical analysis
+  only, no re-identification or linkage)'
+- 'None needed for the Kenyan set: open Figshare download (CC BY 4.0), doi:10.6084/m9.figshare.21107986'
+- API key and budget (~USD 20–60, verify) for one hosted LLM; confirm its terms exclude training on submitted data
+candidate_journals:
+- cmpb
+- ijmi
+- jms
 added_at: '2026-11-04T08:30:00Z'
 added_by: scout
 run_id: 2026-W45 (initial)
+last_reviewed: '2026-11-06'
