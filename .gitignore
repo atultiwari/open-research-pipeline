@@ -51,3 +51,6 @@ raw/
 
 # Local build brief (kept out of the public repo)
 HANDOFF.md
+
+# scratch PR bodies written by automated runs
+pr-body.md

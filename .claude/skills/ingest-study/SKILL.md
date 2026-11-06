@@ -134,7 +134,7 @@ python3 -m pytest -q
 Fix every error. Treat `DEAD` links as errors: correct them, or replace them with `verify`. `BLOCKED` (bot-blocked publisher) is acceptable if you confirmed the page another way.
 
 - `atul` / `enrich` mode: `git add studies/<slug> datasets journals && git commit -m "study: add <slug> (<area>)"` (or `study: enrich <slug>` / `study: update <slug>`), then `git push`.
-- `scout` mode: `git switch -c scout/<YYYY-MM-DD>` (or reuse it), commit each study, push, then `gh pr create --title "scout: <date> candidates" --body <summary>`.
+- `scout` mode: `git switch -c scout/<YYYY-MM-DD>` (or reuse it), commit each study, push, then open the PR with the REST API as `.claude/commands/scout.md` step 6 describes (`gh api repos/atultiwari/open-research-pipeline/pulls ...`; never `gh pr create`, which fails in cloud sessions).
 
 Report to Atul in under 120 words:
 - the title;
