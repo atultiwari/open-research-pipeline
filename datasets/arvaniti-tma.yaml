@@ -1,0 +1,15 @@
+id: arvaniti-tma
+name: Arvaniti prostate TMA Gleason dataset (Zurich)
+url: https://doi.org/10.7910/DVN/OCYCMP
+doi: 10.7910/DVN/OCYCMP
+modality: H&E tissue microarray core images with pixel-level Gleason masks
+organ_or_domain: prostate (radical prostatectomy TMAs)
+size: 15 files, ~2.6 GB (Harvard Dataverse API, 2026-11-06); five TMAs
+access: open
+licence: CC0 1.0
+licence_notes: CC0 as stated on Harvard Dataverse (API 2026-11-06).
+institution_country: University Hospital Zurich, Switzerland
+labels: 'Pixel masks: 0 benign, 1 Gleason 3, 2 Gleason 4, 3 Gleason 5, 4 unlabelled (as stated on the Dataverse record). The source paper reports a test TMA graded by two pathologists (verify on download).'
+citation: Arvaniti E et al. Automated Gleason grading of prostate cancer tissue microarrays via deep learning. Sci Rep 8 (2018) 12054. doi:10.1038/s41598-018-30535-1
+notes: Magnification differs from SICAPv2/CrowdGleason patches; resample to ~10x before patching (verify native resolution).
+last_checked: '2026-11-06'

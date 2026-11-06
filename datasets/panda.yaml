@@ -3,9 +3,10 @@ name: PANDA challenge (prostate biopsies)
 url: https://www.kaggle.com/c/prostate-cancer-grade-assessment
 modality: WSI
 organ_or_domain: prostate
-size: verify
+size: 411.9 GB (Kaggle data page, 2026-11-06)
 access: free-registration
-licence: verify
-licence_notes: Kaggle account; accept competition rules.
-labels: ISUP grade / Gleason
+licence: Subject to Competition Rules
+licence_notes: Kaggle account; accept competition rules. The Kaggle data page gives the licence only as "Subject to Competition Rules"; read the rules before any reuse beyond research.
+labels: 'ISUP grade / Gleason score per slide. Some training slides have label masks: Radboud masks label glands as 0 background, 1 stroma, 2 benign epithelium, 3/4/5 Gleason 3/4/5; Karolinska masks are benign vs cancer only. Kaggle warns masks may contain false positives and negatives.'
+notes: PANDA-PLUS (Hopson et al., J Pathol Inform 2026, doi:10.1016/j.jpi.2025.100540) adds pixel-level expert masks for 546 PANDA slides, but those masks are available only on qualified request, so they are not open.
 last_checked: '2026-11-06'

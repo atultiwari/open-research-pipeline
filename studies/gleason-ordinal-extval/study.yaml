@@ -1,0 +1,76 @@
+tags:
+- gleason
+- prostate
+- ordinal
+- gaussian-process
+- calibration
+- external-validation
+- conformal-prediction
+- foundation-models
+status: new
+status_history:
+- status: new
+  date: '2026-11-06'
+  note: Added by atul
+datasets:
+- id: sicapv2
+  role: development
+- id: crowdgleason
+  role: development
+- id: arvaniti-tma
+  role: external-validation
+- id: panda
+  role: external-validation
+risks:
+- 'Class definitions differ: SICAPv2 merges benign into one ''non-cancerous'' class; Arvaniti and PANDA-Radboud
+  label benign epithelium separately, and PANDA masks include stroma'
+- PANDA-Radboud masks were not drawn by hand gland by gland for every slide; Kaggle warns of false positives and
+  negatives, so treat them as a silver standard
+- Arvaniti TMAs come from radical prostatectomies at a different magnification; resampling may itself shift embeddings
+- Most strong encoders are CC-BY-NC-ND and gated (UNI, UNI2-h, CONCHv1.5, Virchow2); keep to research use
+- The source repo pins TensorFlow 2.8 and GPflow 2.1.3; old CUDA builds may not run on new GPUs
+access_actions:
+- 'Hugging Face gated access (auto-approved): UNI, UNI2-h, CONCHv1.5, Virchow, Virchow2, Prov-GigaPath; Phikon-v2
+  is not gated'
+- Kaggle account and PANDA competition rules acceptance; download only Radboud slides with label masks
+- 'Direct downloads, no account: SICAPv2 (Mendeley Data), CrowdGleason (Zenodo), Arvaniti TMAs (Harvard Dataverse)'
+candidate_journals:
+- jiim
+- cmpb
+- cmig
+added_at: '2026-11-06'
+added_by: atul
+id: gleason-ordinal-extval
+title: Do ordinal Gaussian processes on pathology foundation-model features keep their Gleason grading and calibration
+  gains on unseen hospitals? External validation on two open cohorts, with conformal referral and a pathologist
+  error taxonomy
+area: computational-pathology
+source:
+  type: journal
+  title: 'Ordinal Gaussian Processes for Gleason grading: Enhancing performance and calibration across foundation
+    model rankability scores'
+  authors: Sáez-Maldonado FJ et al.
+  venue: Computer Methods and Programs in Biomedicine 289 (2027) 109700; open access, CC BY-NC-ND 4.0
+  date: 2027-02
+  url: https://doi.org/10.1016/j.cmpb.2026.109700
+  doi: 10.1016/j.cmpb.2026.109700
+  code_url: https://github.com/fjsaezm/ordinal_gps_prostate
+  code_licence: MIT (LICENSE file text). GitHub reports NOASSERTION because the file contains unresolved git merge-conflict
+    markers in the copyright line
+study_type: External validation of a diagnostic classifier (patch-level Gleason pattern grading) with calibration
+  and conformal referral analysis
+reporting_guideline: CLAIM 2024 (+ TRIPOD+AI external-validation and calibration items)
+novelty_delta: The source tests ordinal GPs only on fixed internal splits of two Spanish cohorts, and says its statistics
+  capture seed variance, not data variance. This study trains on SICAPv2 and CrowdGleason and tests on two independent
+  open cohorts (Zurich TMAs, PANDA-Radboud masks), asks whether in-domain rankability predicts external performance,
+  turns calibrated ordinal probabilities into conformal prediction sets for pathologist referral, and adds a pathologist
+  taxonomy of non-adjacent errors.
+compute:
+  tier: runpod
+  estimate: Feature extraction ~15–30 GPU-h on RunPod L4/A40 (~US$8–20) for 4–7 encoders; GP training minutes per
+    run on one GPU; PANDA kept to a Radboud subset of a few hundred slides
+est_weeks: 6
+scores:
+  fit: 5
+  feasibility: 4
+  novelty: 4

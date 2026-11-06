@@ -1,0 +1,15 @@
+id: crowdgleason
+name: CrowdGleason (crowdsourced and expert Gleason grade labels)
+url: https://zenodo.org/records/14178894
+doi: 10.5281/zenodo.14178894
+modality: H&E patches (512 x 512, 10x)
+organ_or_domain: prostate (biopsies)
+size: '19,077 patches from 1,045 WSIs; Patches.zip ~16.2 GB (plus a ~16.0 GB stain-normalised copy)'
+access: open
+licence: CC BY 4.0
+licence_notes: Licence as stated on the Zenodo record (API 2026-11-06). The same record also holds a stain-normalised copy of SICAPv2.
+institution_country: Hospital Universitario San Cecilio / Universidad de Granada, Spain
+labels: 'Gleason grade per patch. Train (13,824) and validation (2,327) patches labelled by a crowd of pathologists-in-training; curated test set (2,926 patches from 262 other WSIs) labelled by expert consensus'
+citation: 'López-Pérez M et al. The CrowdGleason dataset - learning the Gleason grade from crowds and experts. Comput Methods Programs Biomed 257 (2024) 108472. doi:10.1016/j.cmpb.2024.108472'
+notes: 'Whether Annotations.zip holds per-annotator labels (needed for noise modelling) is not stated on the record; verify after download.'
+last_checked: '2026-11-06'

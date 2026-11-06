@@ -1,0 +1,14 @@
+id: sicapv2
+name: SICAPv2 (prostate WSIs with Gleason grade annotations)
+url: https://data.mendeley.com/datasets/9xxm58dvs3
+doi: 10.17632/9xxm58dvs3.2
+modality: WSI-derived H&E patches (512 px, 10x) with pixel-level masks
+organ_or_domain: prostate (biopsies)
+size: 'One zip, ~2.16 GB (Mendeley Data API, 2026-11-06); 155 WSIs; ~10k labelled patches as used by Sáez-Maldonado et al. 2027 (Table 1)'
+access: open
+licence: CC BY 4.0
+licence_notes: Licence as stated on Mendeley Data (API 2026-11-06). A stain-normalised copy (NormalizedSICAPv2.zip) is also on the CrowdGleason Zenodo record (CC BY 4.0).
+institution_country: Hospital Clínico Universitario de Valencia / Universitat Politècnica de València, Spain
+labels: Slide-level Gleason score; patch-level Gleason grade (non-cancerous, G3, G4, G5) from expert-consensus pixel masks; cribriform pattern
+citation: Silva-Rodríguez J et al. Going deeper through the Gleason scoring scale. Comput Methods Programs Biomed 195 (2020) 105637. doi:10.1016/j.cmpb.2020.105637
+last_checked: '2026-11-06'
