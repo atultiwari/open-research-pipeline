@@ -7,11 +7,14 @@ tags:
 - shortcut-learning
 - tcga
 - cptac
-status: new
+status: approved
 status_history:
 - status: new
   date: '2026-11-06'
   note: Added by atul
+- status: approved
+  date: '2026-11-06'
+  note: Gate 1 approved by Atul
 datasets:
 - id: wsi-bench
   role: benchmark
@@ -80,3 +83,4 @@ scores:
   fit: 5
   feasibility: 4
   novelty: 4
+last_reviewed: '2026-11-06'
