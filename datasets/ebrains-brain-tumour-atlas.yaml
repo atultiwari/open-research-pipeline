@@ -1,0 +1,18 @@
+id: ebrains-brain-tumour-atlas
+name: The Digital Brain Tumour Atlas (EBRAINS, Medical University of Vienna)
+url: https://doi.org/10.25493/WQ48-ZGX
+alt_urls:
+- https://search.kg.ebrains.eu/instances/Dataset/8fc108ab-e2b4-406f-8999-60269dc1f994
+doi: 10.25493/WQ48-ZGX
+modality: WSI (H&E); clinical annotations
+organ_or_domain: brain tumours
+size: 3,115 slides of 126 brain tumour types, including 47 control slides (DataCite record); download size verify
+access: free-registration
+licence: 'Non-commercial; EBRAINS Data Use Agreement (DataCite rights statement: cite the DOI, follow the DUA, no commercial
+  use)'
+licence_notes: Access goes through an EBRAINS account and acceptance of the data use agreement (exact sign-up steps
+  verify; the KG page is JavaScript-only). No race data (single Austrian centre).
+institution_country: Austria (Medical University of Vienna)
+notes: Vaidya et al. 2024 trained IDH1-mutation models on 873 EBRAINS glioma slides and tested on TCGA-GBMLGG (1,123
+  slides). That is the only fully open arm of the source study.
+last_checked: '2026-11-06'

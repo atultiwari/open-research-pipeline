@@ -1,0 +1,14 @@
+id: gigapath-features-tcga
+name: Precomputed Prov-GigaPath tile features for TCGA/CPTAC (Hugging Face)
+url: https://huggingface.co/datasets/sofieneb/gigapath_features
+modality: WSI patch embeddings
+organ_or_domain: pan-cancer
+size: '11,759 WSIs (9,838 TCGA from 32 projects; 1,921 CPTAC from 9 cohorts); 914 GB in total; (N, 1536) tile-encoder
+  features per slide (256 px at 20x, TRIDENT)'
+access: free-registration
+licence: Apache-2.0
+licence_notes: 'Apache-2.0 per the Hugging Face tag (the only sibling set without NC/ND terms), but it is still gated
+  (auto) per the API on 2026-11-06 although the card says no login. Underlying slides keep their TCGA/TCIA terms.'
+labels: None included; take them from the GDC/PDC.
+notes: Tile encoder only (no GigaPath slide encoder features).
+last_checked: '2026-11-06'

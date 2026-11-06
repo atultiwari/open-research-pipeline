@@ -1,11 +1,23 @@
 id: cptac
 name: Clinical Proteomic Tumor Analysis Consortium (CPTAC)
 url: https://proteomics.cancer.gov/programs/cptac
+alt_urls:
+- https://www.cancerimagingarchive.net/collection/cptac-luad/
+- https://www.cancerimagingarchive.net/collection/cptac-lscc/
+- https://www.cancerimagingarchive.net/collection/cptac-brca/
 modality: WSI; proteomics; clinical
 organ_or_domain: multiple cancers
-size: verify
+size: 'TCIA pathology (checked 2026-11-06): CPTAC-LUAD 243 subjects, 1,137 SVS slides, 431.5 GB; CPTAC-LSCC 212 subjects,
+  1,081 slides, 414 GB; CPTAC-BRCA 134 subjects, 642 slides, 113.29 GB. Other cohorts: verify'
 access: open
-licence: verify
-institution_country: USA (NCI)
-notes: Pathology slides via TCIA; use as external validation for TCGA-trained models.
+licence: CC BY 4.0 (TCIA pathology downloads for CPTAC-LUAD, CPTAC-LSCC and CPTAC-BRCA)
+licence_notes: 'Older CPTAC-LUAD versions on TCIA were CC BY 3.0. TCIA requires the collection DOI to be cited. Some
+  radiology series (head CT) moved to NIH controlled access in 2024; the pathology slides are public. Clinical data
+  are open on the GDC (project CPTAC-3 / CPTAC-2) and PDC.'
+institution_country: USA (NCI); patients enrolled through sites in several countries
+notes: 'Pathology slides via TCIA (Aspera download). Slide counts exceed subject counts because tumour and normal tissue
+  slides are included: filter to tumour slides. FAIR-Path (Cell Rep Med 2025) describes its CPTAC-3 slides as frozen
+  sections, whereas TCGA diagnostic slides are FFPE; confirm the preparation for each slide used (verify). Demographics
+  (GDC API, CPTAC-3 lung, 339 cases): 192 white, 131 Asian, 6 Black; LUAD 230, LUSC 109; Asian patients are mostly
+  LUAD (108 of 131). Use as external validation for TCGA-trained models.'
 last_checked: '2026-11-06'

@@ -1,12 +1,16 @@
 id: fairness-tcga-cptac
 legacy_id: cp-2026w45-fairness-tcga-cptac
-title: Do newer foundation models reduce demographic performance gaps? Race-, age- and site-stratified audit of
-  UNI2-h MIL on TCGA with CPTAC external validation
+title: Is the race gap in pathology AI really a site gap? A fully open TCGA-to-CPTAC audit of four foundation-model
+  MIL classifiers for lung cancer subtyping, with an external white-versus-Asian equivalence test and a pathologist
+  error review
 area: computational-pathology
 tags:
 - fairness
 - foundation-models
 - wsi
+- site-confounding
+- external-validation
+- lung
 status: new
 status_history:
 - status: new
@@ -14,37 +18,71 @@ status_history:
   note: Migrated from the claude.ai register (2026-W45 (initial))
 source:
   type: journal
-  title: Demographic bias in misdiagnosis by computational pathology models (Nature Medicine 2024)
-  authors: verify
-  venue: Nature Medicine
-  date: 2024-04
-  url: https://pubmed.ncbi.nlm.nih.gov/38641744/
+  title: Demographic bias in misdiagnosis by computational pathology models
+  authors: Vaidya A, Chen RJ, Williamson DFK et al.
+  venue: Nature Medicine 30:1174–1190
+  date: '2024-04-19'
+  url: https://doi.org/10.1038/s41591-024-02885-z
   code_url: https://github.com/mahmoodlab/CPATH_demographics
-  code_licence: Other (NOASSERTION on GitHub; seed notes say academic use only)
+  code_licence: 'CC-BY-NC-ND-4.0 (LICENSE file; GitHub reports NOASSERTION): run unmodified, reimplement changes'
+  doi: 10.1038/s41591-024-02885-z
+  code_note: 'Paywalled; not in PMC or Europe PMC (checked 2026-11-06). Repo reproduces only the open IDH1 arm (EBRAINS
+    train, TCGA-GBMLGG test); breast and lung external tests used private MGB data. PubMed: https://pubmed.ncbi.nlm.nih.gov/38641744/'
 datasets:
 - id: uni2h-features-tcga
+  role: development
+- id: conch-v15-features-tcga
+  role: development
+- id: virchow2-features-tcga
+  role: development
+- id: gigapath-features-tcga
   role: development
 - id: tcga
   role: development
 - id: cptac
   role: external-validation
-study_type: Fairness / subgroup analysis + external validation
-reporting_guideline: TRIPOD+AI / CLAIM 2024
-novelty_delta: Original used older encoders and private MGB data for breast and lung tasks. Rebuilds the tasks fully
-  on open TCGA (train) and CPTAC (external) with UNI2-h, reports disparity by race, age and submitting site, and
-  tests whether site-stratified splits shrink apparent bias.
+- id: ebrains-brain-tumour-atlas
+  role: benchmark
+study_type: Fairness / subgroup analysis + external validation (open surrogate for a private external cohort)
+reporting_guideline: TRIPOD+AI (fairness items) / CLAIM 2024
+novelty_delta: The source tested breast and lung models only on private MGB data, with older encoders. FAIR-Path
+  (2025) and an ICIP 2026 study show foundation-model gaps on TCGA, but none separates site from race or tests externally
+  with current encoders. This study does both on fully open TCGA and CPTAC lung data with four precomputed foundation-model
+  feature sets, adds an adequately sized external (131 Asian CPTAC patients) white-versus-Asian test as a pre-registered
+  equivalence claim, and adds a pathologist error taxonomy by subgroup.
 compute:
-  tier: colab
-  estimate: Laptop/Colab (~5–10 GPU-h on precomputed features)
-est_weeks: 5
+  tier: runpod
+  estimate: ~15–20 GPU-h of ABMIL training on precomputed features (4 encoders × 30 folds; ~US$15–20 on RunPod)
+    plus a ~130–300 GB lung feature download per encoder to a network volume; statistics on a laptop. Optional IDH1
+    anchor adds ~15–25 GPU-h
+est_weeks: 6
 scores:
   feasibility: 4
-  novelty: 4
-  fit: null
-risks: []
+  novelty: 3
+  fit: 4
+risks:
+- Novelty partly overlaps FAIR-Path (Cell Rep Med 2025) and García-de-la-Puente et al. (ICIP 2026, full text unread);
+  the site decomposition and external Asian arm carry the novelty
+- 'CPTAC lung has only 6 Black patients: no external white-versus-Black estimate is possible; TCGA lung has only
+  17 Asian patients for training'
+- CPTAC slide preparation (frozen vs FFPE) is unconfirmed; a preparation shift would confound the external drop
+- Third-party precomputed features (card says public, HF reports gated) must be spot-checked against self-extracted
+  features
+- 'All feature sets except GigaPath and the source code are CC BY-NC-ND: non-commercial use only, no redistribution
+  of features or modified code'
+- Self-reported race with many 'not reported' values; South Asian patients are absent from both cohorts, so no direct
+  India claim
 access_actions:
-- Hugging Face gated access (auto-approval) for precomputed UNI2-h features
-candidate_journals: []
+- Hugging Face account; accept the auto-approved gates for sofieneb/uni2h_features, conch_v15_features, virchow2_features
+  and gigapath_features
+- No login needed for GDC clinical data (TCGA, CPTAC-3) or TCIA CPTAC slides (CC BY 4.0); cite the TCIA collection
+  DOIs
+- 'Optional IDH1 anchor: EBRAINS account and Digital Brain Tumour Atlas data use agreement (non-commercial)'
+candidate_journals:
+- jiim
+- laboratory-investigation
+- cmig
 added_at: '2026-11-04T08:30:00Z'
 added_by: scout
 run_id: 2026-W45 (initial)
+last_reviewed: '2026-11-06'

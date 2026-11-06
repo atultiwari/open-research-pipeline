@@ -1,0 +1,14 @@
+id: virchow2-features-tcga
+name: Precomputed Virchow2 features for TCGA/CPTAC (Hugging Face)
+url: https://huggingface.co/datasets/sofieneb/virchow2_features
+modality: WSI patch embeddings
+organ_or_domain: pan-cancer
+size: '11,760 WSIs (9,838 TCGA from 32 projects; 1,922 CPTAC from 9 cohorts); 1.97 TB in total; (N, 2560) features
+  per slide (class token concatenated with mean patch token; 224 px at 20x, TRIDENT)'
+access: free-registration
+licence: CC-BY-NC-ND-4.0
+licence_notes: 'Non-commercial, no-derivatives (inherits the Virchow2 licence). Card says no login; Hugging Face API
+  reports gated (auto) on 2026-11-06.'
+labels: None included; take them from the GDC/PDC.
+notes: Largest sibling set; download only the cohorts you need (lung is roughly 15% of slides).
+last_checked: '2026-11-06'

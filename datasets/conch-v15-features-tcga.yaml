@@ -1,0 +1,15 @@
+id: conch-v15-features-tcga
+name: Precomputed CONCH v1.5 features for TCGA/CPTAC (Hugging Face)
+url: https://huggingface.co/datasets/sofieneb/conch_v15_features
+modality: WSI patch embeddings
+organ_or_domain: pan-cancer
+size: '11,760 WSIs (9,838 TCGA from 32 projects; 1,922 CPTAC from 9 cohorts); 121 GB in total; (N, 768) features
+  per slide (512 px patches at 20x, TRIDENT)'
+access: free-registration
+licence: CC-BY-NC-ND-4.0
+licence_notes: 'Non-commercial, no-derivatives (inherits the CONCH v1.5 licence). Same card/API mismatch as the UNI2-h
+  set: card says no login, Hugging Face API reports gated (auto) on 2026-11-06.'
+labels: None included; take them from the GDC/PDC.
+notes: Smallest of the four sibling feature sets, so the cheapest second encoder to add. Patch size (512 px) differs
+  from UNI2-h and GigaPath (256 px) and Virchow2 (224 px).
+last_checked: '2026-11-06'

@@ -3,9 +3,20 @@ name: Precomputed UNI2-h features for TCGA/CPTAC (Hugging Face)
 url: https://huggingface.co/datasets/sofieneb/uni2h_features
 modality: WSI patch embeddings
 organ_or_domain: pan-cancer
-size: verify
+size: '11,759 WSIs (9,838 TCGA diagnostic slides from 32 projects; 1,921 CPTAC slides from 9 cohorts); 914 GB in
+  total; one .h5 per slide with (N, 1536) features and patch coordinates (256 px at 20x, TRIDENT)'
 access: free-registration
 licence: CC-BY-NC-ND-4.0
-licence_notes: 'Non-commercial, no-derivatives. Hugging Face gated (auto-approval) per HF API 2026-11-06. Third-party extraction:
-  spot-check against self-extracted features.'
+licence_notes: 'Non-commercial, no-derivatives (inherits the UNI2-h model licence). Card/API mismatch: the dataset card
+  says it is public with no login, but the Hugging Face API reports gated (auto-approval) and file downloads need
+  a logged-in account (checked 2026-11-06). Third-party extraction: spot-check a few slides against self-extracted
+  features. Use must also follow the TCGA (GDC) and CPTAC (TCIA) data use policies.'
+labels: None included. Take diagnoses and demographics from the GDC (TCGA, CPTAC-3) or PDC, or task splits from Patho-Bench.
+citation: Boutaj S et al., arXiv 2606.10778 (From Patches to Patients) and the OMNI NeurIPS 2026 paper, as the card
+  requests
+notes: 'Per-cohort counts on the card include TCGA-LUAD 541, TCGA-LUSC 512, TCGA-BRCA 1,133, TCGA-GBM 195, TCGA-LGG
+  491; CPTAC_LUAD 326, CPTAC_LSCC 304, CPTAC_BRCA 112, CPTAC_GBM 243. CPTAC slides were chosen to match Patho-Bench.
+  Slides that failed processing were skipped. The repo tree also has a TCGA/TCGA-RCC folder not listed in the card
+  table (verify whether it duplicates KIRC/KIRP/KICH). Sibling feature sets for the same slides by the same uploader:
+  virchow2-features-tcga, conch-v15-features-tcga, gigapath-features-tcga.'
 last_checked: '2026-11-06'
