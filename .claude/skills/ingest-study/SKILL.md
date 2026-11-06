@@ -44,6 +44,7 @@ python3 scripts/find_dupes.py --meta /tmp/meta.json [<extra links>] [--title "<s
 
 - In `enrich` mode the study itself appears in `matches`; that is expected. Look only for *other* matching slugs.
 - `matches` not empty → **update that study instead** (`new_study.py --update`), and tell Atul which slug you updated and why.
+- `linked` lists studies whose identifiers only appear inside the fetched text (e.g. a repo named in a README); check by hand.
 - `related` lists studies that use the same dataset. Mention them, and avoid proposing the same extension twice.
 
 ## 4. Check data feasibility (never skip)

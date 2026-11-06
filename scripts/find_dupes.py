@@ -8,6 +8,8 @@ Usage:
 Prints JSON: {"matches": [...], "related": [...]}.
 - matches: studies whose *source* is the same work (same DOI, arXiv id, normalised URL, code repo, or a
   fuzzy title match >= 0.88). Update these instead of creating a new study.
+- linked: studies whose identifiers only appear *inside* the fetched text (README/abstract links, e.g.
+  repos named in acknowledgements). Weak evidence: check by hand, never update on this alone.
 - related: studies that use a matching dataset (useful when the link is a dataset or model).
 Exit code 0 always; the caller decides.
 """
@@ -44,24 +46,25 @@ def study_keys(study: dict) -> set[str]:
     return keys
 
 
-def query_keys(inputs: list[str], metas: list[dict]) -> set[str]:
-    keys = {normalise_url(i) for i in inputs}
+def query_keys(inputs: list[str], metas: list[dict]) -> tuple[set[str], set[str]]:
+    """Primary keys (the link itself, its DOI/arXiv id) and secondary keys (links found inside its text)."""
+    primary = {normalise_url(i) for i in inputs}
+    secondary: set[str] = set()
     for m in metas:
         if m.get("url"):
-            keys.add(normalise_url(m["url"]))
+            primary.add(normalise_url(m["url"]))
         if m.get("doi"):
-            keys.add(f"doi:{m['doi'].lower()}")
+            primary.add(f"doi:{m['doi'].lower()}")
         if m.get("arxiv_id"):
-            keys.add("arxiv:" + re.sub(r"v\d+$", "", m["arxiv_id"]))
-        for u in m.get("links", {}).get("code", []) + m.get("links", {}).get("papers", []):
-            keys.add(normalise_url(u))
-        for d in m.get("links", {}).get("dois", []):
-            keys.add(f"doi:{d.lower()}")
-    return keys
+            primary.add("arxiv:" + re.sub(r"v\d+$", "", m["arxiv_id"]))
+        links = m.get("links", {})
+        secondary |= {normalise_url(u) for u in links.get("code", []) + links.get("papers", [])}
+        secondary |= {f"doi:{d.lower()}" for d in links.get("dois", [])}
+    return primary, secondary - primary
 
 
 def find(inputs: list[str], titles: list[str], metas: list[dict], studies: list[dict], datasets: list[dict]) -> dict:
-    qkeys = query_keys(inputs, metas)
+    qkeys, secondary = query_keys(inputs, metas)
     qtitles = [norm_title(t) for t in titles + [m.get("title") for m in metas] if t]
     matches = []
     for s in studies:
@@ -73,12 +76,14 @@ def find(inputs: list[str], titles: list[str], metas: list[dict], studies: list[
             reasons += [f"title similarity {best:.2f}"] if best >= TITLE_THRESHOLD else []
             matches.append({"id": s["id"], "title": s["title"], "status": s["status"], "reasons": reasons})
 
+    linked = [{"id": s["id"], "title": s["title"], "keys": sorted(secondary & study_keys(s))}
+              for s in studies if secondary & study_keys(s) and s["id"] not in {m["id"] for m in matches}]
     ds_hits = {d["id"] for d in datasets
                if qkeys & {normalise_url(u) for u in [d.get("url", "")] + d.get("alt_urls", []) if u}}
     related = [{"id": s["id"], "title": s["title"], "status": s["status"],
                 "datasets": sorted(ds_hits & {x["id"] for x in s.get("datasets", [])})}
                for s in studies if ds_hits & {x["id"] for x in s.get("datasets", [])}]
-    return {"query_keys": sorted(qkeys), "dataset_ids": sorted(ds_hits), "matches": matches,
+    return {"query_keys": sorted(qkeys), "dataset_ids": sorted(ds_hits), "matches": matches, "linked": linked,
             "related": [r for r in related if r["id"] not in {m["id"] for m in matches}]}
 
 

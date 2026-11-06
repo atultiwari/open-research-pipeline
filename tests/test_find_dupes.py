@@ -37,3 +37,10 @@ def test_dataset_link_gives_related_not_match():
 def test_unrelated_link_finds_nothing():
     r = find(["https://arxiv.org/abs/2001.00001"], ["Something else entirely"], [], STUDIES, DATASETS)
     assert r["matches"] == [] and r["related"] == []
+
+
+def test_links_inside_text_are_linked_not_matches():
+    meta = {"url": "https://github.com/x/new-repo", "links": {"code": ["https://github.com/a/b"], "papers": [], "dois": []}}
+    r = find([], [], [meta], STUDIES, DATASETS)
+    assert r["matches"] == []
+    assert [x["id"] for x in r["linked"]] == ["cirrhosis"]
